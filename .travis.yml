@@ -1,7 +1,11 @@
 language: ruby
 rvm:
   - 2.2.3
-script: bundle exec rspec spec
+services:
+  - postgresql
+script:
+- bundle exec rake db:test:prepare
+- bundle exec rspec
 deploy:
   provider: heroku
   api_key:
