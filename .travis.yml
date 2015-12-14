@@ -1,0 +1,9 @@
+language: ruby
+rvm:
+  - 2.2.3
+script: bundle exec rspec spec
+deploy:
+  provider: heroku
+  api_key:
+    secure: e837107ed72fd2c168c659feb497b44c1459b525ac58a316db2f05b69dcb4528809a7f9733f20dddfaf23119b91095e934da9d7dc8218d2c6f9f461fc437d0e1
+  app: jedi-chess
