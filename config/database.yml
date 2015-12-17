@@ -24,10 +24,18 @@ default: &default
   password: password
   host: localhost
 
-development:
-  <<: *default
-  database: jedi-chess_development
+# development:
+#   <<: *default
+#   database: jedi-chess_development
 
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: jedi-chess_development
+  pool: 5
+  username: postgres
+  password: password
+  host: localhost
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
