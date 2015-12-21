@@ -5,6 +5,7 @@ class Piece < ActiveRecord::Base
 	enum status: [:black, :white]
 
   def is_obstructed(destination_x, destination_y)
+
   end
 
 end
