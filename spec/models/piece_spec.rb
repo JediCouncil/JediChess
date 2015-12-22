@@ -25,6 +25,14 @@ RSpec.describe Piece, type: :model do
 
     context 'piece is obstructed' do
       it 'returns true' do
+        piece.update( x: 'A', y: 2)
+        piece2.update(x: 'C', y: 4)
+
+        result = piece.is_obstructed?("E", 6)
+        expect(result).to be true
+      end
+
+      it 'returns true' do
         piece.update( x: 'F', y: 1)
         piece2.update(x: 'E', y: 2)
 
@@ -62,6 +70,12 @@ RSpec.describe Piece, type: :model do
         piece.update(x: 'A', y: 8)
 
         result = piece.is_obstructed?("C", 8)
+        expect(result).to be false
+      end
+      it 'returns false' do
+        piece.update( x:'E', y:2)
+
+        result = piece.is_obstructed?("H", 5)
         expect(result).to be false
       end
     end

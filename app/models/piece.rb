@@ -33,7 +33,26 @@ class Piece < ActiveRecord::Base
   end
 
   def diagonal_obstruction?(destination_x, destination_y)
+    if destination_x > x
+      x_coordinates = (x...destination_x).to_a[1..-1]
+    else
+      x_coordinates = (destination_x...x).to_a.reverse[0..-2]
+    end
+    if destination_y > y
+      y_coordinates = (y...destination_y).to_a[1..-1]
+    else
+      y_coordinates = (destination_y...y).to_a.reverse[0..-2]
+    end
 
+    xy_coords = x_coordinates.zip(y_coordinates)
+
+    xy_coords.each do |xy_coord|
+      x = xy_coord[0]
+      y = xy_coord[1]
+      obstruent_piece = Piece.find_by(x: x, y: y)
+      return true if obstruent_piece.present?
+    end
+    return false
   end
 
   def vertical_obstruction?(destination_x, destination_y)
