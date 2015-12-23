@@ -32,6 +32,22 @@ class Piece < ActiveRecord::Base
     end
   end
 
+  def set_x_coordinates(starting_x, destination_x)
+    if destination_x > x
+      x_coordinates = (x...destination_x).to_a[1..-1]
+    else
+      x_coordinates = (destination_x...x).to_a.reverse[0..-2]
+    end
+  end
+
+  def set_y_coordinates(starting_y, destination_y)
+    if destination_y > y
+      y_coordinates = (y...destination_y).to_a[1..-1]
+    else
+      y_coordinates = (destination_y...y).to_a.reverse[0..-2]
+    end
+  end
+
   def check_coordinates(x_coordinates, y_coordinates)
     xy_coords = x_coordinates.zip(y_coordinates)
 
@@ -45,40 +61,24 @@ class Piece < ActiveRecord::Base
   end
 
   def diagonal_obstruction?(destination_x, destination_y)
-    if destination_x > x
-      x_coordinates = (x...destination_x).to_a[1..-1]
-    else
-      x_coordinates = (destination_x...x).to_a.reverse[0..-2]
-    end
-
-    if destination_y > y
-      y_coordinates = (y...destination_y).to_a[1..-1]
-    else
-      y_coordinates = (destination_y...y).to_a.reverse[0..-2]
-    end
+    x_coordinates = set_x_coordinates(x, destination_x)
+    y_coordinates = set_y_coordinates(y, destination_y)
 
     check_coordinates(x_coordinates, y_coordinates)
   end
 
   def vertical_obstruction?(destination_x, destination_y)
-    if destination_y > y
-      y_coordinates = (y...destination_y).to_a[1..-1]
-    else
-      y_coordinates = (destination_y...y).to_a.reverse[0..-2]
-    end
-
+    y_coordinates = set_y_coordinates(y, destination_y)
     x_coordinates = [self.x] * y_coordinates.count
+
     check_coordinates(x_coordinates, y_coordinates)
   end
 
   def horizontal_obstruction?(destination_x, destination_y)
-    if destination_x > x
-      x_coordinates = (x...destination_x).to_a[1..-1]
-    else
-      x_coordinates = (destination_x...x).to_a.reverse[0..-2]
-    end
-
+    x_coordinates = set_x_coordinates(x, destination_x)
     y_coordinates = [self.y] * x_coordinates.count
+
     check_coordinates(x_coordinates, y_coordinates)
   end
+
 end
