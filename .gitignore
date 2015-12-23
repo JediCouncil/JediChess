@@ -11,3 +11,20 @@
 /log/*
 !/log/.keep
 /tmp
+*.swp
+
+# Ignore Vagrant
+.vagrant/*
+vagrant_ansible_inventory_default
+*.dump
+
+# env files
+/.env
+/.env.*
+!/.env.example
+vendor/bundle/*
+
+coverage/*
+.vimrc.local
+.zshrc.local
+.DS_Store
