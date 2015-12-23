@@ -72,8 +72,13 @@ class Piece < ActiveRecord::Base
   end
 
   def horizontal_obstruction?(destination_x, destination_y)
+    if destination_x > x
+      x_coordinates = (x...destination_x).to_a[1..-1]
+    else
+      x_coordinates = (destination_x...x).to_a.reverse[0..-2]
+    end
 
+    y_coordinates = [self.y] * x_coordinates.count
+    check_coordinates(x_coordinates, y_coordinates)
   end
-
-
 end
