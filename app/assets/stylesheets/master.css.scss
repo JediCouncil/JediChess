@@ -1,0 +1,40 @@
+#chess {
+  width: 540px;
+  height: 540px;
+  background: white;
+}
+
+table {
+  width: 609px;
+  height: 609px;
+  border-spacing: 0px;
+  border: 2px solid black;
+}
+
+table tr:nth-child(odd) td:nth-child(odd) {
+  background: black;
+}
+
+table tr:nth-child(even) td:nth-child(even) {
+  background: black;
+}
+
+tr {
+  border: 0px solid #181818;
+  padding: 0px;
+  margin: 0px;
+}
+
+td {
+  border: 0px solid #181818;
+  padding: 0px;
+  margin: 0px;
+}
+
+td:hover {
+  background-color: #d3d3d3 !important;
+  cursor: pointer;
+  overflow:hidden;
+  transform:scale(1.05);
+  transition: transform 0.8s ;
+}
