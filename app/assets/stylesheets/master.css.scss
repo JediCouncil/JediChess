@@ -19,18 +19,6 @@ table tr:nth-child(even) td:nth-child(even) {
   background: black;
 }
 
-tr {
-  border: 0px solid #181818;
-  padding: 0px;
-  margin: 0px;
-}
-
-td {
-  border: 0px solid #181818;
-  padding: 0px;
-  margin: 0px;
-}
-
 td:hover {
   background-color: #d3d3d3 !important;
   cursor: pointer;
