@@ -28,7 +28,8 @@ class Piece < ActiveRecord::Base
           slope == Float::INFINITY
       vertical_obstruction?(x2, y2)
     else
-      raise "Invalid input. Not diagonal, horizontal, or vertical"
+      invalid_move = "Invalid input. Not diagonal, horizontal, or vertical"
+      raise invalid_move
     end
   end
 

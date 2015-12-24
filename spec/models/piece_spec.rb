@@ -62,13 +62,13 @@ RSpec.describe Piece, type: :model do
         piece.update(x: 'D', y: 4)
 
         invalid_move = "Invalid input. Not diagonal, horizontal, or vertical"
-        expect(piece.is_obstructed?("B", 5)).to raise_error(invalid_move)
+        expect { piece.is_obstructed?("B", 5) }.to raise_error { invalid_move }
       end
        it 'raises an error' do
         piece.update(x: 'D', y: 4)
 
         invalid_move = "Invalid input. Not diagonal, horizontal, or vertical"
-        expect(piece.is_obstructed?("H", 3)).to raise_error(invalid_move)
+        expect { piece.is_obstructed?("H", 3) }.to raise_error { invalid_move }
       end
     end
 
