@@ -5,47 +5,45 @@ class Piece < ActiveRecord::Base
 	enum status: [:black, :white]
 
   def is_obstructed?(destination_x, destination_y)
-    x1, y1 = self.x, self.y
-    x2, y2 = destination_x, destination_y
 
-    if x2 == x1 #vertical line
+    if destination_x == x #vertical line
       x_distance = 0
     else        #diagonal/horizontal line
-      if x1 > x2
-        x_distance = -((x2..x1).to_a.length - 1)
+      if x > destination_x
+        x_distance = -((destination_x..x).to_a.length - 1)
       else
-        x_distance = ((x1..x2).to_a.length) - 1
+        x_distance = ((x..destination_x).to_a.length) - 1
       end
     end
 
-    slope = (y2 - y1).to_f / (x_distance).to_f
+    slope = (destination_y - y).to_f / (x_distance).to_f
 
     if slope == 1 || slope == -1
-      diagonal_obstruction?(x2, y2)
+      diagonal_obstruction?(destination_x, destination_y)
     elsif slope == 0
-      horizontal_obstruction?(x2, y2)
+      horizontal_obstruction?(destination_x, destination_y)
     elsif slope == -Float::INFINITY||
           slope == Float::INFINITY
-      vertical_obstruction?(x2, y2)
+      vertical_obstruction?(destination_x, destination_y)
     else
       invalid_move = "Invalid input. Not diagonal, horizontal, or vertical"
       raise invalid_move
     end
   end
 
-  def set_x_coordinates(destination_x)
-    if destination_x > self.x
-      x_coordinates = (self.x...destination_x).to_a[1..-1]
+  def current_to_destination_x_coordinates(destination_x)
+    if destination_x > x
+      x_coordinates = (x...destination_x).to_a[1..-1]
     else
-      x_coordinates = (destination_x...self.x).to_a.reverse[0..-2]
+      x_coordinates = (destination_x...x).to_a.reverse[0..-2]
     end
   end
 
-  def set_y_coordinates(destination_y)
-    if destination_y > self.y
-      y_coordinates = (self.y...destination_y).to_a[1..-1]
+  def current_to_destination_y_coordinates(destination_y)
+    if destination_y > y
+      y_coordinates = (y...destination_y).to_a[1..-1]
     else
-      y_coordinates = (destination_y...self.y).to_a.reverse[0..-2]
+      y_coordinates = (destination_y...y).to_a.reverse[0..-2]
     end
   end
 
@@ -62,22 +60,22 @@ class Piece < ActiveRecord::Base
   end
 
   def diagonal_obstruction?(destination_x, destination_y)
-    x_coordinates = set_x_coordinates(destination_x)
-    y_coordinates = set_y_coordinates(destination_y)
+    x_coordinates = current_to_destination_x_coordinates(destination_x)
+    y_coordinates = current_to_destination_y_coordinates(destination_y)
 
     check_coordinates(x_coordinates, y_coordinates)
   end
 
   def vertical_obstruction?(destination_x, destination_y)
-    y_coordinates = set_y_coordinates(destination_y)
-    x_coordinates = [self.x] * y_coordinates.count
+    y_coordinates = current_to_destination_y_coordinates(destination_y)
+    x_coordinates = [x] * y_coordinates.count
 
     check_coordinates(x_coordinates, y_coordinates)
   end
 
   def horizontal_obstruction?(destination_x, destination_y)
-    x_coordinates = set_x_coordinates(destination_x)
-    y_coordinates = [self.y] * x_coordinates.count
+    x_coordinates = current_to_destination_x_coordinates(destination_x)
+    y_coordinates = [y] * x_coordinates.count
 
     check_coordinates(x_coordinates, y_coordinates)
   end

@@ -8,14 +8,14 @@ RSpec.describe Piece, type: :model do
 
     context 'a piece is on destination' do
       it 'returns false' do
-        piece.update( x:'A', y:6)
-        piece2.update(x:'C', y:4)
+        piece.update(x: 'A', y: 6)
+        piece2.update(x: 'C', y: 4)
 
         result = piece.is_obstructed?("C", 4)
         expect(result).to be false
       end
       it 'returns false' do
-        piece.update( x: 'A', y: 8)
+        piece.update(x: 'A', y: 8)
         piece2.update(x: 'A', y: 6)
 
         result = piece.is_obstructed?("A", 6)
@@ -25,7 +25,7 @@ RSpec.describe Piece, type: :model do
 
     context 'piece is obstructed' do
       it 'returns true' do
-        piece.update( x: 'A', y: 2)
+        piece.update(x: 'A', y: 2)
         piece2.update(x: 'C', y: 4)
 
         result = piece.is_obstructed?("E", 6)
@@ -33,7 +33,7 @@ RSpec.describe Piece, type: :model do
       end
 
       it 'returns true' do
-        piece.update( x: 'F', y: 1)
+        piece.update(x: 'F', y: 1)
         piece2.update(x: 'E', y: 2)
 
         result = piece.is_obstructed?("D", 3)
@@ -41,7 +41,7 @@ RSpec.describe Piece, type: :model do
       end
 
       it 'returns true' do
-        piece.update( x: 'B', y: 3)
+        piece.update(x: 'B', y: 3)
         piece2.update(x: 'E', y: 3)
 
         result = piece.is_obstructed?("H", 3)
@@ -49,7 +49,7 @@ RSpec.describe Piece, type: :model do
       end
 
       it 'returns true' do
-        piece.update( x: 'A', y: 1)
+        piece.update(x: 'A', y: 1)
         piece2.update(x: 'A', y: 2)
 
         result = piece.is_obstructed?("A", 4)
@@ -58,7 +58,7 @@ RSpec.describe Piece, type: :model do
     end
 
     context 'invalid move' do
-      it 'raises an error' do
+      it 'raises an error if input is invalid' do
         piece.update(x: 'D', y: 4)
 
         invalid_move = "Invalid input. Not diagonal, horizontal, or vertical"
@@ -87,7 +87,7 @@ RSpec.describe Piece, type: :model do
         expect(result).to be false
       end
       it 'returns false' do
-        piece.update( x:'E', y:2)
+        piece.update(x: 'E', y: 2)
 
         result = piece.is_obstructed?("H", 5)
         expect(result).to be false
