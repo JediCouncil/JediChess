@@ -47,7 +47,7 @@ class Game < ActiveRecord::Base
 		pieces.create(:x=>'f', :y=>'7', :type=>'pawn', :color=>'black')
 		pieces.create(:x=>'g', :y=>'7', :type=>'pawn', :color=>'black')
 		pieces.create(:x=>'h', :y=>'7', :type=>'pawn', :color=>'black')
-
+		
 	end
 
 
