@@ -1,8 +1,15 @@
 class Piece < ActiveRecord::Base
-	belongs_to :player
+	belongs_to :user
 	belongs_to :game
 
-	enum status: [:black, :white]
+
+
+	enum status: [ :black, :white]
+
+	def self.types #find out if we absolutely need this!!!
+      %w(Knight Bishop King Queen Rook Pawn)
+    end
+
 
   def is_obstructed?(destination_x, destination_y)
 
@@ -79,5 +86,6 @@ class Piece < ActiveRecord::Base
 
     check_coordinates(x_coordinates, y_coordinates)
   end
+
 
 end
