@@ -9,7 +9,7 @@ class CreatePieces < ActiveRecord::Migration
     	t.integer :game_id
     	t.integer :player_id
     	t.integer :time_lapsed
-    	t.string :name
+    	t.string :type
 
     		
     	
