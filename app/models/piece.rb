@@ -5,7 +5,7 @@ class Piece < ActiveRecord::Base
 
 	enum status: [ :black, :white]
 
-	def self.types
+	def self.types #find out if we absolutely need this!!!
       %w(Knight Bishop King Queen Rook Pawn)
     end
 
