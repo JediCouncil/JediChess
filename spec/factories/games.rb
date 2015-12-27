@@ -3,7 +3,7 @@ FactoryGirl.define do
 		score ""
 		result ""
 		black_player_id ""
-		white_player_id
+		white_player_id ""
 		
 	end
 	
