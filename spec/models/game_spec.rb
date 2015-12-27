@@ -8,8 +8,8 @@ RSpec.describe Game, type: :model do
   it "populate board" do
   	game = FactoryGirl.create(:game)
 
-  	expect(game.pieces.where(:type => 'Rook', :color =>'white').x).to eq('a')
-  	expect(game.pieces.where(:type => 'Rook', :color =>'white').y).to eq(2)
+  	expect(game.pieces.where(:type => 'Rook', :color =>'white').select('x')).to eq('a')
+  	# expect(game.pieces.where(:type => 'Rook', :color =>'white').y).to eq(2)
   end 
 end
 
