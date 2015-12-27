@@ -6,7 +6,7 @@ end
 
 RSpec.describe Game, type: :model do
   it "populate board" do
-  	game = create(:game)
+  	game = FactoryGirl.create(:game)
 
   	expect(game.pieces.where(:type => 'rook').white.x).to eq('a')
   	expect(game.pieces.where(:type => 'rook').white.y).to eq(2)
