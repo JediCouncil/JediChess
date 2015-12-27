@@ -4,14 +4,14 @@ class CreatePieces < ActiveRecord::Migration
     	t.string :x
     	t.integer :y
     	t.integer :color
-    	t.string :outcome
-    	t.string :casualty
+    	t.string  :outcome
+    	t.string  :casualty
     	t.integer :game_id
     	t.integer :player_id
     	t.integer :time_lapsed
     	t.string :type
 
-        t.timestamps null: false
+      t.timestamps null: false
     end
   end
 end
