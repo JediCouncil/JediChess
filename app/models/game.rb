@@ -4,7 +4,7 @@ class Game < ActiveRecord::Base
 	has_and_belongs_to_many :user
 	has_many :pieces
 	belongs_to :type
-	
+
 	after_create :populate_board!
 
 	scope :available, -> {
@@ -13,6 +13,7 @@ class Game < ActiveRecord::Base
 		having('count(id) = 1')
 	}
 
+	private
 	def populate_board!
 		pieces.create(:x=>'a', :y=>'1',:type=>'rook', :color=>'white')
 		pieces.create(:x=>'b', :y=>'1', :type=>'knight', :color=>'white')
@@ -31,6 +32,7 @@ class Game < ActiveRecord::Base
 		pieces.create(:x=>'g', :y=>'2', :type=>'pawn', :color=>'white')
 		pieces.create(:x=>'h', :y=>'2', :type=>'pawn', :color=>'white')
 
+
 		pieces.create(:x=>'a', :y=>'8',:type=>'rook', :color=>'black')
 		pieces.create(:x=>'b', :y=>'8', :type=>'knight', :color=>'black')
 		pieces.create(:x=>'c', :y=>'8', :type=>'bishop', :color=>'black')
@@ -47,6 +49,8 @@ class Game < ActiveRecord::Base
 		pieces.create(:x=>'f', :y=>'7', :type=>'pawn', :color=>'black')
 		pieces.create(:x=>'g', :y=>'7', :type=>'pawn', :color=>'black')
 		pieces.create(:x=>'h', :y=>'7', :type=>'pawn', :color=>'black')
+
+
 		
 	end
 

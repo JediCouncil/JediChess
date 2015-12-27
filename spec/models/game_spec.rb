@@ -6,11 +6,10 @@ end
 
 RSpec.describe Game, type: :model do
   it "populate board" do
-  	Game.populate_board!
-  	expect(Game.pieces.x(:type => 'rook', :color=>'white')).to eq('a')
-  	expect(Game.pieces.y(:type => 'rook', :color=>'white')).to eq(1)
-  	expect(Game.pieces.x(:type => 'knight', :color=>'white')).to eq('b')
-  	expect(Game.pieces.y(:type => 'knight', :color=>'white')).to eq(1)
+  	game = create(:game)
+
+  	expect(game.pieces.where(:type => 'rook').white.x).to eq('a')
+  	expect(game.pieces.where(:type => 'rook').white.y).to eq(2)
   end 
 end
 
