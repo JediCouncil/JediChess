@@ -1,2 +1,0 @@
-class Queen < Piece
-end
