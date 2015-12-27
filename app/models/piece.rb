@@ -4,6 +4,7 @@ class Piece < ActiveRecord::Base
 
   enum status: [:black, :white]
 
+<<<<<<< HEAD
   def self.types # find out if we absolutely need this!!!
     %w(Knight Bishop King Queen Rook Pawn)
   end
@@ -59,6 +60,7 @@ class Piece < ActiveRecord::Base
       return true if obstruent_piece.present?
     end
     false
+
   end
 
   def diagonal_obstruction?(destination_x, destination_y)
