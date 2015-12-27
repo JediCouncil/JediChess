@@ -1,10 +1,10 @@
 class Piece < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :game
+
+  has_and_belongs_to_many :user
+	belongs_to :game
 
   enum status: [:black, :white]
 
-<<<<<<< HEAD
   def self.types # find out if we absolutely need this!!!
     %w(Knight Bishop King Queen Rook Pawn)
   end
