@@ -94,4 +94,43 @@ RSpec.describe Piece, type: :model do
       end
     end
   end
+
+  describe '#move_to!' do
+    let(:piece) { build(:piece) }
+    let(:piece2) { build(:piece) }
+
+    context 'enemy piece' do
+      it 'piece2 destroyed and piece has updated xy coordinates' do
+        piece.update(x: 'H', y: 1, status: 'black')
+        piece2.update(x: 'H', y: 4, status: 'white')
+
+        expect{piece.move_to!('H', 4)}.to change{Piece.count}.from(2).to(1)
+        expect(piece).to have_attributes(x: 'H', y: 4)
+      end
+       it 'piece2 destroyed and piece has updated xy coordinates' do
+        piece.update(x: 'A', y: 2, status: 'white')
+        piece2.update(x: 'A', y: 6, status: 'black')
+
+        expect{piece.move_to!('A', 6)}.to change{Piece.count}.from(2).to(1)
+        expect(piece).to have_attributes(x: 'A', y: 6)
+      end
+    end
+
+    context 'our piece' do
+      it 'piece2 not destroyed and piece has same xy coordinates' do
+        piece.update(x: 'E', y: 2, status: 'black')
+        piece2.update(x: 'E', y: 4, status: 'black')
+
+        expect{piece.move_to!('E', 4)}.to_not change{Piece.count}
+        expect(piece).to have_attributes(x: 'E', y: 2)
+      end
+       it 'piece2 not destroyed and piece has same xy coordinates' do
+        piece.update(x: 'D', y: 7, status: 'white')
+        piece2.update(x: 'D', y: 4, status: 'white')
+
+        expect{piece.move_to!('D', 4)}.to_not change{Piece.count}
+        expect(piece).to have_attributes(x: 'D', y: 7)
+      end
+    end
+  end
 end

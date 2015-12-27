@@ -1,7 +1,7 @@
 class CreatePieces < ActiveRecord::Migration
   def change
     create_table :pieces do |t|
-    	t.string :x 
+    	t.string :x
     	t.integer :y
     	t.integer :color
     	t.string :outcome
@@ -11,10 +11,7 @@ class CreatePieces < ActiveRecord::Migration
     	t.integer :time_lapsed
     	t.string :type
 
-    		
-    	
-
-      t.timestamps null: false
+        t.timestamps null: false
     end
   end
 end
