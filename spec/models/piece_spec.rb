@@ -1,5 +1,3 @@
-
-
 RSpec.describe Piece, type: :model do
   describe '#is_obstructed?' do
     let(:piece)  { build(:piece) }
