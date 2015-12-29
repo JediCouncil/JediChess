@@ -10,7 +10,6 @@ class GamesController < ApplicationController
 	def show
 		# @game = Game.find(params[:id])
     @game ||= Game.where(id: params[:id]).last
-
 	end
 
 end
