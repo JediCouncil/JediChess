@@ -1,11 +1,11 @@
 FactoryGirl.define do
   factory :piece do
-    x ""
-    y ""
-    color ""
-    outcome ""
-    casualty ""
-    type ""
+    x ''
+    y ''
+    color ''
+    outcome ''
+    casualty ''
+    type ''
     trait :black do
       status :black
     end

@@ -1,5 +1,5 @@
 class DropPlayers < ActiveRecord::Migration
   def change
-  	drop_table :players
+    drop_table :players
   end
 end
