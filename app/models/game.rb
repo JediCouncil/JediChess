@@ -1,16 +1,15 @@
 class Game < ActiveRecord::Base
 
-
-	has_and_belongs_to_many :user
+	has_one :white_player, class_name: :user
+	has_one :black_player, class_name: :user
 	has_many :pieces
-	belongs_to :type
 
 	after_create :populate_board!
 
 	scope :available, -> {
-		joins(:users).
-		group('games.id').
-		having('count(id) = 1')
+		joins("LEFT OUTER JOIN users ON users.game_id = games.id").
+		group("games.id").
+		having("count(games.id) < 2")
 	}
 
 	private
