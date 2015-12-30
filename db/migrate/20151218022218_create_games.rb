@@ -1,12 +1,11 @@
 class CreateGames < ActiveRecord::Migration
   def change
     create_table :games do |t|
-
-    	t.string :name
-
+    	t.integer :score
+    	t.string :result
+    	t.integer :black_player_id
+    	t.integer :white_player_id
     	t.timestamps null: false
   	end
-
-    add_index :games
   end
 end
