@@ -5,7 +5,7 @@ FactoryGirl.define do
     color ""
     outcome ""
     casualty ""
-    name ""
+    type ""
     trait :black do
       status :black
     end
