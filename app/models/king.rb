@@ -1,3 +1,2 @@
 class King < Piece
-	
 end
