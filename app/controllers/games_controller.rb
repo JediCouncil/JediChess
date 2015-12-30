@@ -3,11 +3,11 @@ class GamesController < ApplicationController
     @game = Game.new
   end
 
-  def create
-    @game = Game.new(game_params)
-  end
+	def create
+		@game = Game.new(game_params)
+	end
 
-  def show
-    @game = Game.find(params[:id])
-  end
+	def show
+		@game = Game.find(params[:id])
+	end
 end

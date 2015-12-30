@@ -83,5 +83,10 @@ class Piece < ActiveRecord::Base
   end
 
   def move_to!(destination_x, destination_y)
+    piece = Piece.find_by(x: destination_x, y: destination_y)
+    if piece.status != status
+      piece.destroy
+      update(x: destination_x, y: destination_y)
+    end
   end
 end
