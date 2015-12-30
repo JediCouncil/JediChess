@@ -1,4 +1,10 @@
 class Game < ActiveRecord::Base
-	belongs_to :user
-	has_many :pieces
+  has_many :users
+  has_many :pieces
+
+  scope :available, lambda {
+    joins(:users)
+      .group('games.id')
+      .having('count(id) = 1')
+  }
 end

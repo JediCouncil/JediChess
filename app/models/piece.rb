@@ -1,18 +1,17 @@
 class Piece < ActiveRecord::Base
-	belongs_to :user
-	belongs_to :game
+  belongs_to :user
+  belongs_to :game
 
-	enum status: [:black, :white]
+  enum status: [:black, :white]
 
-	def self.types #find out if we absolutely need this!!!
-      %w(Knight Bishop King Queen Rook Pawn)
-    end
+  def self.types # find out if we absolutely need this!!!
+    %w(Knight Bishop King Queen Rook Pawn)
+  end
 
   def is_obstructed?(destination_x, destination_y)
-
-    if destination_x == x #vertical line
+    if destination_x == x # vertical line
       x_distance = 0
-    else        #diagonal/horizontal line
+    else # diagonal/horizontal line
       if x > destination_x
         x_distance = -((destination_x..x).to_a.length - 1)
       else
@@ -26,12 +25,11 @@ class Piece < ActiveRecord::Base
       diagonal_obstruction?(destination_x, destination_y)
     elsif slope == 0
       horizontal_obstruction?(destination_x, destination_y)
-    elsif slope == -Float::INFINITY||
-          slope == Float::INFINITY
+    elsif slope == -Float::INFINITY || slope == Float::INFINITY
       vertical_obstruction?(destination_x, destination_y)
     else
-      invalid_move = "Invalid input. Not diagonal, horizontal, or vertical"
-      raise invalid_move
+      invalid_move = 'Invalid input. Not diagonal, horizontal, or vertical'
+      fail invalid_move
     end
   end
 
@@ -60,7 +58,7 @@ class Piece < ActiveRecord::Base
       obstruent_piece = Piece.find_by(x: x, y: y)
       return true if obstruent_piece.present?
     end
-    return false
+    false
   end
 
   def diagonal_obstruction?(destination_x, destination_y)
@@ -70,14 +68,14 @@ class Piece < ActiveRecord::Base
     check_coordinates(x_coordinates, y_coordinates)
   end
 
-  def vertical_obstruction?(destination_x, destination_y)
+  def vertical_obstruction?(_destination_x, destination_y)
     y_coordinates = current_to_destination_y_coordinates(destination_y)
     x_coordinates = [x] * y_coordinates.count
 
     check_coordinates(x_coordinates, y_coordinates)
   end
 
-  def horizontal_obstruction?(destination_x, destination_y)
+  def horizontal_obstruction?(destination_x, _destination_y)
     x_coordinates = current_to_destination_x_coordinates(destination_x)
     y_coordinates = [y] * x_coordinates.count
 
@@ -91,5 +89,4 @@ class Piece < ActiveRecord::Base
       update(x: destination_x, y: destination_y)
     end
   end
-
 end
