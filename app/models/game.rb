@@ -6,11 +6,13 @@ class Game < ActiveRecord::Base
 
 	after_create :populate_board!
 
-	scope :available, -> {
-		joins("LEFT OUTER JOIN users ON users.game_id = games.id").
-		group("games.id").
-		having("count(games.id) < 2")
-	}
+	# scope :available, -> {
+	# 	joins("LEFT OUTER JOIN users ON users.game_id = games.id").
+	# 	group("games.id").
+	# 	having("count(games.id) < 2")
+	# }
+	
+	scope :available, -> { where('black_player_id IS NULL OR white_player_id IS NULL' ) }
 
 	private
 	def populate_board!
