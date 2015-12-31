@@ -2,6 +2,11 @@
   width: 540px;
   height: 540px;
   background: white;
+  margin: 0 auto;
+}
+
+#chess h1 {
+  text-align: center;
 }
 
 table {
@@ -9,6 +14,7 @@ table {
   height: 609px;
   border-spacing: 0px;
   border: 2px solid black;
+  border-collapse: separate !important;
 }
 
 table tr:nth-child(odd) td:nth-child(odd) {

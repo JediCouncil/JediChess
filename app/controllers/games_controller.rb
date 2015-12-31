@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
-	def new
-		@game = Game.new
-	end
+  def new
+    @game = Game.new
+  end
 
 	def create
 		@game = Game.new(game_params)
@@ -10,5 +10,4 @@ class GamesController < ApplicationController
 	def show
 		@game = Game.find(params[:id])
 	end
-
 end
