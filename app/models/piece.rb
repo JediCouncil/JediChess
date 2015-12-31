@@ -1,9 +1,8 @@
 class Piece < ActiveRecord::Base
 
-  # has_and_belongs_to_many :user
 	belongs_to :game
 
-  enum status: [:black, :white]
+  enum color: [:black, :white]
 
   def self.types # find out if we absolutely need this!!!
     %w(Knight Bishop King Queen Rook Pawn)
@@ -86,7 +85,7 @@ class Piece < ActiveRecord::Base
 
   def move_to!(destination_x, destination_y)
     piece = Piece.find_by(x: destination_x, y: destination_y)
-    if piece.status != status
+    if piece.color != color
       piece.destroy
       update(x: destination_x, y: destination_y)
     end
