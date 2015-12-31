@@ -1,6 +1,7 @@
 class Piece < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :game
+
+  # has_and_belongs_to_many :user
+	belongs_to :game
 
   enum status: [:black, :white]
 
@@ -59,6 +60,7 @@ class Piece < ActiveRecord::Base
       return true if obstruent_piece.present?
     end
     false
+
   end
 
   def diagonal_obstruction?(destination_x, destination_y)
