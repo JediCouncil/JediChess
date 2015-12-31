@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20_151_226_225_245) do
     t.string 'type'
     t.datetime 'created_at',  null: false
     t.datetime 'updated_at',  null: false
-    t.integer 'status'
+ 
   end
 
   create_table 'users', force: :cascade do |t|
