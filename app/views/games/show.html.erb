@@ -12,3 +12,18 @@
     </tbody>
   </table>
 </div>
+
+<div id="chess">
+  <h1>Jedi Chess</h1>
+  <table>
+    <tbody>
+      <% row_range.each do |row| %>
+          <tr class = 'y-position-<%= row %>' >
+            <% row_range.reverse.each do |column| %>
+               <td></td>
+            <% end %>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
