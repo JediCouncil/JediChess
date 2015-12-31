@@ -17,11 +17,11 @@ table {
   border-collapse: separate !important;
 }
 
-table tr:nth-child(odd) td:nth-child(odd) {
+table tr:nth-child(odd) td:nth-child(even) {
   background: black;
 }
 
-table tr:nth-child(even) td:nth-child(even) {
+table tr:nth-child(even) td:nth-child(odd) {
   background: black;
 }
 
@@ -32,3 +32,50 @@ td:hover {
   transform:scale(1.05);
   transition: transform 0.8s ;
 }
+
+
+.piece {
+  width: 45px;
+  height: 45px;
+  background-size: 270px 90px;
+  background: url(Chess_Pieces_Sprite.svg) no-repeat;
+
+}
+
+.white_rook {
+  @extend .piece;
+  display: inline-block;
+  background-position: 180px 0px;
+}
+
+.white_knight {
+  @extend .piece;
+  display: inline-block;
+  background-position: 135px 0px;
+}
+
+.white_bishop {
+  @extend .piece;
+  display: inline-block;
+  background-position: 90px 0px;
+}
+
+.white_queen {
+  @extend .piece;
+  display: inline-block;
+  background-position: -45px 0px;
+}
+
+.white_king {
+  @extend .piece;
+  display: inline-block;
+  background-position: 0px 0px;
+
+}
+
+.white_pawn {
+  @extend .piece;
+  display: inline-block;
+  background-position: 225px 0px;
+}
+
