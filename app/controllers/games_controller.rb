@@ -8,6 +8,17 @@ class GamesController < ApplicationController
 	end
 
 	def show
-		@game = Game.find(params[:id])
+		@game ||= Game.where(id: params[:id]).last
+		@pieces = @game.pieces
+	end
+
+	private
+
+	def game_params
+		params.require(:game).permit(
+			:white_player_id, 
+			:black_player_id,
+			:score, 
+			:result)
 	end
 end
