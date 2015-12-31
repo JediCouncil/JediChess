@@ -128,5 +128,19 @@ RSpec.describe Piece, type: :model do
         expect(piece).to have_attributes(x: 'D', y: 7)
       end
     end
+     context 'no piece' do
+      it 'piece has updated xy coordinates' do
+        piece.update(x: 'G', y: 2, color: 'black')
+
+        expect{piece.move_to!('D', 5)}.to_not change{Piece.count}
+        expect(piece).to have_attributes(x: 'D', y: 5)
+      end
+       it 'piece has updated xy coordinates' do
+        piece.update(x: 'B', y: 3, color: 'white')
+
+        expect{piece.move_to!('E', 3)}.to_not change{Piece.count}
+        expect(piece).to have_attributes(x: 'E', y: 3)
+      end
+    end
   end
 end
