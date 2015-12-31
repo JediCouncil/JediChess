@@ -85,9 +85,14 @@ class Piece < ActiveRecord::Base
 
   def move_to!(destination_x, destination_y)
     piece = Piece.find_by(x: destination_x, y: destination_y)
-    if piece.color != color
-      piece.destroy
-      update(x: destination_x, y: destination_y)
+
+    if piece.present?
+      if piece.color != color
+        piece.destroy
+        update(x: destination_x, y: destination_y)
+      end
+    else
+        update(x: destination_x, y: destination_y)
     end
   end
 end
