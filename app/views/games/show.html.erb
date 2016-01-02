@@ -1,14 +1,35 @@
 <div id="chess">
   <h1>Jedi Chess</h1>
-  <table>
-    <tbody>
-      <% 8.times do %>
-          <tr>
-            <% 8.times do %>
-               <td><div class="white_queen center-block"></div></td>
+    <table>
+      <% y_array = (1..8).to_a.reverse! %>
+      <% y_array.each do |y_value| %>
+        <%= content_tag "tr" do %>
+          <% x_array = ('a'..'h').to_a %>
+          <% x_array.each do |x_value| %>
+            <% pos_id = x_value + y_value.to_s %>
+            <%= content_tag "td", id: pos_id do %>              
             <% end %>
-          </tr>
+          <% end %> 
+        <% end %>
       <% end %>
-    </tbody>
-  </table>
+    </table>
 </div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+  var pos_id_array = <%= raw @pos_id_array %>;
+  var piece_class_array = <%= raw @piece_class_array %>;
+
+  for (i=0; i<pos_id_array.length; i++) {
+
+    text = "<div class=\"" + 
+
+    piece_class_array[i] + " center-block\"></div>"
+    pos_id = '#' + pos_id_array[i]
+    $(pos_id).html(text)
+  }
+
+</script>
+

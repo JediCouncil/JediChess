@@ -18,11 +18,11 @@ table {
 }
 
 table tr:nth-child(odd) td:nth-child(even) {
-  background: black;
+  background: gray;
 }
 
 table tr:nth-child(even) td:nth-child(odd) {
-  background: black;
+  background: gray;
 }
 
 td:hover {
@@ -45,19 +45,19 @@ td:hover {
 .white_rook {
   @extend .piece;
   display: inline-block;
-  background-position: 180px 0px;
+  background-position: -180px 0px;
 }
 
 .white_knight {
   @extend .piece;
   display: inline-block;
-  background-position: 135px 0px;
+  background-position: -135px 0px;
 }
 
 .white_bishop {
   @extend .piece;
   display: inline-block;
-  background-position: 90px 0px;
+  background-position: -90px 0px;
 }
 
 .white_queen {
@@ -76,6 +76,49 @@ td:hover {
 .white_pawn {
   @extend .piece;
   display: inline-block;
-  background-position: 225px 0px;
+  background-position: -225px 0px;
+}
+
+.black_rook {
+  @extend .piece;
+  display: inline-block;
+  background-position: -180px -45px;
+}
+
+.black_knight {
+  @extend .piece;
+  display: inline-block;
+  background-position: -135px -45px;
+}
+
+.black_bishop {
+  @extend .piece;
+  display: inline-block;
+  background-position: -90px -45px;
+}
+
+.black_queen {
+  @extend .piece;
+  display: inline-block;
+  background-position: -45px -45px;
+}
+
+.black_king {
+  @extend .piece;
+  display: inline-block;
+  background-position: 0px -45px;
+
+}
+
+.black_pawn {
+  @extend .piece;
+  display: inline-block;
+  background-position: -225px -45px;
+}
+
+td {
+  padding: 0;
+  height: 76px;
+  width: 76px;
 }
 
