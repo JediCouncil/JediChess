@@ -5,8 +5,6 @@ RSpec.describe Pawn, type: :model do
     context "first move" do
       let(:black_pawn) { build(:pawn, color: "black", x: 'B', y: 2) }
       let(:white_pawn) { build(:pawn, color: "white", x: 'C', y: 7) }
-      # let(:obstruent_piece) {build(:piece)}
-      # obstruent_piece.update(x: 'B', y: 3)
 
       it "black pawn can move 2 spaces" do
         result = black_pawn.valid_move?('B', 4)
@@ -99,17 +97,16 @@ RSpec.describe Pawn, type: :model do
       end
 
       it "white pawn can't move horizontal" do
-        result = white_pawn.valid_move?('C', 6)
+        result = white_pawn.valid_move?('C', 7)
         expect(result).to be false
       end
     end
 
     context "capture" do
-      let(:black_pawn) { build(:pawn, color: "black") }
+      let(:black_pawn) { build(:pawn, color: "black", x: 'F', y: 3) }
       let(:white_pawn) { build(:pawn, color: "white") }
 
       it "can capture one square diagonally" do
-        black_pawn.update(x: 'F', y: 3)
         white_pawn.update(x: 'G', y: 4)
 
         result = black_pawn.valid_move?('G', 4)
@@ -117,7 +114,6 @@ RSpec.describe Pawn, type: :model do
       end
 
       it "can't capture vertically" do
-        black_pawn.update(x: 'F', y: 3)
         white_pawn.update(x: 'F', y: 4)
 
         result = black_pawn.valid_move?('F', 4)
@@ -125,7 +121,6 @@ RSpec.describe Pawn, type: :model do
       end
 
       it "can't capture horizontally" do
-        black_pawn.update(x: 'F', y: 3)
         white_pawn.update(x: 'E', y: 3)
 
         result = black_pawn.valid_move?('E', 3)
