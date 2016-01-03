@@ -4,19 +4,19 @@ class Pawn < Piece
     #invalid move error raises if moving to same current
     #xy coordinates
 
-    #check if path is obstructed
-    obstructed = is_obstructed?(destination_x, destination_y)
-    return false if obstructed
+    #check if it's backward/horizontal move
+    invalid_move = invalid_move?(destination_y)
+    return false if invalid_move
 
-    #check if it's backward move
-    backwards = backward_move?(destination_y)
-    return false if backwards
 
     #find distance
     y_coords = current_to_destination_y_coordinates(destination_y)
     y_distance = y_coords.length
 
     if first_move?
+      #check if path is obstructed
+      obstructed = is_obstructed?(destination_x, destination_y)
+      return false if obstructed
       y_distance <= 1 ? true : false
     else
       #move only 1 space
@@ -36,7 +36,10 @@ class Pawn < Piece
     end
   end
 
-  def backward_move?(destination_y)
+  def invalid_move?(destination_y)
+    #horizontal move
+    return true if y == destination_y
+    #backwards move
     if black?
       destination_y < y ? true : false
     else
