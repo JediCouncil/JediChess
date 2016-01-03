@@ -27,19 +27,17 @@ class Pawn < Piece
     #check if piece is present on destination
     destination_piece = Piece.find_by(x: destination_x, y: destination_y)
 
-
     #check if its a vertical or diagonal move
     if valid_spaces
       if vertical_move?(destination_x)
         destination_piece.present? ? false : true
-      else
-        #diagonal
+      else #diagonal_move
+        return true
       end
     else
       #not valid spaces
       return false
     end
-
   end
 
   def invalid_move?(destination_y)
