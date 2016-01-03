@@ -115,7 +115,11 @@ RSpec.describe Pawn, type: :model do
         expect(result).to be true
       end
 
-      it "can't capture vertically" do
+      it "can't capture vertically", :focus => true do
+        black_pawn.update(x: 'F', y: 3)
+        white_pawn.update(x: 'F', y: 4)
+        result = black_pawn.valid_move?('F', 4)
+        expect(result).to be false
       end
 
       it "can't capture horizontally" do
