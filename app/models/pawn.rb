@@ -25,7 +25,7 @@ class Pawn < Piece
     if vertical_move?(destination_x)
       !destination_piece.present?
     else #diagonal move
-      return true
+      destination_piece.present?
     end
   end
 
