@@ -1,23 +1,23 @@
 class GamesController < ApplicationController
-  include GamesHelper 
+  include GamesHelper
 
   def index
+
     @games = Game.available
+
   end
 
   def new
     @game = Game.new
   end
 
-	def create
-		@game = Game.create()
+  def create
+    @game = Game.create
     redirect_to game_path(@game)
-	end
+  end
 
-	def show
-		@game = Game.find(params[:id])
-    @pieces_hash = render_pieces(@game) #call the helper function and get the hash. will be passed onto the view
-    
-	end
-
+  def show
+    @game = Game.find(params[:id])
+    @pieces_hash = render_pieces(@game) # call the helper function and get the hash. will be passed onto the view
+  end
 end
