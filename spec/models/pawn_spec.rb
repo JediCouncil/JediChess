@@ -31,6 +31,11 @@ RSpec.describe Pawn, type: :model do
         expect(result).to be false
       end
 
+      it "black pawn can't move diagonal if piece not present" do
+        result = black_pawn.valid_move?('A', 3)
+        expect(result).to be false
+      end
+
       it "white pawn can move 2 spaces" do
         result = white_pawn.valid_move?('C', 5)
         expect(result).to be true
@@ -53,6 +58,11 @@ RSpec.describe Pawn, type: :model do
 
       it "white pawn can't move horizontal" do
         result = white_pawn.valid_move?('B', 7)
+        expect(result).to be false
+      end
+
+      it "white pawn can't move diagonal if piece not present" do
+        result = white_pawn.valid_move?('D', 6)
         expect(result).to be false
       end
     end
@@ -81,6 +91,11 @@ RSpec.describe Pawn, type: :model do
         expect(result).to be false
       end
 
+      it "black pawn can't move diagonal if piece not present" do
+        result = black_pawn.valid_move?('D', 5)
+        expect(result).to be false
+      end
+
       it "white pawn can move 1 space" do
         result = white_pawn.valid_move?('B', 5)
         expect(result).to be true
@@ -98,6 +113,11 @@ RSpec.describe Pawn, type: :model do
 
       it "white pawn can't move horizontal" do
         result = white_pawn.valid_move?('C', 7)
+        expect(result).to be false
+      end
+
+      it "white pawn can't move diagonal if piece not present" do
+        result = white_pawn.valid_move?('A', 5)
         expect(result).to be false
       end
     end
