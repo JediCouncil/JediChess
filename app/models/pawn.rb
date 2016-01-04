@@ -10,10 +10,10 @@ class Pawn < Piece
     #check if pawn can move correct # of spaces
     if first_move?
       return false if is_obstructed?(destination_x, destination_y)
-      valid_spaces = y_distance <= 1
+      valid_spaces = (y_distance <= 1)
     else
       #move only 1 space
-      valid_spaces = y_distance < 1
+      valid_spaces = (y_distance < 1)
     end
 
     return false unless valid_spaces
