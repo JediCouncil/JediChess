@@ -1,17 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Pawn, type: :model do
-  describe "#valid_move?" do
-    context "first move" do
-      let(:black_pawn) { build(:pawn, color: "black", x: 'B', y: 2) }
-      let(:white_pawn) { build(:pawn, color: "white", x: 'C', y: 7) }
+  describe '#valid_move?' do
+    context 'first move' do
+      let(:black_pawn) { build(:pawn, color: 'black', x: 'B', y: 2) }
+      let(:white_pawn) { build(:pawn, color: 'white', x: 'C', y: 7) }
 
-      it "black pawn can move 2 spaces" do
+      it 'black pawn can move 2 spaces' do
         result = black_pawn.valid_move?('B', 4)
         expect(result).to be true
       end
 
-      it "black pawn can move 1 space" do
+      it 'black pawn can move 1 space' do
         result = black_pawn.valid_move?('B', 3)
         expect(result).to be true
       end
@@ -31,12 +31,17 @@ RSpec.describe Pawn, type: :model do
         expect(result).to be false
       end
 
-      it "white pawn can move 2 spaces" do
+      it "black pawn can't move diagonal if piece not present" do
+        result = black_pawn.valid_move?('A', 3)
+        expect(result).to be false
+      end
+
+      it 'white pawn can move 2 spaces' do
         result = white_pawn.valid_move?('C', 5)
         expect(result).to be true
       end
 
-      it "white pawn can move 1 space" do
+      it 'white pawn can move 1 space' do
         result = white_pawn.valid_move?('C', 6)
         expect(result).to be true
       end
@@ -55,13 +60,18 @@ RSpec.describe Pawn, type: :model do
         result = white_pawn.valid_move?('B', 7)
         expect(result).to be false
       end
+
+      it "white pawn can't move diagonal if piece not present" do
+        result = white_pawn.valid_move?('D', 6)
+        expect(result).to be false
+      end
     end
 
-    context "not first move" do
-      let(:black_pawn) { build(:pawn, color: "black", x: 'C', y: 4) }
-      let(:white_pawn) { build(:pawn, color: "white", x: 'B', y: 6) }
+    context 'not first move' do
+      let(:black_pawn) { build(:pawn, color: 'black', x: 'C', y: 4) }
+      let(:white_pawn) { build(:pawn, color: 'white', x: 'B', y: 6) }
 
-      it "black pawn can move 1 space" do
+      it 'black pawn can move 1 space' do
         result = black_pawn.valid_move?('C', 5)
         expect(result).to be true
       end
@@ -81,7 +91,12 @@ RSpec.describe Pawn, type: :model do
         expect(result).to be false
       end
 
-      it "white pawn can move 1 space" do
+      it "black pawn can't move diagonal if piece not present" do
+        result = black_pawn.valid_move?('D', 5)
+        expect(result).to be false
+      end
+
+      it 'white pawn can move 1 space' do
         result = white_pawn.valid_move?('B', 5)
         expect(result).to be true
       end
@@ -100,13 +115,18 @@ RSpec.describe Pawn, type: :model do
         result = white_pawn.valid_move?('C', 7)
         expect(result).to be false
       end
+
+      it "white pawn can't move diagonal if piece not present" do
+        result = white_pawn.valid_move?('A', 5)
+        expect(result).to be false
+      end
     end
 
-    context "capture" do
-      let(:black_pawn) { build(:pawn, color: "black", x: 'F', y: 3) }
-      let(:white_pawn) { build(:pawn, color: "white") }
+    context 'capture' do
+      let(:black_pawn) { build(:pawn, color: 'black', x: 'F', y: 3) }
+      let(:white_pawn) { build(:pawn, color: 'white') }
 
-      it "can capture one square diagonally" do
+      it 'can capture one square diagonally' do
         white_pawn.update(x: 'G', y: 4)
 
         result = black_pawn.valid_move?('G', 4)
@@ -129,4 +149,3 @@ RSpec.describe Pawn, type: :model do
     end
   end
 end
-
