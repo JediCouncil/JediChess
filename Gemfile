@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'gon'
 gem 'devise', '>= 3.2.4'
 
 gem 'bootstrap-sass', '~> 3.3.5.1'
