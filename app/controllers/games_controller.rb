@@ -1,24 +1,24 @@
 class GamesController < ApplicationController
+  include GamesHelper
+
+  def index
+
+    @games = Game.available
+
+  end
+
   def new
     @game = Game.new
   end
 
-	def create
-		@game = Game.new(game_params)
-	end
+  def create
+    @game = Game.create
+    redirect_to game_path(@game)
+  end
 
-	def show
-		@game ||= Game.where(id: params[:id]).last
-		@pieces = @game.pieces
-	end
+  def show
+    @game = Game.find(params[:id])
+    @pieces_hash = render_pieces(@game) # call the helper function and get the hash. will be passed onto the view
+  end
 
-	private
-
-	def game_params
-		params.require(:game).permit(
-			:white_player_id, 
-			:black_player_id,
-			:score, 
-			:result)
-	end
 end
