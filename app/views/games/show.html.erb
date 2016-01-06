@@ -21,7 +21,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
   var pieces_hash = <%= raw @pieces_hash.to_json %>; //first convert a ruby hash to json format so js can utilize using .to_json
-
+  //testing a new pull
+  
   for (key in pieces_hash) {
     pos_id = '#' + key
     piece_url = '/pieces/'+ pieces_hash[key][1]
