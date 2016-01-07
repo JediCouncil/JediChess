@@ -9,7 +9,6 @@ class PiecesController < ApplicationController
   end
 
   def update
-    # binding.pry
     current_piece.update_attributes(piece_params)
     @game = current_piece.game
     redirect_to game_path(@game)
