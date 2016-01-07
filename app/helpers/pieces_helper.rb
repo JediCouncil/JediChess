@@ -1,3 +1,3 @@
 module PiecesHelper
-	include GamesHelper
+  include GamesHelper
 end
