@@ -2,9 +2,8 @@ FactoryGirl.define do
   factory :piece do
     factory :pawn, class: 'Pawn' do
     end
-  end
-
-  factory :king do
+    factory :king, class: 'King' do
+    end
     x ''
     y ''
     color ''
