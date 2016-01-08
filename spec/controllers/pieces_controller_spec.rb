@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe PiecesController, type: :controller do
-
   describe 'PUT #update' do
     let(:game) { create(:game) }
     let(:piece) { game.pieces.first }
