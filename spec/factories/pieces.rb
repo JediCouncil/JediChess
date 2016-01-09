@@ -17,5 +17,8 @@ FactoryGirl.define do
     trait :white do
       status :white
     end
+
+    factory :knight, class: 'Knight' do
+    end
   end
 end
