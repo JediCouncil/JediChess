@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Rook, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
   describe "#valid_move?" do
   	
   		let(:white_rook) { build(:rook, color: "white", x: "A", y: 1) }
@@ -41,4 +41,5 @@ RSpec.describe Rook, type: :model do
 
 
   end
+
 end

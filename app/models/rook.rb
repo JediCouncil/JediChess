@@ -4,4 +4,5 @@ class Rook < Piece
 		return false if (destination_x != x) && (destination_y != y)
 		return true if x == destination_x || y == destination_y
 	end
+
 end
