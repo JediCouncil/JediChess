@@ -2,6 +2,7 @@ class Piece < ActiveRecord::Base
   belongs_to :game
 
   enum color: [:black, :white]
+  enum first_move: [:true, :false]
 
   def self.types # find out if we absolutely need this!!!
     %w(Knight Bishop King Queen Rook Pawn)
