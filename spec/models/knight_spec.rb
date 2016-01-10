@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Knight, type: :model do
   describe '#valid_move?' do
-    let(:knight)  { build(:knight, x: 'C' , y: 4) }
+    let(:knight) { build(:knight, x: 'C', y: 4) }
 
     context 'given knight moves properly' do
       it 'is a valid move' do
