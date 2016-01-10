@@ -8,4 +8,13 @@ class King < Piece
 
     return true
   end
+
+  def castle!(rook)
+    x_coords = current_to_destination_x_coordinates(rook.x)
+
+    if x_coords.size == 3 || x_coords.size == 2
+      update(x: x_coords[1], y: y)
+      rook.update(x: x_coords[0], y: y)
+    end
+  end
 end

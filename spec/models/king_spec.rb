@@ -42,5 +42,47 @@ RSpec.describe King, type: :model do
       end
     end
   end
+
+  describe "#castle!" do
+    let(:black_king) { build(:king, x: 'E', y: 8, color: 'black') }
+    let(:black_rook) { build(:rook, x: 'A', y: 8, color: 'black') }
+    let(:white_king) { build(:king, x: 'E', y: 1, color: 'white') }
+    let(:white_rook) { build(:rook, x: 'A', y: 1, color: 'white') }
+
+    context "queenside" do
+      it "black king moves 2 spaces to the left and black rook moves to the right of the king" do
+        black_king.castle!(black_rook)
+        expect(black_king.x).to eq('C')
+        expect(black_king.y).to eq(8)
+        expect(black_rook.x).to eq('D')
+        expect(black_rook.y).to eq(8)
+      end
+      it "white king moves 2 spaces to the left and white rook moves to the right of the king" do
+        white_king.castle!(white_rook)
+        expect(white_king.x).to eq('C')
+        expect(white_king.y).to eq(1)
+        expect(white_rook.x).to eq('D')
+        expect(white_rook.y).to eq(1)
+      end
+    end
+    context "kingside" do
+      it "black king moves 2 spaces to the right and black rook moves to the left of the king and" do
+        black_rook.update(x: 'H', y: '8')
+        black_king.castle!(black_rook)
+        expect(black_king.x).to eq('G')
+        expect(black_king.y).to eq(8)
+        expect(black_rook.x).to eq('F')
+        expect(black_king.y).to eq(8)
+      end
+       it "white king moves 2 spaces to the left and white rook moves to the right of the king" do
+        white_rook.update(x: 'H', y: '1')
+        white_king.castle!(white_rook)
+        expect(white_king.x).to eq('G')
+        expect(white_king.y).to eq(1)
+        expect(white_rook.x).to eq('F')
+        expect(white_rook.y).to eq(1)
+      end
+    end
+  end
 end
 
