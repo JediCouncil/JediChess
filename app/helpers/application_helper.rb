@@ -4,4 +4,3 @@ module ApplicationHelper
     "https://secure.gravatar.com/avatar/#{gravatar_id}?s=200&r=pg&d=retro"
   end
 end
-
