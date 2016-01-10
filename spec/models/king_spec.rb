@@ -16,22 +16,22 @@ RSpec.describe King, type: :model do
         expect(result).to be false
       end
 
-      it 'it not a valid move' do
+      it 'is not a valid move' do
         result = king.valid_move?('B', 6)
         expect(result).to be false
       end
 
-      it 'it not a valid move' do
+      it 'is not a valid move' do
         result = king.valid_move?('B', 2)
         expect(result).to be false
       end
 
-      it 'it not a valid move' do
+      it 'is not a valid move' do
         result = king.valid_move?('A', 8)
         expect(result).to be false
       end
 
-      it 'it not a valid move' do
+      it 'is not a valid move' do
         result = king.valid_move?('C', 1)
         expect(result).to be false
       end
@@ -78,5 +78,5 @@ RSpec.describe King, type: :model do
         expect(result).to be true
       end
     end
-  end    
+  end
 end
