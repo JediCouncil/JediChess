@@ -4,18 +4,7 @@ FactoryGirl.define do
     end
     factory :king, class: 'King' do
     end
-    x ''
-    y ''
-    color ''
-    outcome ''
-    casualty ''
-    type ''
-    trait :black do
-      status :black
-    end
-
-    trait :white do
-      status :white
+    factory :knight, class: 'Knight' do
     end
   end
 end

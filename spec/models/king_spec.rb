@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe King, type: :model do
-
   describe '#valid_move?' do
-    let(:king)  { build(:king, x: 'D' , y: 4) }
+    let(:king) { build(:king, x: 'D', y: 4) }
 
     context 'given king tries to move more than one step' do
       it 'is not a valid move' do
