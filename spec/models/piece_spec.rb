@@ -92,7 +92,7 @@ RSpec.describe Piece, type: :model do
   end
 
   describe '#move_to!' do
-    let(:piece) { build(:piece) }
+    let(:piece)  { build(:piece) }
     let(:piece2) { build(:piece) }
 
     context 'enemy piece' do
