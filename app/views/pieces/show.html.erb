@@ -30,10 +30,26 @@
     $(pos_id).html(text); //this jquery finds each id tag with the value pos_id and insert the above <div class = 'color_type'></div> inside it so it gets inserted inside the td tag
 
     $(current_id).css("background-color", "red");
-
-    $("." + pieces_hash[key][0]).draggable();
-
   }
+
+  //only selected chess piece is draggable
+  var selected_piece = current_id + " ." + pieces_hash[key][0]  // #h2 .black_pawn
+
+  $(selected_piece).draggable({
+    distance: 5,
+    cursor: 'move'
+  });
+
+  //Every chess tile accepts a draggable
+  $("#chess tr > td").droppable({
+    drop: handleDropEvent
+  });
+
+  function handleDropEvent(event, ui){
+    var draggable = ui.draggable;
+    alert('i have a chess piece dropped on me');
+  }
+
 </script>
 
 
