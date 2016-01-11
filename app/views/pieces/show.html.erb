@@ -21,7 +21,9 @@
 <script>
   var pieces_hash = <%= raw @pieces_hash.to_json %>; //first convert a ruby hash to json format so js can utilize using .to_json
 
-	var current_id = '#' + <%= raw @piece_pos_id.inspect %> //not sure why I need inspect and raw here
+	var current_position_id = '#' + <%= raw @piece_pos_id.inspect %> //not sure why I need inspect and raw here
+
+  var current_piece_id = <%= @piece.id %>
 
   for (key in pieces_hash) {
     pos_id = '#' + key
@@ -29,12 +31,13 @@
     text = "<a href='"+ piece_url + "'><div class=\"" + pieces_hash[key][0] + " center-block\"></div></a>"
     $(pos_id).html(text); //this jquery finds each id tag with the value pos_id and insert the above <div class = 'color_type'></div> inside it so it gets inserted inside the td tag
 
-    $(current_id).css("background-color", "red");
+    $(current_position_id).css("background-color", "red");
   }
 
-  //only selected chess piece is draggable
-  var selected_piece = current_id + " ." + pieces_hash[key][0]  // #h2 .black_pawn
+  var selected_piece = current_position_id + " ." + pieces_hash[key][0],  // #h2 .black_pawn
+      selected_piece_url = '/pieces/' + current_piece_id
 
+  //only selected chess piece is draggable
   $(selected_piece).draggable({
     distance: 5,
     cursor: 'move'
@@ -42,14 +45,20 @@
 
   //Every chess tile accepts a draggable
   $("#chess tr > td").droppable({
-    drop: handleDropEvent
+    drop: updatePieceCoordinates
   });
 
-  function handleDropEvent(event, ui){
-    var draggable = ui.draggable;
-    alert('i have a chess piece dropped on me');
+  //Handles Drop Event and triggers ajax PUT request
+  function updatePieceCoordinates(event, ui){
+    var destination_id = $(this).attr("id"), //"e7"
+        destination_x = destination_id[0],
+        destination_y = destination_id[1];
+    $.ajax({
+      method: "PUT",
+      url: selected_piece_url,
+      data: { piece: {x: destination_x, y: destination_y} }
+    })
   }
-
 </script>
 
 
