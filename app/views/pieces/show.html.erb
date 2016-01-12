@@ -25,6 +25,8 @@
 
   var current_piece_id = <%= @piece.id %>
 
+  var current_piece_class = "<%= @piece.color + '_' + @piece.type.downcase %>"
+
   for (key in pieces_hash) {
     pos_id = '#' + key
     piece_url = '/pieces/'+ pieces_hash[key][1]
@@ -34,7 +36,7 @@
     $(current_position_id).css("background-color", "red");
   }
 
-  var selected_piece = current_position_id + " ." + pieces_hash[key][0],  // #h2 .black_pawn
+  var selected_piece = current_position_id + " ." + current_piece_class,  // #h2 .black_pawn
       selected_piece_url = '/pieces/' + current_piece_id
 
   //only selected chess piece is draggable
