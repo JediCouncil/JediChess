@@ -1,0 +1,28 @@
+var current_piece_id = <%= @piece.id %>
+var current_position_id = '#' + <%= raw @piece_pos_id.inspect %>
+var current_piece_class =  "<%= @piece.color + '_' + @piece.type.downcase %>"
+var selected_piece = current_position_id + " ." + current_piece_class,  // #h2 .black_pawn
+    selected_piece_url = '/pieces/' + current_piece_id
+
+$(current_position_id).css("background", "red");
+
+//only selected chess piece is draggable
+$(selected_piece).draggable();
+
+// //Every chess tile accepts a draggable
+$("#chess tr > td").droppable({
+  drop: updatePieceCoordinates
+});
+
+// //Handles Drop Event and triggers ajax PUT request
+function updatePieceCoordinates(event, ui){
+  var destination_id = $(this).attr("id"), //"e7"
+      destination_x = destination_id[0],
+      destination_y = destination_id[1];
+  $.ajax({
+    method: "PUT",
+    url: selected_piece_url,
+    data: { piece: {x: destination_x, y: destination_y} }
+  })
+}
+

@@ -17,17 +17,17 @@
 </div>
 
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
   var pieces_hash = <%= raw @pieces_hash.to_json %>; //first convert a ruby hash to json format so js can utilize using .to_json
 
   for (key in pieces_hash) {
     pos_id = '#' + key
     piece_url = '/pieces/'+ pieces_hash[key][1]
-    text = "<a href='"+ piece_url + "'><div class=\"" + pieces_hash[key][0] + " center-block\"></div></a>"
+    text = "<a href='"+ piece_url + "' data-remote='true'><div class=\"" + pieces_hash[key][0] + " center-block\"></div></a>"
     $(pos_id).html(text) //this jquery finds each id tag with the value pos_id and insert the above <div class = 'color_type'></div> inside it so it gets inserted inside the td tag
-
   };
+
 </script>
+
+
 
