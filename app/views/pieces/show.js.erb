@@ -1,7 +1,7 @@
 var current_piece_id = <%= @piece.id %>
 var current_position_id = '#' + <%= raw @piece_pos_id.inspect %>
 var current_piece_class =  "<%= @piece.color + '_' + @piece.type.downcase %>"
-var selected_piece = current_position_id + " ." + current_piece_class,  // #h2 .black_pawn
+var selected_piece = current_position_id + " ." + current_piece_class, //ex: #h2 .black_pawn
     selected_piece_url = '/pieces/' + current_piece_id
 
 $(current_position_id).css("background", "red");
