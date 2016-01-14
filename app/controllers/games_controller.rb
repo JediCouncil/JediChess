@@ -2,9 +2,7 @@ class GamesController < ApplicationController
   include GamesHelper
 
   def index
-
     @games = Game.available
-
   end
 
   def new
