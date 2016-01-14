@@ -82,7 +82,6 @@ class Piece < ActiveRecord::Base
   end
 
   def move_to!(piece_id, destination_x, destination_y)
-    
     current_piece = Piece.find_by(id: piece_id)
     current_game = current_piece.game.id
     destination_piece = Piece.find_by(game_id: current_game, x: destination_x, y: destination_y)
@@ -96,6 +95,6 @@ class Piece < ActiveRecord::Base
     end
 
     update_attributes(x: destination_x, y: destination_y)
-    return true #return true if a move has been made (a. dest_cell piece killed; b. no piece present in dest_cell)
+    true # return true if a move has been made (a. dest_cell piece killed; b. no piece present in dest_cell)
   end
 end
