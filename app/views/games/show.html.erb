@@ -8,7 +8,7 @@
           <% x_array = ('a'..'h').to_a %>
           <% x_array.each do |x_value| %>
             <% pos_id = x_value + y_value.to_s %>
-            <%= content_tag "td", id: pos_id do %>
+            <%= content_tag "td", id: pos_id, class: "droppable" do %>
             <% end %>
           <% end %>
         <% end %>
@@ -18,16 +18,120 @@
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
 <script>
   var pieces_hash = <%= raw @pieces_hash.to_json %>; //first convert a ruby hash to json format so js can utilize using .to_json
 
   for (key in pieces_hash) {
     pos_id = '#' + key
     piece_url = '/pieces/'+ pieces_hash[key][1]
-    text = "<a href='"+ piece_url + "'><div class=\"" + pieces_hash[key][0] + " center-block\"></div></a>"
+    text = "<div id="+ Number(pieces_hash[key][1]) +" class=\"draggable " + pieces_hash[key][0] + " center-block\"></div>"
+    
+    // text = "<a href='"+ piece_url + "'><div data-item-id="+ Number(pieces_hash[key][1]) +" class=\"draggable " + pieces_hash[key][0] + " center-block\"></div></a>"
+
     $(pos_id).html(text) //this jquery finds each id tag with the value pos_id and insert the above <div class = 'color_type'></div> inside it so it gets inserted inside the td tag
 
   };
+
+ 
+
+  $(function() {
+
+    $( ".draggable" ).draggable({
+      revert: 'invalid',
+      drag: function( event, ui ) {}
+    });
+
+    $( ".droppable" ).droppable({
+      tolerance: 'fit',
+      drop: function( event, ui ) {
+        var $this = $(this);
+        ui.draggable.position({
+          my: "center",
+          at: "center",
+          of: $this
+          // using: function(pos) {
+          //   $(this).animate(pos, 200, "linear");
+          // }
+        });
+
+        //bind the droppable element to the new cell
+
+        
+        var droppable_id = '#' + $(this).attr("id");
+        var draggable_id = '#' + $(ui.draggable).attr("id");
+        var org_cell = $(draggable_id).parent();
+        var org_position = org_cell.attr("id") //print d7
+
+        var detached_draggable = $(draggable_id).detach();
+
+        $(droppable_id).append(detached_draggable);
+
+        $(draggable_id).attr("style", "position: relative;");
+
+        var id = $(ui.draggable).attr("id");
+        var dest_position = $(this).attr("id");
+        var dest_x = dest_position.split('')[0];
+        var dest_y = dest_position.split('')[1];
+        var org_x = org_position.split('')[0];
+        var org_y = org_position.split('')[1];
+        // console.log("PieceID " + id + "PositionID" + position);
+
+        $.ajax({ 
+          url: "/pieces/"+id,
+          type: "PUT",
+          data: {
+
+            'id': id,
+            'dest_x': dest_x,
+            'dest_y': dest_y,
+            'org_x': org_x,
+            'org_y': org_y
+          },
+          success: function(res){
+            // debugger;
+            //res should tell me which cell I need to update and with the information to update with <div id = '123' class="draggable black_queen center-block"></div>
+            
+            //case 1: only dest_cell -->move_to! returned success
+            //case 2: only org_cell -->move_to! returned failure
+            //res[0] will contain a location flag: 0->org cell update; 1->des cell update
+            //res[1] will be the hash with the piece id, type, color 
+            
+
+            if (res[0]==0) {
+              //update org cell 
+              var cell_id = '#'+org_x+org_y;
+              $(cell_id).html(piece_div);
+              //update dest_cell with the previous piece
+              var piece_div2 = "<div id="+piece_id+" class=\"draggable "+piece_class+" center-block\"></div>";
+              $('#'+dest_x+dest_y).html(piece_div2);
+            }
+
+            if (res[0]==1){
+              //only update dest cell
+              debugger;
+              var cell_id = '#'+dest_x+dest_y;
+              var piece_id = res[1][0]['dest_piece_id'];
+              var piece_class = res[1][0]['dest_piece_color']+'_'+res[1][0]['dest_piece_type'];
+              var piece_div = "<div id="+piece_id+" class=\"draggable "+piece_class+" center-block\"></div>";
+              $(cell_id).html(piece_div);
+              
+            }
+
+            $('#'+piece_id).draggable({
+                revert: 'invalid',
+                drag: function( event, ui ) {}
+              });
+            
+          }
+        });
+
+      }
+    });
+    
+
+ 
+  });
+
 </script>
 

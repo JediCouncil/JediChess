@@ -30,7 +30,7 @@ td:hover {
   cursor: pointer;
   overflow:hidden;
   transform:scale(1.05);
-  transition: transform 0.8s ;
+  /*transition: transform 0.8s ;*/
 }
 
 
@@ -39,6 +39,7 @@ td:hover {
   height: 45px;
   background-size: 270px 90px;
   background: url(Chess_Pieces_Sprite.svg) no-repeat;
+  z-index: 1000;
 
 }
 
@@ -120,6 +121,10 @@ td {
   padding: 0;
   height: 76px;
   width: 76px;
+}
+
+.draggable[style] {
+  position: relative !important;
 }
 
 

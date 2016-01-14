@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'jquery-ui-rails'
 gem 'gon'
 gem 'devise', '>= 3.2.4'
 
