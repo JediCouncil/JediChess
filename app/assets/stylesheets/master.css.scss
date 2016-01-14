@@ -26,7 +26,6 @@ table tr:nth-child(even) td:nth-child(odd) {
 }
 
 td:hover {
-  background-color: #d3d3d3 !important;
   cursor: pointer;
   overflow:hidden;
   transform:scale(1.05);

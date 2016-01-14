@@ -10,6 +10,7 @@ class PiecesController < ApplicationController
 
   def update
     current_piece.update_attributes(piece_params)
+    render :nothing => true, status => 200
   end
 
   private
