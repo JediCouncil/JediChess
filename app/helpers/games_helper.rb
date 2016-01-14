@@ -5,7 +5,7 @@ module GamesHelper
     game.pieces.each do |piece|
       pos_id = piece.x + piece.y.to_s
       piece_class = piece.color + '_' + piece.type.downcase # gon.piece_class = white_knight
-      render_hash [pos_id] = piece_class
+      render_hash [pos_id] = [piece_class, piece.id]
     end
     render_hash
   end
