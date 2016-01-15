@@ -1,13 +1,5 @@
 class PiecesController < ApplicationController
 
-  def show
-    @piece = current_piece
-    @piece_pos_id = @piece.x + @piece.y.to_s
-    respond_to do |format|
-      format.js
-    end
-  end
-
   def update
     current_piece.update_attributes(piece_params)
     render :nothing => true, status => 200
