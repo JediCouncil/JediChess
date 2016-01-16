@@ -127,15 +127,22 @@
 
             if (res[0]==1){
               //only update dest cell
-              var cell_id = '#'+dest_x+dest_y;
-              var piece_id = res[1][0]['dest_piece_id'];
-              var piece_class = res[1][0]['dest_piece_color']+'_'+res[1][0]['dest_piece_type'];
-              var piece_div = "<div id="+piece_id+" class=\"draggable "+piece_class+" center-block\"></div>";
-              $(cell_id).html(piece_div);
-              $('#'+piece_id).draggable({
-                revert: 'invalid',
-                drag: function( event, ui ) {}
-              });
+              
+              // var piece_id = res[1][0]['dest_piece_id'];
+              // var piece_class = res[1][0]['dest_piece_color']+'_'+res[1][0]['dest_piece_type'];
+              // var piece_div = "<div id="+piece_id+" class=\"draggable "+piece_class+" center-block\"></div>";
+              // $(cell_id).html(piece_div);
+              // $('#'+piece_id).draggable({
+              //   revert: 'invalid',
+              //   drag: function( event, ui ) {}
+              // });
+
+              var dest_cell_id = '#'+dest_x+dest_y;
+              var dest_piece_id = '#'+res[1][0]['dest_piece_id'];
+              var destinationPiece = $(dest_piece_id).detach();
+              $(dest_cell_id)
+                .empty()
+                .append(destinationPiece);
               
             }
 

@@ -1,12 +1,12 @@
 class PiecesController < ApplicationController
   include GamesHelper
 
-  def show
-    @piece = current_piece
-    @game = @piece.game
-    @pieces_hash = render_pieces(@game)
-    @piece_pos_id = @piece.x + @piece.y.to_s
-  end
+  # def show
+  #   @piece = current_piece
+  #   @game = @piece.game
+  #   @pieces_hash = render_pieces(@game)
+  #   @piece_pos_id = @piece.x + @piece.y.to_s
+  # end
 
   def update
     # call valid move functions and return valid or invalid
