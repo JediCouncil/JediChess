@@ -45,12 +45,23 @@ RSpec.describe Game, type: :model do
   describe "#check?" do
     game = FactoryGirl.create(:game)
     it 'returns false if the game is not in check' do
-        expect(game.check?).to eq false
+        expect(game.check?).to eq false #should return false if the game stays at starting state
     end
 
-    it 'returns true if the game is in check' do
-        Pawn.destroy_all(game: game)
+    it 'returns true if the Queen is threatening' do
+        Pawn.destroy_all(game: game) #removes all pawns from game
+        #to make room for threatening queen
+        #makes queen directly vertical to white king]
+
         create(:queen, x: 'E', y: '7', color: 'black', game: game)
+
+        expect(game.check?).to eq true
+    end
+
+    it 'returns true if a Pawn is threatening' do
+        Pawn.destroy_all(game: game, color: 'white') #removes all white pawns
+
+        create(:pawn, x: 'D', y: '2', color: 'black', game: game)
 
         expect(game.check?).to eq true
     end

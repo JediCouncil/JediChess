@@ -13,6 +13,26 @@ class Game < ActiveRecord::Base
 
   scope :available, -> { where('black_player_id IS NULL OR white_player_id IS NULL') }
 
+  def check?
+    #game is in check if either black or white king is in check
+    king_is_in_check?('black') || king_is_in_check('white')
+  end
+
+  def king_is_in_check?(color)
+    #finds king by color
+    king = pieces.find_by(type: "King", color: color)
+    #returns array of all opposing pieces
+    opponents = pieces.where(color: !color).to_a
+    #loops through each opposing piece to determine if they have a valid move
+    #that can capture king
+    opponents.each do |opponent|
+      if opponent.valid_move?(king.x, king.y) == true
+        @threatening_piece = opponent
+        return true
+      end
+    end
+    false
+  end
   private
 
   def populate_board!
@@ -51,20 +71,5 @@ class Game < ActiveRecord::Base
     pieces.create(x: 'h', y: '7', type: 'Pawn', color: 'black')
   end
 
-  def check?
-    king_is_in_check?('black') || king_is_in_check('white')
-  end
 
-  def king_is_in_check?(color)
-    king = pieces.find_by(type: "King", color: color)
-    opponents = pieces.where(color: !color).to_a
-
-    opponents.each do |opponent|
-      if opponent.valid_move?(king.x, king.y)
-        @threatening_piece = opponent
-        return true
-      end
-    end
-    false
-  end
 end
