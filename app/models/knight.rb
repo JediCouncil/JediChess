@@ -1,2 +1,0 @@
-class Knight < Piece
-end
