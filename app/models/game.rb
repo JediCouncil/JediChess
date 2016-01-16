@@ -22,12 +22,11 @@ class Game < ActiveRecord::Base
     #finds king by color
     king = pieces.find_by(type: "King", color: color)
     #returns array of all opposing pieces
-    opponents = pieces.where(color: !color).to_a
+    opponents = pieces.includes(:game).where(color: !color).to_a
     #loops through each opposing piece to determine if they have a valid move
     #that can capture king
     opponents.each do |opponent|
       if opponent.valid_move?(king.x, king.y) == true
-        @threatening_piece = opponent
         return true
       end
     end

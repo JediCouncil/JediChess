@@ -40,9 +40,9 @@ RSpec.describe Game, type: :model do
     expect(game.pieces.select('type').where(x: 'f', y: 7).first.type).to eq('Pawn')
     expect(game.pieces.select('type').where(x: 'g', y: 7).first.type).to eq('Pawn')
     expect(game.pieces.select('type').where(x: 'h', y: 7).first.type).to eq('Pawn')
-  end
+end
 
-  describe "#check?" do
+ describe "#check?" do
     game = FactoryGirl.create(:game)
     it 'returns false if the game is not in check' do
         expect(game.check?).to eq false #should return false if the game stays at starting state
