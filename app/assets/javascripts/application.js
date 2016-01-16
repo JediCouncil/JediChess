@@ -10,10 +10,12 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-// require jquery
+//= require jquery
 //= require bootstrap-sprockets
-// require jquery_ujs
+//= require jquery_ujs
 //= require_tree .
 
-// require jquery-ui
+//= require jquery-ui/draggable
+//= require jquery-ui/droppable
+
 
