@@ -11,9 +11,5 @@ RSpec.describe PiecesController, type: :controller do
       expect(piece.x).to eq('B')
       expect(piece.y).to eq(1)
     end
-    it 'redirects to the game show page' do
-      put :update, id: piece, piece: { x: 'B', y: 1 }
-      expect(response).to redirect_to(game_path(game))
-    end
   end
 end
