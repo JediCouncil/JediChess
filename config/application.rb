@@ -25,8 +25,10 @@ module JediChess
 
     config.autoload_paths += %W(#{config.root}/app/models/pieces)
 
+
     config.generators do |g|
-      g.test_framework :rspec
+      g.test_framework  :rspec
     end
+
   end
 end

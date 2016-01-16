@@ -1,16 +1,17 @@
 FactoryGirl.define do
   factory :piece do
-    factory :pawn, class: 'Pawn' do
+    x ""
+    y ""
+    color ""
+    outcome ""
+    casualty ""
+    type ""
+    trait :black do
+      status :black
     end
 
-    factory :rook, class: 'Rook' do
+    trait :white do
+      status :white
     end
-
-    factory :king, class: 'King' do
-    end
-
-    factory :knight, class: 'Knight' do
-    end
-    
   end
 end

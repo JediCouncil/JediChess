@@ -3,9 +3,9 @@
   <h1>Add a New Game</h1>
   <br />
   <%= simple_form_for @game, :url => games_path do |f| %>
-<!-- removed the form field to collect name because we don't have a name field in the game-->
+    <%= f.input :name %>
     <br />
-    <%= f.submit "Create", :class => 'btn btn-primary pull-right' %>
+    <%= f.submit "Create", :class => 'btn btn-primary' %>
     <br />
   <% end %>
 <br />
