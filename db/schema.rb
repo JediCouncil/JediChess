@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20_151_231_070_521) do
   end
 
 
+
   create_table 'pieces', force: :cascade do |t|
     t.string 'x'
     t.integer 'y'
