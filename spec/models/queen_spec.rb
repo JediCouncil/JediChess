@@ -5,15 +5,16 @@ RSpec.describe Queen, type: :model do
   describe "#valid_move?" do
   	let(:white_queen) { build(:queen, color: "white", x: "d", y: 1) }
  		let(:black_queen) { build(:queen, color: "black", x: "d", y: 8) }
+    let(:white_pawn)  { build(:pawn, color: "white", x: "d", y: 2)}  
 
  		it "white queen can move vertically" do
  			result = white_queen.valid_move?('d', 4)
  			expect(result).to be true
   	end
 
-  	it "white queen can move horizontally" do
- 			result = white_queen.valid_move?('g', 1)
- 			expect(result).to be true
+  	it "white queen can't move with obstruction" do
+ 			result = white_queen.valid_move?('d', 3)
+ 			expect(result).to be false
   	end
  
   	it "white queen can move diagonally" do
