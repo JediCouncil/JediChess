@@ -9,9 +9,9 @@ class PiecesController < ApplicationController
   end
 
   def update
-    current_piece.update_attributes(piece_params)
-    @game = current_piece.game
-    redirect_to game_path(@game)
+      current_piece.update_attributes(piece_params)
+      @game = current_piece.game
+      redirect_to game_path(@game)
   end
 
   private

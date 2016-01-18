@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe Piece, type: :model do
   describe '#is_obstructed?' do
     let(:piece)  { build(:piece) }
@@ -128,18 +130,25 @@ RSpec.describe Piece, type: :model do
         expect(piece).to have_attributes(x: 'D', y: 7)
       end
     end
+
     context 'no piece' do
-      it 'piece has updated xy coordinates' do
+      it 'piece has updated xy coordinates if valid_move? is true' do
         piece.update(x: 'G', y: 2, color: 'black')
 
         expect { piece.move_to!('D', 5) }.to_not change { Piece.count }
         expect(piece).to have_attributes(x: 'D', y: 5)
       end
-      it 'piece has updated xy coordinates' do
+      it 'piece has updated xy coordinates if valid_move? is true' do
         piece.update(x: 'B', y: 3, color: 'white')
 
         expect { piece.move_to!('E', 3) }.to_not change { Piece.count }
         expect(piece).to have_attributes(x: 'E', y: 3)
+      end
+      it 'piece doesn\'t have updated xy coordinates if valid_move? is false' do
+        piece.update(x: 'B', y: 3, color: 'white')
+
+        expect { piece.move_to!('H', 1) }.to_not change { Piece.count }
+        expect(piece).to have_attributes(x: 'B', y: 3)
       end
     end
   end
