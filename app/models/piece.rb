@@ -54,7 +54,7 @@ class Piece < ActiveRecord::Base
     xy_coords.each do |xy_coord|
       x = xy_coord[0]
       y = xy_coord[1]
-      obstruent_piece = Piece.find_by(x: x, y: y)
+      obstruent_piece = game.pieces.find_by(x: x, y: y)
       return true if obstruent_piece.present?
     end
     false
@@ -82,7 +82,7 @@ class Piece < ActiveRecord::Base
   end
 
   def move_to!(destination_x, destination_y)
-    destination_piece = Piece.find_by(x: destination_x, y: destination_y)
+    destination_piece = game.pieces.find_by(x: destination_x, y: destination_y)
 
     if destination_piece.present?
       if destination_piece.color != color

@@ -17,15 +17,15 @@ $(document).ready(function(){
         }
       }
 
-      if ( $this.parent().hasClass("selected_piece" )) {
+      if ( $this.closest("td").hasClass("selected_piece" )) {
         // if piece is unselected then disable drag
         if ( $this.hasClass("ui-draggable" )){
           $this.draggable("disable");
         }
-        $this.parent().removeClass("selected_piece");
+        $this.closest("td").removeClass("selected_piece");
       }
       else {
-        $this.parent().addClass("selected_piece")
+        $this.closest("td").addClass("selected_piece")
         lastClicked = this;
 
         if ( $this.hasClass("ui-draggable-disabled" )){
@@ -74,6 +74,9 @@ $(document).ready(function(){
         url: "/pieces/" + draggable_piece.data('item-id'),
         data: { piece: {x: destination_x, y: destination_y} }
       })
+        .done(function(response){
+          alert(response);
+        });
     }
   }//end of if
 });
