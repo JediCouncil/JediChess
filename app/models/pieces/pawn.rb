@@ -41,14 +41,6 @@ class Pawn < Piece
     end
   end
 
-  def first_move?
-    if black?
-      y == 2 # starting y-cord is 2
-    else
-      y == 7 # starting y-cord is 7
-    end
-  end
-
   def vertical_move?(destination_x)
     destination_x == x
   end

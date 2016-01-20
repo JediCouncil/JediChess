@@ -4,6 +4,8 @@ FactoryGirl.define do
     end
     factory :king, class: 'King' do
     end
+    factory :rook, class: 'Rook' do
+    end
     factory :knight, class: 'Knight' do
     end
   end
