@@ -15,6 +15,11 @@ class King < Piece
     if x_coords.size == 3 || x_coords.size == 2
       update(x: x_coords[1])
       rook.update(x: x_coords[0])
+      return [ type, rook.type,
+              { king_x_coord: x_coords[1],
+                rook_x_coord: x_coords[0]
+              }
+            ]
     end
   end
 

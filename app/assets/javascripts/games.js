@@ -47,27 +47,23 @@ $(document).ready(function(){
 
     //Handles Drop Event and triggers ajax PUT request
     function updatePieceCoordinates(event, ui){
-      ui.draggable.parent().removeClass("selected_piece");
-      ui.draggable.draggable("disable");
+      destination = $(this);
+      draggable_piece = $(ui.draggable);
 
-      var destination_id = $(this).attr("id"), //"e7"
-          destination_x = destination_id[0],
-          destination_y = destination_id[1];
+      draggable_piece.parent().removeClass("selected_piece");
+      draggable_piece.draggable("disable");
+
+      destination_id = $(this).attr("id"); //"e7"
+      destination_x = destination_id[0];
+      destination_y = destination_id[1];
 
       var $this = $(this);
-       ui.draggable.position({
+        draggable_piece.position({
         my: "center",
         at: "center",
         of: $this
        });
 
-      var draggable_piece = $(ui.draggable)
-      var detached_draggable = draggable_piece.detach();
-      draggable_piece.attr("style", "position: relative;");
-
-      //attach piece to new destination
-      var destination_id = '#'+ destination_id;
-      $(destination_id).append(detached_draggable);
 
       $.ajax({
         method: "PUT",
@@ -75,9 +71,31 @@ $(document).ready(function(){
         data: { piece: {x: destination_x, y: destination_y} }
       })
         .done(function(response){
-          alert(response);
-        });
-    }
+          if (response != false) {
+            if (response[0] == "King" && response[1] == "Rook") {
+              var detached_king = draggable_piece.detach();
+              var detached_rook = destination.find("div").detach();
+              detached_king.attr("style", "position: relative;");
+              detached_rook.attr("style", "position: relative;");
+
+              //attach piece to new destination
+              var destination_id_king = '#' + response[2]['king_x_coord'] + destination_y;
+              var destination_id_rook = '#' + response[2]['rook_x_coord'] + destination_y;
+              $(destination_id_king).append(detached_king);
+              $(destination_id_rook).append(detached_rook);
+
+            }
+            else {
+              var detached_draggable = draggable_piece.detach();
+              draggable_piece.attr("style", "position: relative;");
+
+              //attach piece to new destination
+              var destination_id = '#'+ destination_x + destination_y;
+              $(destination_id).append(detached_draggable);
+            }
+          }
+        }); //end of done
+    }//end of drop function
   }//end of if
 });
 

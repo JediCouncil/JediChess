@@ -88,7 +88,10 @@ class Piece < ActiveRecord::Base
       if destination_piece.color != color
         destination_piece.destroy
       else
-        return
+        if type == "King" && destination_piece.type == "Rook"
+          return castle!(destination_piece)
+        end
+        return false
       end
     end
     update(x: destination_x, y: destination_y)
