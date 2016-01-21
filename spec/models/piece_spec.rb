@@ -152,4 +152,20 @@ RSpec.describe Piece, type: :model do
       end
     end
   end
+
+  describe '#move!' do
+    let(:piece) { build(:piece, type: "Knight", x: 'B', y: 4) }
+
+    context 'given piece is a Knight' do
+      it 'moves the knight if valid move' do
+        expect { piece.move!('C', 6, "Knight") }.to_not change { Piece.count }
+        expect(piece).to have_attributes(x: 'C', y: 6)
+      end
+
+      it 'doesn\'t move the knight if valid move is false' do
+        expect { piece.move!('C', 5, "Knight") }.to_not change { Piece.count }
+        expect(piece).to have_attributes(x: 'B', y: 4)
+      end
+    end
+  end
 end
