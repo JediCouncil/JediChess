@@ -1,7 +1,6 @@
 class King < Piece
 
   def can_castle?(rook)
-    binding.pry
     return false unless first_move?
 
     return false unless rook.first_move?
