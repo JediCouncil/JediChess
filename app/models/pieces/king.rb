@@ -1,14 +1,13 @@
 class King < Piece
-  def is_obstructed?(destination_x, destination_y)
-    super.is_obstructed(destination_x, destination_y)
-  end
-  def can_castle?(rook)
 
+  def can_castle?(rook)
+    binding.pry
     return false unless first_move?
 
     return false unless rook.first_move?
 
     return false if is_obstructed?(rook.x, rook.y)
+
 
     true
   end
