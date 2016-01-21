@@ -84,53 +84,17 @@ class Piece < ActiveRecord::Base
   def move_to!(destination_x, destination_y)
     destination_piece = Piece.find_by(x: destination_x, y: destination_y)
 
-    if valid_move?(destination_x, destination_y)
       if destination_piece.present?
         if destination_piece.color != color
           destination_piece.destroy
-          return true
         else
-          return false
+          return
         end
       end
       update(x: destination_x, y: destination_y)
-      return true
-    end
   end
 
-  def move!(destination_x, destination_y, type)
-    if type == "Knight"
-      # binding.pry
-      if valid_move?(destination_x, destination_y)
-        move_to!(destination_x, destination_y)
-      end
-    end
-    if Piece.type == "King"
-      if King.valid_move?(destination_x, destination_y)
-        move_to!(destination_x, destination_y)
-      end
-    end
-    if Piece.type == "Pawn"
-      if Pawn.valid_move?(destination_x, destination_y)
-        move_to!(destination_x, destination_y)
-      end
-    end
-    if Piece.type == "Queen"
-      if Queen.valid_move?(destination_x, destination_y)
-        move_to!(destination_x, destination_y)
-      end
-    end
-    if Piece.type == "Rook"
-      if Rook.valid_move?(destination_x, destination_y)
-        move_to!(destination_x, destination_y)
-      end
-    end
-    if Piece.type == "Bishop"
-      if Bishop.valid_move?(destination_x, destination_y)
-        move_to!(destination_x, destination_y)
-      end
-    end
+  def move!(destination_x, destination_y)
+    move_to!(destination_x, destination_y) if valid_move?(destination_x, destination_y)
   end
-
-
 end 

@@ -130,41 +130,36 @@ RSpec.describe Piece, type: :model do
         expect(piece).to have_attributes(x: 'D', y: 7)
       end
     end
-
     context 'no piece' do
-      it 'piece has updated xy coordinates if valid_move? is true' do
+      it 'piece has updated xy coordinates' do
         piece.update(x: 'G', y: 2, color: 'black')
 
         expect { piece.move_to!('D', 5) }.to_not change { Piece.count }
         expect(piece).to have_attributes(x: 'D', y: 5)
       end
-      it 'piece has updated xy coordinates if valid_move? is true' do
+      it 'piece has updated xy coordinates' do
         piece.update(x: 'B', y: 3, color: 'white')
 
         expect { piece.move_to!('E', 3) }.to_not change { Piece.count }
         expect(piece).to have_attributes(x: 'E', y: 3)
       end
-      it 'piece doesn\'t have updated xy coordinates if valid_move? is false' do
-        piece.update(x: 'B', y: 3, color: 'white')
-
-        expect { piece.move_to!('H', 1) }.to_not change { Piece.count }
-        expect(piece).to have_attributes(x: 'B', y: 3)
-      end
     end
   end
 
   describe '#move!' do
-    let(:piece) { build(:piece, type: "Knight", x: 'B', y: 4) }
+    let(:piece) { build(:piece, x: 'D', y: 3, type: 'King') }
 
-    context 'given piece is a Knight' do
-      it 'moves the knight if valid move' do
-        expect { piece.move!('C', 6, "Knight") }.to_not change { Piece.count }
-        expect(piece).to have_attributes(x: 'C', y: 6)
+    context 'given piece is a king' do
+      it 'moves if valid' do
+        result = piece.move!('D', 4)
+        expect(result).to have_attributes(x: 'D', y: 4)
       end
+    end
 
-      it 'doesn\'t move the knight if valid move is false' do
-        expect { piece.move!('C', 5, "Knight") }.to_not change { Piece.count }
-        expect(piece).to have_attributes(x: 'B', y: 4)
+    context 'given piece is a king' do
+      it 'does not move if invalid' do
+        result = piece.move!('F', 1)
+        expect(result).to have_attributes(x: 'D', y: 3)
       end
     end
   end
