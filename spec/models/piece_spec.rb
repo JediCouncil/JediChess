@@ -56,20 +56,20 @@ RSpec.describe Piece, type: :model do
       end
     end
 
-    context 'invalid move' do
-      it 'raises an error if input is invalid' do
-        piece.update(x: 'D', y: 4)
+    # context 'invalid move' do
+    #   it 'raises an error if input is invalid' do
+    #     piece.update(x: 'D', y: 4)
 
-        invalid_move = 'Invalid input. Not diagonal, horizontal, or vertical'
-        expect { piece.is_obstructed?('B', 5) }.to raise_error { invalid_move }
-      end
-      it 'raises an error' do
-        piece.update(x: 'D', y: 4)
+    #     invalid_move = 'Invalid input. Not diagonal, horizontal, or vertical'
+    #     expect { piece.is_obstructed?('B', 5) }.to raise_error { invalid_move }
+    #   end
+    #   it 'raises an error' do
+    #     piece.update(x: 'D', y: 4)
 
-        invalid_move = 'Invalid input. Not diagonal, horizontal, or vertical'
-        expect { piece.is_obstructed?('H', 3) }.to raise_error { invalid_move }
-      end
-    end
+    #     invalid_move = 'Invalid input. Not diagonal, horizontal, or vertical'
+    #     expect { piece.is_obstructed?('H', 3) }.to raise_error { invalid_move }
+    #   end
+    # end
 
     context 'piece is not obstructed' do
       it 'returns false' do
