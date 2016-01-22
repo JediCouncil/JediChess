@@ -15,7 +15,7 @@ RSpec.describe Queen, type: :model do
   	end
 
   	it "white queen can't move with obstruction" do
-      create(:pawn, x: 'D', y: 2)
+      create(:pawn, x: 'D', y: 2, game_id: 9)
  			result = white_queen.valid_move?('D', 3)
  			expect(result).to be false
   	end

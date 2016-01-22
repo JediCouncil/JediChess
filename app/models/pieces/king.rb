@@ -4,7 +4,7 @@ class King < Piece
     return false unless first_move?
 
     return false unless rook.first_move?
-
+    
     return false if is_obstructed?(rook.x, rook.y)
 
 
