@@ -121,7 +121,7 @@ RSpec.describe Pawn, type: :model do
       let(:black_pawn) { build(:pawn, color: 'black', x: 'F', y: 3) }
       let(:white_pawn) { build(:pawn, color: 'white') }
 
-      it 'can capture one square diagonally' do
+      it 'can capture one square diagonally' do #failing
         white_pawn.update(x: 'G', y: 4)
 
         result = black_pawn.valid_move?('G', 4)

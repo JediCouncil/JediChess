@@ -43,7 +43,7 @@ RSpec.describe King, type: :model do
     end
   end
 
-  describe '#castle!' do #all failing
+  describe '#castle!' do 
     let(:black_king) { build(:king, x: 'E', y: 8, color: 'black') }
     let(:black_rook) { build(:rook, x: 'A', y: 8, color: 'black') }
     let(:white_king) { build(:king, x: 'E', y: 1, color: 'white') }

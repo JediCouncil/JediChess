@@ -1,5 +1,6 @@
 class Pawn < Piece
   def valid_move?(destination_x, destination_y)
+    
     return false if backward_or_horizontal_move?(destination_y)
 
     # find distance
