@@ -94,7 +94,7 @@ class Piece < ActiveRecord::Base
       update(x: destination_x, y: destination_y)
   end
 
-  def move!(destination_x, destination_y, type)
-    move_to!(destination_x, destination_y) if type.valid_move?(destination_x, destination_y)
+  def move!(destination_x, destination_y)
+    move_to!(destination_x, destination_y) if valid_move?(destination_x, destination_y)
   end
 end 

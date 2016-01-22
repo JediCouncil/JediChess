@@ -151,14 +151,14 @@ RSpec.describe Piece, type: :model do
 
     context 'given piece is a king' do
       it 'moves if valid' do
-        result = piece.move!('D', 4, 'King')
+        result = piece.move!('D', 4)
         expect(result).to have_attributes(x: 'D', y: 4)
       end
     end
 
     context 'given piece is a king' do
       it 'does not move if invalid' do
-        result = piece.move!('F', 1, 'King')
+        result = piece.move!('F', 1)
         expect(result).to have_attributes(x: 'D', y: 3)
       end
     end
