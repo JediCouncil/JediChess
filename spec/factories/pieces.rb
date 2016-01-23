@@ -14,8 +14,25 @@ FactoryGirl.define do
 
     factory :queen, class: 'Queen' do
     end
+
     factory :bishop, class: 'Bishop' do
+
+
+    x ''
+    y ''
+    color ''
+    outcome ''
+    casualty ''
+    type ''
+    trait :black do
+      status :black
+    end
+
+    trait :white do
+      status :white
+
     end
 
   end
+
 end
