@@ -8,6 +8,7 @@ class Piece < ActiveRecord::Base
   end
 
   def is_obstructed?(destination_x, destination_y)
+
     if destination_x == x # vertical line
       x_distance = 0
     else # diagonal/horizontal line
