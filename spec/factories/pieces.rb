@@ -16,7 +16,7 @@ FactoryGirl.define do
     end
 
     factory :bishop, class: 'Bishop' do
-
+    end
 
     x ''
     y ''
