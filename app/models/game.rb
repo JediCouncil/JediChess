@@ -13,6 +13,10 @@ class Game < ActiveRecord::Base
 
   scope :available, -> { where('black_player_id IS NULL OR white_player_id IS NULL') }
 
+  def change_turn(white_player_id, black_player_id)
+
+  end
+
   private
 
   def populate_board!

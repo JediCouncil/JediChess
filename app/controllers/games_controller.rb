@@ -14,6 +14,10 @@ class GamesController < ApplicationController
     redirect_to game_path(@game)
   end
 
+  def update
+    
+  end
+
   def show
     @game = Game.find(params[:id])
     @pieces_hash = render_pieces(@game) # call the helper function and get the hash. will be passed onto the view
