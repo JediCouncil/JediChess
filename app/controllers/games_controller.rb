@@ -18,5 +18,4 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     gon.pieces_hash = render_pieces(@game) # call the helper function and get the hash. will be passed onto the view
   end
-
 end

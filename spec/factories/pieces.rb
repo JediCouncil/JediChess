@@ -15,6 +15,9 @@ FactoryGirl.define do
     factory :queen, class: 'Queen' do
     end
 
+    factory :bishop, class: 'Bishop' do
+    end
+
     x ''
     y ''
     color ''
@@ -28,7 +31,5 @@ FactoryGirl.define do
     trait :white do
       status :white
     end
-
   end
-
 end
