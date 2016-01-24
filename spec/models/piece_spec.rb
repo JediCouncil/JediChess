@@ -152,6 +152,7 @@ RSpec.describe Piece, type: :model do
     let (:piece3) { create(:pawn, color: 'black', x: 'B', y: 2) }
     let (:piece4) { create(:rook, color: 'black', x: 'H', y: 6) }
     let (:piece5) { create(:queen, color: 'white', x: 'G', y: 4) }
+    let (:piece6) { create(:bishop, color: 'white', x: 'F', y: 2)}
 
     context 'given piece is a king' do
       it 'moves if valid' do
@@ -220,6 +221,20 @@ RSpec.describe Piece, type: :model do
       it 'does not move if invalid' do
         piece5.move!('C', 4)
         expect(piece5).to have_attributes(x: 'G', y: 4)
+      end
+    end
+
+    context 'given piece is a bishop' do
+      it 'does move if valid' do
+        piece6.move!('G', 3)
+        expect(piece6).to have_attributes(x: 'G', y: 3)
+      end
+    end
+
+    context 'given piece is a bishop' do
+      it 'does not move if invalid' do
+        piece6.move!('F', 4)
+        expect(piece6).to have_attributes(x: 'F', y: 2)
       end
     end
   end

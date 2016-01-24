@@ -15,6 +15,9 @@ FactoryGirl.define do
     factory :queen, class: 'Queen' do
     end
 
+    factory :bishop, class: 'Bishop' do
+    end
+
     x ''
     y ''
     color ''
