@@ -152,7 +152,7 @@ RSpec.describe Piece, type: :model do
     let (:piece3) { create(:pawn, color: 'black', x: 'B', y: 2) }
     let (:piece4) { create(:rook, color: 'black', x: 'H', y: 6) }
     let (:piece5) { create(:queen, color: 'white', x: 'G', y: 4) }
-    let (:piece6) { create(:bishop, color: 'white', x: 'F', y: 2)}
+    let (:piece6) { create(:bishop, color: 'white', x: 'F', y: 2) }
 
     context 'given piece is a king' do
       it 'moves if valid' do
