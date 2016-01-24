@@ -20,7 +20,7 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @pieces_hash = render_pieces(@game) # call the helper function and get the hash. will be passed onto the view
+    gon.pieces_hash = render_pieces(@game) # call the helper function and get the hash. will be passed onto the view
   end
 
   private

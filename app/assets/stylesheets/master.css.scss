@@ -26,7 +26,6 @@ table tr:nth-child(even) td:nth-child(odd) {
 }
 
 td:hover {
-  background-color: #d3d3d3 !important;
   cursor: pointer;
   overflow:hidden;
   transform:scale(1.05);
@@ -39,7 +38,11 @@ td:hover {
   height: 45px;
   background-size: 270px 90px;
   background: url(Chess_Pieces_Sprite.svg) no-repeat;
+}
 
+.selected_piece {
+  background-color: #3399FF !important;
+  border: .5px solid black;
 }
 
 .white_rook {

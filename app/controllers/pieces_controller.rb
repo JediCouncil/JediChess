@@ -11,8 +11,7 @@ class PiecesController < ApplicationController
 
   def update
     current_piece.update_attributes(piece_params)
-    @game = current_piece.game
-    redirect_to game_path(@game)
+    render :nothing => true, status => 200
   end
 
   private

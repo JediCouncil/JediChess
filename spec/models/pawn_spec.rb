@@ -63,8 +63,8 @@ RSpec.describe Pawn, type: :model do
     end
 
     context 'not first move' do
-      let(:black_pawn) { build(:pawn, color: 'black', x: 'C', y: 4) }
-      let(:white_pawn) { build(:pawn, color: 'white', x: 'B', y: 6) }
+      let(:black_pawn) { build(:pawn, color: 'black', x: 'C', y: 4, first_move: false) }
+      let(:white_pawn) { build(:pawn, color: 'white', x: 'B', y: 6, first_move: false) }
 
       it 'black pawn can move 1 space' do
         result = black_pawn.valid_move?('C', 5)
