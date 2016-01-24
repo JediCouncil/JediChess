@@ -14,10 +14,13 @@ class Game < ActiveRecord::Base
   scope :available, -> { where('black_player_id IS NULL OR white_player_id IS NULL') }
 
   def change_turn!
-    if current_user == white_player
-      turn.update_attributes(:black_player_id)
+    # if current player who played move_to! just now was the white_player
+    # then update the turn to the black_player
+    if current_user.pieces.move_to! == white_player_id
+      update_attributes(turn: black_player_id)
     else
-      turn.update_attributes(:white_player_id)
+      update_attributes(turn: white_player_id)
+    end
   end
 
   private

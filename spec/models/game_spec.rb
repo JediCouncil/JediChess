@@ -46,7 +46,7 @@ RSpec.describe Game, type: :model do
 
     context 'given last piece played was black' do
       it 'changes turn to white_player_id' do
-        game.change_turn!
+        expect { (game.change_turn!) }.to change { Game.turn }.from(0).to(1)
       end
     end
   end
