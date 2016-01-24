@@ -4,5 +4,6 @@ FactoryGirl.define do
     result ''
     black_player_id ''
     white_player_id ''
+    turn ''
   end
 end

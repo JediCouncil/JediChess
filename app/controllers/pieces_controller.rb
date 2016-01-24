@@ -1,5 +1,6 @@
 class PiecesController < ApplicationController
   include GamesHelper
+  before_action :require_authorized_for_updating_piece, :only => [:update]
 
   def show
     @piece = current_piece
@@ -24,5 +25,9 @@ class PiecesController < ApplicationController
 
   def piece_params
     params.require(:piece).permit(:x, :y)
+  end
+
+  def require_authorized_for_updating_piece
+
   end
 end

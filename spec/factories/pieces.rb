@@ -11,6 +11,5 @@ FactoryGirl.define do
 
     factory :knight, class: 'Knight' do
     end
-    
   end
 end

@@ -1,5 +1,4 @@
 module GamesHelper
-
   def render_pieces(game) # this function takes a game object as input and spit out a hash with "xy" ('a8') as key and "color_type" ("black_rook") as value
     render_hash = {}
     game.pieces.each do |piece|
@@ -9,5 +8,4 @@ module GamesHelper
     end
     render_hash
   end
-
 end

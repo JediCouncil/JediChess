@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
-
-RSpec.describe Game, type: :model do
   it 'populate board' do
     game = FactoryGirl.create(:game)
 
@@ -43,5 +39,15 @@ RSpec.describe Game, type: :model do
     expect(game.pieces.select('type').where(x: 'f', y: 7).first.type).to eq('Pawn')
     expect(game.pieces.select('type').where(x: 'g', y: 7).first.type).to eq('Pawn')
     expect(game.pieces.select('type').where(x: 'h', y: 7).first.type).to eq('Pawn')
+  end
+
+  describe '#change_turn!' do
+    let(:game) { create(:game, white_player_id: 1, black_player_id: 0, turn: 0) }
+
+    context 'given last piece played was black' do
+      it 'changes turn to white_player_id' do
+        game.change_turn!
+      end
+    end
   end
 end

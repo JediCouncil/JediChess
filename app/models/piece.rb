@@ -92,5 +92,6 @@ class Piece < ActiveRecord::Base
       end
     end
     update(x: destination_x, y: destination_y)
+    Game.change_turn!
   end
 end
