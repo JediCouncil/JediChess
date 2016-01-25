@@ -55,6 +55,7 @@ class Game < ActiveRecord::Base
     #Use check? method
     #if a game is in check?(), iterate through every possible move King could make and determine if the game is still in check, return false if at least one move still return true on game.check?(). 
     x_coord_indices = { 'A' => 1, 'B' => 2, 'c' => 3, 'd' => 4, 'e' => 5, 'f' => 6, 'g' => 7, 'h' => 8 }
+    
 
     if check?
       #retrieve the king color that's in check
@@ -65,14 +66,27 @@ class Game < ActiveRecord::Base
       x = king.x
       y = king.y
 
+      x_norm=x_coord_indices[x]
+
+
       #have a pointer to move the king one step in all directions
       times=0 #iterator
-      while times<8 #going clockwise starting from top center 
-        king.move?!(dest_x, dest_y)
+      ix = [0, 1, 1, 1, 0, -1, -1, -1]
+      iy = [1, 1, 0, -1, -1, -1, 0, 1]
+      index=0
+      for ix.each do |delta_x| #going clockwise starting from top center 
+        
+        delta_y = iy[index]
+        
+        dest_x=x_norm+delta_x if dest_x <= 8 && dest_x >=1
+        dest_y=y+delta_y if dest_y <= 8 && dest_y >=1
+        
+        king.move!(dest_x, dest_y)
         return true if king_is_in_check?(color)
-        king.move?(x,y) #move the piece back if not checkmate
-        times+=1
+        king.move!(x,y) #move the piece back if not checkmate
+        index+=1
       end
+      false
      
     end 
     false #if the game is not in check, there is no checkmate
