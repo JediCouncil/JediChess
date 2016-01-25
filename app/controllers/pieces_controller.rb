@@ -14,15 +14,14 @@ class PiecesController < ApplicationController
     unless destination_piece.nil?
       if current_piece.type == "King" && destination_piece.type == "Rook"
         if current_piece.can_castle?(destination_piece)
-          @result_array = current_piece.move_to!(params[:piece][:x], params[:piece][:y])
+          @result = current_piece.move_to!(params[:piece][:x], params[:piece][:y])
         end
-        return render json: @result_array
+        return render json: @result
       end
     end
-
-    @results_array = current_piece.move_to!(params[:piece][:x], params[:piece][:y])
+    @result = current_piece.move_to!(params[:piece][:x], params[:piece][:y])
     # binding.pry
-    return render json: @results_array
+    return render json: @result
     # can it move?
     # when moving is anyting destroyed?
     # render the move and destoryed attributes

@@ -103,8 +103,7 @@ class Piece < ActiveRecord::Base
                                original_position: {x: x, y: y},
                                new_position: {x: destination_x, y: destination_y}
                               }
-                            # binding.pry
-    update(x: destination_x, y: destination_y)
+    update(x: destination_x, y: destination_y, first_move: false)
     return results
   end
 end

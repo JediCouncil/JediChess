@@ -47,7 +47,6 @@ $(document).ready(function(){
 
     //Handles Drop Event and triggers ajax PUT request
     function updatePieceCoordinates(event, ui){
-      destination = $(this);
       draggable_piece = $(ui.draggable);
 
       draggable_piece.parent().removeClass("selected_piece");
@@ -76,7 +75,7 @@ $(document).ready(function(){
     //    type: rook.type, position: {x: x_coords[0], y: rook.y}
     //   } ]
     // }
-        debugger;
+        // debugger;
           if (response.status == "success"){
             // debugger;
             if (response.pieces_destroyed != undefined) {

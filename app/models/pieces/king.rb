@@ -11,7 +11,6 @@ class King < Piece
 
   def castle!(rook)
     x_coords = current_to_destination_x_coordinates(rook.x)
-
     if x_coords.size == 3 || x_coords.size == 2
       results = {status: "success", pieces_moved: [
         { type: type, original_position: {x: x, y: y}, new_position: {x: x_coords[1], y: y} },
@@ -20,8 +19,9 @@ class King < Piece
       }
       update(x: x_coords[1])
       rook.update(x: x_coords[0])
-
       return results
+    else
+      return false
     end
   end
 
