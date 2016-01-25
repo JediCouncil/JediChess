@@ -100,9 +100,9 @@ class Piece < ActiveRecord::Base
     end
 
     results[:pieces_moved] << {type: type,
-                             original_position: {x: x, y: y},
-                             new_position: {x: destination_x, y: destination_y}
-                            }
+                               original_position: {x: x, y: y},
+                               new_position: {x: destination_x, y: destination_y}
+                              }
                             # binding.pry
     update(x: destination_x, y: destination_y)
     return results

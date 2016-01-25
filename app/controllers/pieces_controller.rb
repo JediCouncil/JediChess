@@ -8,9 +8,6 @@
 
 class PiecesController < ApplicationController
   def update
-    # @pieces_moved
-    # @pieces_destroyed
-
     current_game = current_piece.game
     destination_piece = current_game.pieces.find_by(piece_params)
 
@@ -22,6 +19,7 @@ class PiecesController < ApplicationController
         return render json: @result_array
       end
     end
+
     @results_array = current_piece.move_to!(params[:piece][:x], params[:piece][:y])
     # binding.pry
     return render json: @results_array
