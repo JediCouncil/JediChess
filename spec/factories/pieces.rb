@@ -31,7 +31,5 @@ FactoryGirl.define do
     trait :white do
       status :white
     end
-
   end
-
 end
