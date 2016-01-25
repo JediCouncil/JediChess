@@ -114,7 +114,7 @@ RSpec.describe Piece, type: :model do
       end
     end
 
-    context 'our piece' do
+    context 'our piece' do 
       it 'piece2 not destroyed and piece has same xy coordinates' do
         piece.update(x: 'E', y: 2, color: 'black')
         piece2.update(x: 'E', y: 4, color: 'black')
@@ -217,12 +217,12 @@ RSpec.describe Piece, type: :model do
       end
     end
 
-    context 'given piece is a queen' do
-      it 'does not move if invalid' do
-        piece5.move!('C', 4)
-        expect(piece5).to have_attributes(x: 'G', y: 4)
-      end
-    end
+    # context 'given piece is a queen' do #this test is invalid as the move below should be valid
+    #   it 'does not move if invalid' do
+    #     piece5.move!('C', 4)
+    #     expect(piece5).to have_attributes(x: 'G', y: 4)
+    #   end
+    # end
 
     context 'given piece is a bishop' do
       it 'does move if valid' do
