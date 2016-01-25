@@ -7,7 +7,7 @@ RSpec.describe King, type: :model do
     let(:white_king) { build(:king, x: 'E', y: 1, color: 'white') }
     let(:white_rook) { build(:rook, x: 'A', y: 1, color: 'white') }
 
-    context 'king and rook unmoved and no obstructions' do 
+    context 'king and rook unmoved and no obstructions' do
       it 'returns true' do
         result = black_king.can_castle?(black_rook)
         expect(result).to be true
@@ -43,7 +43,7 @@ RSpec.describe King, type: :model do
     end
   end
 
-  describe '#castle!' do 
+  describe '#castle!' do
     let(:black_king) { build(:king, x: 'E', y: 8, color: 'black') }
     let(:black_rook) { build(:rook, x: 'A', y: 8, color: 'black') }
     let(:white_king) { build(:king, x: 'E', y: 1, color: 'white') }

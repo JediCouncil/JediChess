@@ -114,7 +114,7 @@ RSpec.describe Piece, type: :model do
       end
     end
 
-    context 'our piece' do 
+    context 'our piece' do
       it 'piece2 not destroyed and piece has same xy coordinates' do
         piece.update(x: 'E', y: 2, color: 'black')
         piece2.update(x: 'E', y: 4, color: 'black')
