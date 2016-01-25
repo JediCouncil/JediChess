@@ -1,5 +1,16 @@
+#error:
+# {status: "error", errors: [{message: "Bad data."}]}
+
+# #success:
+# {status: "success", pieces_moved: [
+#   {type: "Rook", position: {x: 'A', y: 1}}
+# ], pieces_destroyed: []}
+
 class PiecesController < ApplicationController
   def update
+    # @pieces_moved
+    # @pieces_destroyed
+
     current_game = current_piece.game
     destination_piece = current_game.pieces.find_by(piece_params)
 
@@ -12,7 +23,13 @@ class PiecesController < ApplicationController
       end
     end
 
+    # can it move?
+    # when moving is anyting destroyed?
+    # render the move and destoryed attributes
+    # otherwise its an error, or invalid move
+
     current_piece.update_attributes(piece_params)
+    # render nothing: true
     render :text => "successful"
   end
 

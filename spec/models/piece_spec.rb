@@ -20,7 +20,7 @@ RSpec.describe Piece, type: :model do
       end
     end
 
-    context 'piece is obstructed' do
+    context 'piece is obstructed', :focus => true do
       it 'returns true' do
         piece.update(x: 'A', y: 2)
         piece2.update(x: 'C', y: 4)

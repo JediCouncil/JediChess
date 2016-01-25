@@ -13,13 +13,16 @@ class King < Piece
     x_coords = current_to_destination_x_coordinates(rook.x)
 
     if x_coords.size == 3 || x_coords.size == 2
+
+    results = {status: "success", pieces_moved: [
+      { type: type, original_position: {x: x, y: y}, new_position: {x: x_coords[1], y: y} },
+      { type: rook.type, original_position: {x: rook.x, y: rook.y}, new_position: {x: x_coords[0], y: rook.y} }
+      ]
+    }
       update(x: x_coords[1])
       rook.update(x: x_coords[0])
-      return [ type, rook.type,
-              { king_x_coord: x_coords[1],
-                rook_x_coord: x_coords[0]
-              }
-            ]
+
+    return results
     end
   end
 
