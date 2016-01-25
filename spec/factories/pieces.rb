@@ -32,7 +32,5 @@ FactoryGirl.define do
       status :white
 
     end
-
   end
-
 end
