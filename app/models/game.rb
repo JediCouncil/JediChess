@@ -50,4 +50,23 @@ class Game < ActiveRecord::Base
     pieces.create(x: 'G', y: '7', type: 'Pawn', color: 'black')
     pieces.create(x: 'H', y: '7', type: 'Pawn', color: 'black')
   end
+
+  def checkmate?
+    #Use check? method
+    #if a game is in check?(), iterate through every possible move King could make and determine if the game is still in check, return false if at least one move still return true on game.check?(). 
+    x_coord_indices = { 'A' => 1, 'B' => 2, 'c' => 3, 'd' => 4, 'e' => 5, 'f' => 6, 'g' => 7, 'h' => 8 }
+
+    if check?
+      #retrieve the king color that's in check
+      king_is_in_check?('black') ? color == 'black': color == 'white'
+
+      #retrieve king's position
+      king = pieces.find_by(type: "King", color: color)
+      x = king.x
+      y = king.y
+     
+    end 
+    false #if the game is not in check, there is no checkmate
+  end
+
 end
