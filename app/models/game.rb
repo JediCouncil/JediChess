@@ -64,6 +64,15 @@ class Game < ActiveRecord::Base
       king = pieces.find_by(type: "King", color: color)
       x = king.x
       y = king.y
+
+      #have a pointer to move the king one step in all directions
+      times=0 #iterator
+      while times<8 #going clockwise starting from top center 
+        king.move?!(dest_x, dest_y)
+        return true if king_is_in_check?(color)
+        king.move?(x,y) #move the piece back if not checkmate
+        times+=1
+      end
      
     end 
     false #if the game is not in check, there is no checkmate
