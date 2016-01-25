@@ -1,12 +1,6 @@
-#error:
-# {status: "error", errors: [{message: "Bad data."}]}
-
-# #success:
-# {status: "success", pieces_moved: [
-#   {type: "Rook", position: {x: 'A', y: 1}}
-# ], pieces_destroyed: []}
-
 class PiecesController < ApplicationController
+  include PiecesHelper
+
   def update
     current_game = current_piece.game
     destination_piece = current_game.pieces.find_by(piece_params)
@@ -19,16 +13,10 @@ class PiecesController < ApplicationController
         return render json: @result
       end
     end
-    @result = current_piece.move_to!(params[:piece][:x], params[:piece][:y])
-    # binding.pry
-    return render json: @result
-    # can it move?
-    # when moving is anyting destroyed?
-    # render the move and destoryed attributes
-    # otherwise its an error, or invalid move
 
-    # render nothing: true
-    # render :text => "successful"
+    @result = current_piece.move_to!(params[:piece][:x], params[:piece][:y])
+
+    return render json: @result
   end
 
   private

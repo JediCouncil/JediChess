@@ -70,23 +70,14 @@ $(document).ready(function(){
         data: { piece: {x: destination_x, y: destination_y} }
       })
         .done(function(response){
-    //      {status: "success", pieces_moved: [
-    //   {type: type, position: {x: x_coords[1], y: y },
-    //    type: rook.type, position: {x: x_coords[0], y: rook.y}
-    //   } ]
-    // }
-        // debugger;
           if (response.status == "success"){
-            // debugger;
             if (response.pieces_destroyed != undefined) {
               if (response.pieces_destroyed.length > 0) {
-                // only one piece can be destroyed per move
                 var destroyed_piece = response.pieces_destroyed[0];
                 var pos = '#' + destroyed_piece.position.x + destroyed_piece.position.y;
                 $(pos).find('div').detach();
               }
             }
-
 
             response.pieces_moved.forEach(function(piece){
               var original_pos = '#' + piece.original_position.x + piece.original_position.y
