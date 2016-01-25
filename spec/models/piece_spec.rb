@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe Piece, type: :model do
   describe '#is_obstructed?' do
     let(:piece)  { build(:piece) }
@@ -54,20 +56,20 @@ RSpec.describe Piece, type: :model do
       end
     end
 
-    context 'invalid move' do
-      it 'raises an error if input is invalid' do
-        piece.update(x: 'D', y: 4)
+    # context 'invalid move' do
+    #   it 'raises an error if input is invalid' do
+    #     piece.update(x: 'D', y: 4)
 
-        invalid_move = 'Invalid input. Not diagonal, horizontal, or vertical'
-        expect { piece.is_obstructed?('B', 5) }.to raise_error { invalid_move }
-      end
-      it 'raises an error' do
-        piece.update(x: 'D', y: 4)
+    #     invalid_move = 'Invalid input. Not diagonal, horizontal, or vertical'
+    #     expect { piece.is_obstructed?('B', 5) }.to raise_error { invalid_move }
+    #   end
+    #   it 'raises an error' do
+    #     piece.update(x: 'D', y: 4)
 
-        invalid_move = 'Invalid input. Not diagonal, horizontal, or vertical'
-        expect { piece.is_obstructed?('H', 3) }.to raise_error { invalid_move }
-      end
-    end
+    #     invalid_move = 'Invalid input. Not diagonal, horizontal, or vertical'
+    #     expect { piece.is_obstructed?('H', 3) }.to raise_error { invalid_move }
+    #   end
+    # end
 
     context 'piece is not obstructed' do
       it 'returns false' do
@@ -140,6 +142,99 @@ RSpec.describe Piece, type: :model do
 
         expect { piece.move_to!('E', 3) }.to_not change { Piece.count }
         expect(piece).to have_attributes(x: 'E', y: 3)
+      end
+    end
+  end
+
+  describe '#move!' do
+    let (:piece) { create(:king, color: 'white', x: 'D', y: 3) }
+    let (:piece2) { create(:knight, color: 'black', x: 'B', y: 7) }
+    let (:piece3) { create(:pawn, color: 'black', x: 'B', y: 2) }
+    let (:piece4) { create(:rook, color: 'black', x: 'H', y: 6) }
+    let (:piece5) { create(:queen, color: 'white', x: 'G', y: 4) }
+    let (:piece6) { create(:bishop, color: 'white', x: 'F', y: 2) }
+
+    context 'given piece is a king' do
+      it 'moves if valid' do
+        piece.move!('D', 4)
+        expect(piece).to have_attributes(x: 'D', y: 4)
+      end
+    end
+
+    context 'given piece is a king' do
+      it 'does not move if invalid' do
+        piece.move!('F', 1)
+        expect(piece).to have_attributes(x: 'D', y: 3)
+      end
+    end
+
+    context 'given piece is a knight' do
+      it 'does move if valid' do
+        piece2.move!('D', 6)
+        expect(piece2).to have_attributes(x: 'D', y: 6)
+      end
+    end
+
+    context 'given piece is a knight' do
+      it 'does not move if invalid' do
+        piece2.move!('H', 3)
+        expect(piece2).to have_attributes(x: 'B', y: 7)
+      end
+    end
+
+    context 'given piece is a pawn' do
+      it 'does move if valid' do
+        piece3.move!('B', 3)
+        expect(piece3).to have_attributes(x: 'B', y: 3)
+      end
+    end
+
+    context 'given piece is a pawn' do
+      it 'does not move if invalid' do
+        piece3.move!('A', 3)
+        expect(piece3).to have_attributes(x: 'B', y: 2)
+      end
+    end
+
+    context 'given piece is a rook' do
+      it 'does move if valid' do
+        piece4.move!('H', 1)
+        expect(piece4).to have_attributes(x: 'H', y: 1)
+      end
+    end
+
+    context 'given piece is a rook' do
+      it 'does not move if invalid' do
+        piece4.move!('G', 5)
+        expect(piece4).to have_attributes(x: 'H', y: 6)
+      end
+    end
+
+    context 'given piece is a queen' do
+      it 'does move if valid' do
+        piece5.move!('G', 2)
+        expect(piece5).to have_attributes(x: 'G', y: 2)
+      end
+    end
+
+    # context 'given piece is a queen' do #this test is invalid as the move below should be valid
+    #   it 'does not move if invalid' do
+    #     piece5.move!('C', 4)
+    #     expect(piece5).to have_attributes(x: 'G', y: 4)
+    #   end
+    # end
+
+    context 'given piece is a bishop' do
+      it 'does move if valid' do
+        piece6.move!('G', 3)
+        expect(piece6).to have_attributes(x: 'G', y: 3)
+      end
+    end
+
+    context 'given piece is a bishop' do
+      it 'does not move if invalid' do
+        piece6.move!('F', 4)
+        expect(piece6).to have_attributes(x: 'F', y: 2)
       end
     end
   end
