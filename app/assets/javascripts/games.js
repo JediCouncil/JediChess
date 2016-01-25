@@ -79,6 +79,7 @@ $(document).ready(function(){
         // debugger;
           if (response.status == "success"){
             response.pieces_moved.forEach(function(piece){
+              debugger;
               var original_pos = '#' + piece.original_position.x + piece.original_position.y
               var detached_piece = $(original_pos).find('div').detach();
               detached_piece.attr("style", "position: relative;");

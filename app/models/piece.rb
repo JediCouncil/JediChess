@@ -83,9 +83,13 @@ class Piece < ActiveRecord::Base
 
   def move_to!(destination_x, destination_y)
     destination_piece = game.pieces.find_by(x: destination_x, y: destination_y)
+    results = { status: "success", pieces_moved: [], pieces_destroyed: [] }
 
     if destination_piece.present?
       if destination_piece.color != color
+        results[:pieces_destroyed] << {type: destination_piece.type,
+                                     position: {x: destination_x, y: destination_y}
+                                    }
         destination_piece.destroy
       else
         if type == "King" && destination_piece.type == "Rook"
@@ -94,6 +98,13 @@ class Piece < ActiveRecord::Base
         return false
       end
     end
+
+    results[:pieces_moved] << {type: type,
+                             original_position: {x: x, y: y},
+                             new_position: {x: destination_x, y: destination_y}
+                            }
+                            # binding.pry
     update(x: destination_x, y: destination_y)
+    return results
   end
 end

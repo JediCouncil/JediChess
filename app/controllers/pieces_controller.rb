@@ -22,15 +22,16 @@ class PiecesController < ApplicationController
         return render json: @result_array
       end
     end
-
+    @results_array = current_piece.move_to!(params[:piece][:x], params[:piece][:y])
+    # binding.pry
+    return render json: @results_array
     # can it move?
     # when moving is anyting destroyed?
     # render the move and destoryed attributes
     # otherwise its an error, or invalid move
 
-    current_piece.update_attributes(piece_params)
     # render nothing: true
-    render :text => "successful"
+    # render :text => "successful"
   end
 
   private
