@@ -7,28 +7,34 @@ class Piece < ActiveRecord::Base
     %w(Knight Bishop King Queen Rook Pawn)
   end
 
-  def is_obstructed?(destination_x, destination_y)
-    if destination_x == x # vertical line
-      x_distance = 0
-    else # diagonal/horizontal line
-      if x > destination_x
-        x_distance = -((destination_x..x).to_a.length - 1)
-      else
-        x_distance = ((x..destination_x).to_a.length) - 1
-      end
-    end
+  def is_obstructed?(destination_x, destination_y) # return true if it's obstructed
+    # define various ways an obstruction occurs:
+    # 1). Check for obstrution for all pieces except for knight
+    # 2). Knight can't be obstructed
 
-    slope = (destination_y - y).to_f / (x_distance).to_f
+    x_coord_indices = { 'A' => 1, 'B' => 2, 'C' => 3, 'D' => 4, 'E' => 5, 'F' => 6, 'G' => 7, 'H' => 8 }
+    reverse_x_coord = { 1 => 'A', 2 => 'B', 3 => 'C', 4 => 'D', 5 => 'E', 6 => 'F', 7 => 'G', 8 => 'H' }
+    x_norm = x_coord_indices[x]
 
-    if slope == 1 || slope == -1
-      diagonal_obstruction?(destination_x, destination_y)
-    elsif slope == 0
-      horizontal_obstruction?(destination_x, destination_y)
-    elsif slope == -Float::INFINITY || slope == Float::INFINITY
-      vertical_obstruction?(destination_x, destination_y)
+    destination_x_norm = x_coord_indices[destination_x]
+
+    if type == 'Knight'
+      return false
     else
-      invalid_move = 'Invalid input. Not diagonal, horizontal, or vertical'
-      fail invalid_move
+      destination_x_norm - x_norm >= 0 ? direction_x = 1 : direction_x = -1
+      destination_y - y >= 0 ? direction_y = 1 : direction_y = -1
+      turtle_x = x_norm
+      turtle_y = y
+      while turtle_x != destination_x_norm || turtle_y != destination_y
+        # shorten the distance on both x, y by 1 unit
+        turtle_x += (direction_x * 1) if turtle_x != destination_x_norm
+        turtle_y += (direction_y * 1) if turtle_y != destination_y
+        return false if turtle_x == destination_x_norm && turtle_y == destination_y
+        return true if Piece.find_by(x: reverse_x_coord[turtle_x], y: turtle_y, game_id: game_id)
+
+      end
+      return false
+
     end
   end
 
@@ -58,27 +64,6 @@ class Piece < ActiveRecord::Base
       return true if obstruent_piece.present?
     end
     false
-  end
-
-  def diagonal_obstruction?(destination_x, destination_y)
-    x_coordinates = current_to_destination_x_coordinates(destination_x)
-    y_coordinates = current_to_destination_y_coordinates(destination_y)
-
-    check_coordinates(x_coordinates, y_coordinates)
-  end
-
-  def vertical_obstruction?(_destination_x, destination_y)
-    y_coordinates = current_to_destination_y_coordinates(destination_y)
-    x_coordinates = [x] * y_coordinates.count
-
-    check_coordinates(x_coordinates, y_coordinates)
-  end
-
-  def horizontal_obstruction?(destination_x, _destination_y)
-    x_coordinates = current_to_destination_x_coordinates(destination_x)
-    y_coordinates = [y] * x_coordinates.count
-
-    check_coordinates(x_coordinates, y_coordinates)
   end
 
   def move_to!(destination_x, destination_y)
