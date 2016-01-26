@@ -87,7 +87,10 @@ $(document).ready(function(){
               $(new_pos).append(detached_piece);
             })
           }
-        }); //end of done
+        }) //end of done
+        .fail(function(){
+          alert("An error has occured");
+        }) //end of fail
     }//end of drop function
   }//end of if
 });
