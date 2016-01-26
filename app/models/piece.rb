@@ -13,10 +13,10 @@ class Piece < ActiveRecord::Base
     # 2). Knight can't be obstructed
     x_coord_indices = { 'A' => 1, 'B' => 2, 'C' => 3, 'D' => 4, 'E' => 5, 'F' => 6, 'G' => 7, 'H' => 8 }
     reverse_x_coord = { 1 => 'A', 2 => 'B', 3 => 'C', 4 => 'D', 5 => 'E', 6 => 'F', 7 => 'G', 8 => 'H' }
-    x_norm = x_coord_indices[x.upcase]
+    x_norm = x_coord_indices[x]
 
 
-    destination_x_norm = x_coord_indices[destination_x.upcase]
+    destination_x_norm = x_coord_indices[destination_x]
 
     if type == 'Knight'
       return false

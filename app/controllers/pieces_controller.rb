@@ -13,8 +13,7 @@ class PiecesController < ApplicationController
         return render json: @result
       end
     end
-
-    @result = current_piece.move_to!(params[:piece][:x], params[:piece][:y])
+    @result = current_piece.move!(params[:piece][:x], params[:piece][:y].to_i)
     return render json: @result
   end
 
