@@ -15,7 +15,6 @@ class PiecesController < ApplicationController
     end
 
     @result = current_piece.move_to!(params[:piece][:x], params[:piece][:y])
-
     return render json: @result
   end
 

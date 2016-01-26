@@ -18,8 +18,7 @@ class Pawn < Piece
     return false unless valid_spaces
 
     # check if piece is present on destination
-    # FIND PIECE ACCORDING TO GAME ID ============ TODO
-    destination_piece = Piece.find_by(x: destination_x, y: destination_y)
+    destination_piece = Piece.find_by(x: destination_x, y: destination_y, game_id: game_id)
 
     # check if move is vertical/diagonal
     if vertical_move?(destination_x)
