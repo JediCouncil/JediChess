@@ -149,7 +149,7 @@ RSpec.describe Piece, type: :model do
   describe '#move!' do
     let (:piece) { create(:king, color: 'white', x: 'D', y: 3) }
     let (:piece2) { create(:knight, color: 'black', x: 'B', y: 7) }
-    let (:piece3) { create(:pawn, color: 'black', x: 'B', y: 2) }
+    let (:piece3) { create(:pawn, color: 'white', x: 'B', y: 2) }
     let (:piece4) { create(:rook, color: 'black', x: 'H', y: 6) }
     let (:piece5) { create(:queen, color: 'white', x: 'G', y: 4) }
     let (:piece6) { create(:bishop, color: 'white', x: 'F', y: 2) }
