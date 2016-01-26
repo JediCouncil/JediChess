@@ -35,9 +35,9 @@ class Pawn < Piece
     return true if y == destination_y
     # backwards move
     if black?
-      destination_y < y
-    else
       destination_y > y
+    else
+      destination_y < y
     end
   end
 
