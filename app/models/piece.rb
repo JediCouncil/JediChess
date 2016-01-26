@@ -15,7 +15,6 @@ class Piece < ActiveRecord::Base
     reverse_x_coord = { 1 => 'A', 2 => 'B', 3 => 'C', 4 => 'D', 5 => 'E', 6 => 'F', 7 => 'G', 8 => 'H' }
     x_norm = x_coord_indices[x]
 
-
     destination_x_norm = x_coord_indices[destination_x]
 
     if type == 'Knight'
@@ -68,25 +67,25 @@ class Piece < ActiveRecord::Base
 
   def move_to!(destination_x, destination_y)
     destination_piece = Piece.find_by(x: destination_x, y: destination_y, game_id: game_id)
-    results = { status: "success", pieces_moved: [], pieces_destroyed: [] }
+    results = { status: 'success', pieces_moved: [], pieces_destroyed: [] }
 
     if destination_piece.present?
       if destination_piece.color != color
-        destroyed_piece_hsh = {type: destination_piece.type,position: {x: destination_x, y: destination_y}}
-        results[:pieces_destroyed] << destroyed_piece_hsh
+        piece_destroyed_hsh = { type: destination_piece.type, position: { x: destination_x, y: destination_y } }
+        results[:pieces_destroyed] << piece_destroyed_hsh
         destination_piece.destroy
       else
-        if type == "King" && destination_piece.type == "Rook"
+        if type == 'King' && destination_piece.type == 'Rook'
           return castle!(destination_piece)
         end
         return false
       end
     end
 
-    piece_moved_hsh = {type: type, original_position: {x: x, y: y}, new_position: {x: destination_x, y: destination_y}}
+    piece_moved_hsh = { type: type, original_position: { x: x, y: y }, new_position: { x: destination_x, y: destination_y } }
     results[:pieces_moved] << piece_moved_hsh
     update(x: destination_x, y: destination_y, first_move: false)
-    return results
+    results
   end
 
   def move!(destination_x, destination_y)

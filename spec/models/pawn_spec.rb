@@ -119,10 +119,10 @@ RSpec.describe Pawn, type: :model do
 
     context 'capture' do
       let(:game) { create(:game) }
-      let(:black_pawn) { game.pieces.find_by(color: 0, x: 'B', y: 7)}
+      let(:black_pawn) { game.pieces.find_by(color: 0, x: 'B', y: 7) }
       let(:white_pawn) { game.pieces.find_by(color: 1, x: 'C', y: 2) }
 
-      it 'can capture one square diagonally', :focus => true do
+      it 'can capture one square diagonally', focus: true do
         white_pawn.update(x: 'C', y: 6)
 
         result = black_pawn.valid_move?('C', 6)

@@ -5,9 +5,9 @@ class PiecesController < ApplicationController
     current_game = current_piece.game
     destination_piece = current_game.pieces.find_by(piece_params)
 
-    #castling
+    # castling
     unless destination_piece.nil?
-      if current_piece.type == "King" && destination_piece.type == "Rook"
+      if current_piece.type == 'King' && destination_piece.type == 'Rook'
         if current_piece.can_castle?(destination_piece)
           @result = current_piece.move_to!(params[:piece][:x], params[:piece][:y])
         end
@@ -16,7 +16,7 @@ class PiecesController < ApplicationController
     end
 
     @result = current_piece.move!(params[:piece][:x], params[:piece][:y].to_i)
-    return render json: @result
+    render json: @result
   end
 
   private
