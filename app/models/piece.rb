@@ -60,7 +60,7 @@ class Piece < ActiveRecord::Base
     xy_coords.each do |xy_coord|
       x = xy_coord[0]
       y = xy_coord[1]
-      obstruent_piece = game.pieces.find_by(x: x, y: y)
+      obstruent_piece = Piece.find_by(x: x, y: y, game_id: game_id)
       return true if obstruent_piece.present?
     end
     false
