@@ -25,7 +25,7 @@ class Game < ActiveRecord::Base
     check_by=[] 
     pieces.each do |piece|
       #this array stores the pieces that are checking the king
-      binding.pry
+      # binding.pry
       piece.color == 'black' ? (opponent_color=1) : (opponent_color=0) #set the opponent's color to be the opposite of the current piece color
       #retrieve the opponent's king x, y
       enemy_king = pieces.find_by(color: opponent_color, type: 'King')
@@ -38,16 +38,15 @@ class Game < ActiveRecord::Base
 
   def king_in_check
     if check?
-      binding.pry
-      check_by[0].color=='black' ? (king_color='white') : (king_color='black')
-      return piece.where(type:'King', color:king_color)
+      # binding.pry
+      check_by[0].color=='black' ? (king_color=1) : (king_color=0)
+      return pieces.find_by(type:'King', color:king_color)
     end
   end 
 
   def checkmate?
     
     #if a game is in check?(), iterate through every possible move King could make and determine if the game is still in check, return false if at least one move still return true on game.check?(). 
-    x_coord_indices = { 'A' => 1, 'B' => 2, 'C' => 3, 'D' => 4, 'E' => 5, 'F' => 6, 'G' => 7, 'H' => 8 }
     
     if check?
       #determine if king can get out of the check
@@ -61,35 +60,40 @@ class Game < ActiveRecord::Base
   def get_out_of_check?
     x = king_in_check.x
     y = king_in_check.y
-    x_norm=x_coord_indices[x]
-
+    x_norm=x_coord_indices(x)
+    
 
     #have a pointer to move the king one step in all directions
-    times=0 #iterator
     ix = [0, 1, 1, 1, 0, -1, -1, -1]
     iy = [1, 1, 0, -1, -1, -1, 0, 1]
-    index=0
+    index=0 
+
     ix.each do |delta_x| #going clockwise starting from top center 
-      
+      # binding.pry
       delta_y = iy[index]
       
-      dest_x=x_norm+delta_x if dest_x <= 8 && dest_x >=1
-      dest_y=y+delta_y if dest_y <= 8 && dest_y >=1
+      dest_x_norm=x_norm+delta_x
+      dest_x=reverse_x_coord(dest_x_norm)
+      dest_y=y+delta_y
       
-      king.move!(dest_x, dest_y)
-      if check?
-        king.move!(x,y) #move king back and return false if king can't get out
-        return false
-      end
-      king.move!(x,y) #move the piece back if not checkmate
-      index+=1
+      if (dest_x_norm <= 8) && (dest_x_norm >=1) && (dest_y <= 8) && (dest_y >=1)
+      
+        king_in_check.move!(dest_x, dest_y)
+        if check?
+          king_in_check.move!(x,y) #move king back and return false if king can't get out
+          return false
+        end
+        king_in_check.move!(x,y) #move the piece back if not checkmate
+
+        index+=1
+
+      end 
     end
 
     return true
   end
 
   def block_out_of_check?
-    x_coord_indices = { 'A' => 1, 'B' => 2, 'C' => 3, 'D' => 4, 'E' => 5, 'F' => 6, 'G' => 7, 'H' => 8 }
     color=king_in_check.color
     rescue_team=pieces.where(color:color)
     check_by.each do |offender_piece|
@@ -100,7 +104,7 @@ class Game < ActiveRecord::Base
         when 'Knight'
           #do nothing
         when 'Queen', 'Rook', 'Bishop', 'Pawn'
-          (x_coord_indices[offender_piece.x]-x_coord_indices[king_in_check.x])>0 ? (x_direction=-1) : (x_direction=1)
+          x_coord_indices(offender_piece.x)-x_coord_indices(king_in_check.x)>0 ? (x_direction=-1) : (x_direction=1)
           (offender_piece.y-king_in_check.y)>0 ? (y_direction=-1) : (y_direction=1)
           while pointer.x!=king_in_check.x || pointer.y!=king_in_check.y
             return true if rescue_piece.valid_move?(pointer.x, pointer.y)
@@ -113,6 +117,16 @@ class Game < ActiveRecord::Base
 
     return false
 
+  end
+
+  def x_coord_indices(x)
+    x_coord_indices = { 'A' => 1, 'B' => 2, 'C' => 3, 'D' => 4, 'E' => 5, 'F' => 6, 'G' => 7, 'H' => 8 }
+    return x_coord_indices[x] 
+  end
+
+  def reverse_x_coord(x_norm)
+    x_coord_indices = { 1 => 'A', 2 => 'B', 3 => 'C', 4 => 'D', 5 => 'E', 6 => 'F', 7 => 'G', 8 => 'H' }
+    return x_coord_indices[x_norm]
   end
 
   private

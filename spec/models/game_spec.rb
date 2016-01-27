@@ -43,7 +43,7 @@ RSpec.describe Game, type: :model do
 
   context 'set up a check situatio' do
     game = FactoryGirl.create(:game)
-    # binding.pry
+
     game.pieces.where(type: 'Pawn', color: 0).destroy_all
     game.pieces.find_by(type: 'King', color: 0).update(x:'D', y: 5)
     game.pieces.find_by(type: 'Rook', color: 1).update(x:'A', y: 5)
