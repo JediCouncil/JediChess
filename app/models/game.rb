@@ -17,7 +17,7 @@ class Game < ActiveRecord::Base
     # used at end of move_to! method in piece.rb
     # if current player who played move_to! just now was white_player_id (white pieces)
     # then update the turn to the black_player_id (black pieces)
-    if pieces.color == 0 # white? color is an integer...
+    if pieces.color == 'white'
       update_attributes(turn: black_player_id)
     else
       update_attributes(turn: white_player_id)
