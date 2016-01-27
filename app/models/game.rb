@@ -21,10 +21,12 @@ class Game < ActiveRecord::Base
 
   def check_by
     #Loop through every piece on the board except for the kings, and for each iteration, determine whether that piece can destroy the opponent's king
+    # binding.pry
+    check_by=[] 
     pieces.each do |piece|
-      check_by=[] #this array stores the pieces that are checking the king
-      piece.color == 'black' ? (opponent_color='white') : (opponent_color='black') #set the opponent's color to be the opposite of the current piece color
-
+      #this array stores the pieces that are checking the king
+      binding.pry
+      piece.color == 'black' ? (opponent_color=1) : (opponent_color=0) #set the opponent's color to be the opposite of the current piece color
       #retrieve the opponent's king x, y
       enemy_king = pieces.find_by(color: opponent_color, type: 'King')
       enemy_king_x = enemy_king.x
@@ -36,8 +38,9 @@ class Game < ActiveRecord::Base
 
   def king_in_check
     if check?
+      binding.pry
       check_by[0].color=='black' ? (king_color='white') : (king_color='black')
-      return piece.find_by(type:'King', color:king_color)
+      return piece.where(type:'King', color:king_color)
     end
   end 
 
@@ -88,7 +91,7 @@ class Game < ActiveRecord::Base
   def block_out_of_check?
     x_coord_indices = { 'A' => 1, 'B' => 2, 'C' => 3, 'D' => 4, 'E' => 5, 'F' => 6, 'G' => 7, 'H' => 8 }
     color=king_in_check.color
-    rescue_team=pieces.find_by(color:color)
+    rescue_team=pieces.where(color:color)
     check_by.each do |offender_piece|
       pointer = offender_piece #reset pointer to point to the offender piece
       rescue_team.each do |rescue_piece|

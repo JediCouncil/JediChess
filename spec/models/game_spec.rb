@@ -44,16 +44,16 @@ RSpec.describe Game, type: :model do
   context 'set up a check situatio' do
     game = FactoryGirl.create(:game)
     # binding.pry
-    game.pieces.where(type: 'Pawn', color: 'black').destroy_all
-    game.pieces.find_by(type: 'King', color: 'black').update(x:'D', y: 5)
-    game.pieces.find_by(type: 'Rook', color: 'white').update(x:'A', y: 5)
-    game.pieces.find_by(type: 'Queen', color: 'white').update(x:'B', y: 3)
-    game.pieces.find_by(type: 'Knight', color: 'White').update(x:'B', y: 4)
-    game.pieces.find_by(type: 'Bishop', color: 'white').update(x:'F', y: 3)
-    game.pieces.find_by(type: 'Knight', color: 'white').update(x:'F', y: 5)
+    game.pieces.where(type: 'Pawn', color: 0).destroy_all
+    game.pieces.find_by(type: 'King', color: 0).update(x:'D', y: 5)
+    game.pieces.find_by(type: 'Rook', color: 1).update(x:'A', y: 5)
+    game.pieces.find_by(type: 'Queen', color: 1).update(x:'B', y: 3)
+    game.pieces.find_by(type: 'Knight', color: 1).update(x:'B', y: 4)
+    game.pieces.find_by(type: 'Bishop', color: 1).update(x:'F', y: 3)
+    game.pieces.find_by(type: 'Knight', color: 1).update(x:'F', y: 5)
 
     it 'black king is checked by 5 pieces' do
-        binding.pry
+        # binding.pry
         result=game.check?
         expect(result).to be true
     end
