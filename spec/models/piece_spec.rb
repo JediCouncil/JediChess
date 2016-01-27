@@ -1,6 +1,42 @@
 require 'rails_helper'
 
 RSpec.describe Piece, type: :model do
+  describe '#check?' do   
+    let (:piece1) { create(:king, color: 'black', x: 'D', y: 5, game_id: 12) }
+    let (:piece2) { create(:rook, color: 'white', x: 'A', y: 5, game_id: 12) }
+    let (:piece3) { create(:queen, color: 'white', x: 'B', y: 3, game_id: 12) }
+    let (:piece4) { create(:knight, color: 'white', x: 'B', y: 4, game_id: 12) }
+    let (:piece5) { create(:bishop, color: 'white', x: 'F', y: 3, game_id: 12) }
+    let (:piece6) { create(:knight, color: 'white', x: 'F', y: 5, game_id: 12) }
+    let (:piece7) { create(:rook, color: 'black', x: 'A', y: 8, game_id: 12) }
+    let (:piece8) { create(:knight, color: 'black', x: 'B', y: 8, game_id: 12) }
+    let (:piece9) { create(:bishop, color: 'black', x: 'C', y: 8, game_id: 12) }
+
+    context 'black king is in check' do
+        it 'checked by 5' do 
+          result = piece1.game.check?
+          expect(result).to be true
+        end
+        it 'checkmated' do
+          result = piece1.game.checkmate?
+          expect(result).to be true
+        end
+    end 
+
+  end 
+
+  # describe '#checkmate?' do
+    
+
+  #   context 'white king is in checkmate' do
+  #       it 'checked by a black queen' do 
+  #       end
+  #       it 'white king is checked by a black rook' do
+  #       end
+  #   end 
+
+  # end
+
   describe '#is_obstructed?' do
     let(:piece)  { build(:piece) }
     let(:piece2) { build(:piece) }

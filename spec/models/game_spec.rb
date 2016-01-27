@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
-
-RSpec.describe Game, type: :model do
   it 'populate board' do
     game = FactoryGirl.create(:game)
 
@@ -44,4 +40,33 @@ RSpec.describe Game, type: :model do
     expect(game.pieces.select('type').where(x: 'G', y: 7).first.type).to eq('Pawn')
     expect(game.pieces.select('type').where(x: 'H', y: 7).first.type).to eq('Pawn')
   end
+
+  context 'set up a check situatio' do
+    game = FactoryGirl.create(:game)
+    # binding.pry
+    game.pieces.where(type: 'Pawn', color: 'black').destroy_all
+    game.pieces.find_by(type: 'King', color: 'black').update(x:'D', y: 5)
+    game.pieces.find_by(type: 'Rook', color: 'white').update(x:'A', y: 5)
+    game.pieces.find_by(type: 'Queen', color: 'white').update(x:'B', y: 3)
+    game.pieces.find_by(type: 'Knight', color: 'White').update(x:'B', y: 4)
+    game.pieces.find_by(type: 'Bishop', color: 'white').update(x:'F', y: 3)
+    game.pieces.find_by(type: 'Knight', color: 'white').update(x:'F', y: 5)
+
+    it 'black king is checked by 5 pieces' do
+        result=game.check?
+        expect(result).to be true
+    end
+
+    it 'black king is checkmated by 5 pieces' do
+        result=game.checkmate?
+        expect(result).to be true
+    end
+
+
+
+  end
+
+  
+
+
 end
