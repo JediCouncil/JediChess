@@ -65,6 +65,10 @@ class Piece < ActiveRecord::Base
     false
   end
 
+  def can_castle?(piece)
+    false
+  end
+
   def move_to!(destination_x, destination_y)
     destination_piece = Piece.find_by(x: destination_x, y: destination_y, game_id: game_id)
     results = { status: 'success', pieces_moved: [], pieces_destroyed: [] }

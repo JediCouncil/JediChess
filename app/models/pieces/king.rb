@@ -1,10 +1,12 @@
 class King < Piece
-  def can_castle?(rook)
+  def can_castle?(piece)
+    return false unless piece.is_a? Rook
+
+    return false unless piece.first_move?
+
     return false unless first_move?
 
-    return false unless rook.first_move?
-
-    return false if is_obstructed?(rook.x, rook.y)
+    return false if is_obstructed?(piece.x, piece.y)
 
     true
   end
