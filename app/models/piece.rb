@@ -11,7 +11,6 @@ class Piece < ActiveRecord::Base
     # define various ways an obstruction occurs:
     # 1). Check for obstrution for all pieces except for knight
     # 2). Knight can't be obstructed
-
     x_coord_indices = { 'A' => 1, 'B' => 2, 'C' => 3, 'D' => 4, 'E' => 5, 'F' => 6, 'G' => 7, 'H' => 8 }
     reverse_x_coord = { 1 => 'A', 2 => 'B', 3 => 'C', 4 => 'D', 5 => 'E', 6 => 'F', 7 => 'G', 8 => 'H' }
     x_norm = x_coord_indices[x]
@@ -60,26 +59,41 @@ class Piece < ActiveRecord::Base
     xy_coords.each do |xy_coord|
       x = xy_coord[0]
       y = xy_coord[1]
-      obstruent_piece = Piece.find_by(x: x, y: y)
+      obstruent_piece = Piece.find_by(x: x, y: y, game_id: game_id)
       return true if obstruent_piece.present?
     end
     false
   end
 
+  def can_castle?(_piece)
+    false
+  end
+
   def move_to!(destination_x, destination_y)
-    destination_piece = Piece.find_by(x: destination_x, y: destination_y)
+    destination_piece = Piece.find_by(x: destination_x, y: destination_y, game_id: game_id)
+    results = { status: 'success', pieces_moved: [], pieces_destroyed: [] }
 
     if destination_piece.present?
       if destination_piece.color != color
+        piece_destroyed_hsh = { type: destination_piece.type, position: { x: destination_x, y: destination_y } }
+        results[:pieces_destroyed] << piece_destroyed_hsh
         destination_piece.destroy
       else
-        return
+        if type == 'King' && destination_piece.type == 'Rook'
+          return castle!(destination_piece)
+        end
+        return false
       end
     end
-    update(x: destination_x, y: destination_y)
+
+    piece_moved_hsh = { type: type, original_position: { x: x, y: y }, new_position: { x: destination_x, y: destination_y } }
+    results[:pieces_moved] << piece_moved_hsh
+    update(x: destination_x, y: destination_y, first_move: false)
+    results
   end
 
   def move!(destination_x, destination_y)
-    move_to!(destination_x, destination_y) if valid_move?(destination_x, destination_y)
+    return move_to!(destination_x, destination_y) if valid_move?(destination_x, destination_y)
+    false
   end
 end

@@ -5,48 +5,46 @@ RSpec.describe Game, type: :model do
   it 'populate board' do
     game = FactoryGirl.create(:game)
 
-    expect(game.pieces.select('type').where(x: 'a', y: 1).first.type).to eq('Rook')
-    expect(game.pieces.select('type').where(x: 'b', y: 1).first.type).to eq('Knight')
-    expect(game.pieces.select('type').where(x: 'c', y: 1).first.type).to eq('Bishop')
-    expect(game.pieces.select('type').where(x: 'd', y: 1).first.type).to eq('Queen')
-    expect(game.pieces.select('type').where(x: 'e', y: 1).first.type).to eq('King')
-    expect(game.pieces.select('type').where(x: 'f', y: 1).first.type).to eq('Bishop')
-    expect(game.pieces.select('type').where(x: 'g', y: 1).first.type).to eq('Knight')
-    expect(game.pieces.select('type').where(x: 'h', y: 1).first.type).to eq('Rook')
+    expect(game.pieces.select('type').where(x: 'A', y: 1).first.type).to eq('Rook')
+    expect(game.pieces.select('type').where(x: 'B', y: 1).first.type).to eq('Knight')
+    expect(game.pieces.select('type').where(x: 'C', y: 1).first.type).to eq('Bishop')
+    expect(game.pieces.select('type').where(x: 'D', y: 1).first.type).to eq('Queen')
+    expect(game.pieces.select('type').where(x: 'E', y: 1).first.type).to eq('King')
+    expect(game.pieces.select('type').where(x: 'F', y: 1).first.type).to eq('Bishop')
+    expect(game.pieces.select('type').where(x: 'G', y: 1).first.type).to eq('Knight')
+    expect(game.pieces.select('type').where(x: 'H', y: 1).first.type).to eq('Rook')
 
-    expect(game.pieces.select('type').where(x: 'a', y: 2).first.type).to eq('Pawn')
-    expect(game.pieces.select('type').where(x: 'b', y: 2).first.type).to eq('Pawn')
-    expect(game.pieces.select('type').where(x: 'c', y: 2).first.type).to eq('Pawn')
-    expect(game.pieces.select('type').where(x: 'd', y: 2).first.type).to eq('Pawn')
-    expect(game.pieces.select('type').where(x: 'e', y: 2).first.type).to eq('Pawn')
-    expect(game.pieces.select('type').where(x: 'f', y: 2).first.type).to eq('Pawn')
-    expect(game.pieces.select('type').where(x: 'g', y: 2).first.type).to eq('Pawn')
-    expect(game.pieces.select('type').where(x: 'h', y: 2).first.type).to eq('Pawn')
+    expect(game.pieces.select('type').where(x: 'A', y: 2).first.type).to eq('Pawn')
+    expect(game.pieces.select('type').where(x: 'B', y: 2).first.type).to eq('Pawn')
+    expect(game.pieces.select('type').where(x: 'C', y: 2).first.type).to eq('Pawn')
+    expect(game.pieces.select('type').where(x: 'D', y: 2).first.type).to eq('Pawn')
+    expect(game.pieces.select('type').where(x: 'E', y: 2).first.type).to eq('Pawn')
+    expect(game.pieces.select('type').where(x: 'F', y: 2).first.type).to eq('Pawn')
+    expect(game.pieces.select('type').where(x: 'G', y: 2).first.type).to eq('Pawn')
+    expect(game.pieces.select('type').where(x: 'H', y: 2).first.type).to eq('Pawn')
 
-    expect(game.pieces.select('type').where(x: 'a', y: 8).first.type).to eq('Rook')
-    expect(game.pieces.select('type').where(x: 'b', y: 8).first.type).to eq('Knight')
-    expect(game.pieces.select('type').where(x: 'c', y: 8).first.type).to eq('Bishop')
-    expect(game.pieces.select('type').where(x: 'd', y: 8).first.type).to eq('Queen')
-    expect(game.pieces.select('type').where(x: 'e', y: 8).first.type).to eq('King')
-    expect(game.pieces.select('type').where(x: 'f', y: 8).first.type).to eq('Bishop')
-    expect(game.pieces.select('type').where(x: 'g', y: 8).first.type).to eq('Knight')
-    expect(game.pieces.select('type').where(x: 'h', y: 8).first.type).to eq('Rook')
+    expect(game.pieces.select('type').where(x: 'A', y: 8).first.type).to eq('Rook')
+    expect(game.pieces.select('type').where(x: 'B', y: 8).first.type).to eq('Knight')
+    expect(game.pieces.select('type').where(x: 'C', y: 8).first.type).to eq('Bishop')
+    expect(game.pieces.select('type').where(x: 'D', y: 8).first.type).to eq('Queen')
+    expect(game.pieces.select('type').where(x: 'E', y: 8).first.type).to eq('King')
+    expect(game.pieces.select('type').where(x: 'F', y: 8).first.type).to eq('Bishop')
+    expect(game.pieces.select('type').where(x: 'G', y: 8).first.type).to eq('Knight')
+    expect(game.pieces.select('type').where(x: 'H', y: 8).first.type).to eq('Rook')
 
-    expect(game.pieces.select('type').where(x: 'a', y: 7).first.type).to eq('Pawn')
-    expect(game.pieces.select('type').where(x: 'b', y: 7).first.type).to eq('Pawn')
-    expect(game.pieces.select('type').where(x: 'c', y: 7).first.type).to eq('Pawn')
-    expect(game.pieces.select('type').where(x: 'd', y: 7).first.type).to eq('Pawn')
-    expect(game.pieces.select('type').where(x: 'e', y: 7).first.type).to eq('Pawn')
-    expect(game.pieces.select('type').where(x: 'f', y: 7).first.type).to eq('Pawn')
-    expect(game.pieces.select('type').where(x: 'g', y: 7).first.type).to eq('Pawn')
-    expect(game.pieces.select('type').where(x: 'h', y: 7).first.type).to eq('Pawn')
-end
+    expect(game.pieces.select('type').where(x: 'A', y: 7).first.type).to eq('Pawn')
+    expect(game.pieces.select('type').where(x: 'B', y: 7).first.type).to eq('Pawn')
+    expect(game.pieces.select('type').where(x: 'C', y: 7).first.type).to eq('Pawn')
+    expect(game.pieces.select('type').where(x: 'D', y: 7).first.type).to eq('Pawn')
+    expect(game.pieces.select('type').where(x: 'E', y: 7).first.type).to eq('Pawn')
+    expect(game.pieces.select('type').where(x: 'F', y: 7).first.type).to eq('Pawn')
+    expect(game.pieces.select('type').where(x: 'G', y: 7).first.type).to eq('Pawn')
+    expect(game.pieces.select('type').where(x: 'H', y: 7).first.type).to eq('Pawn')
+  end
+
 
  describe "#check?" do
     game = FactoryGirl.create(:game)
-    it 'returns false if the game is not in check' do
-        expect(game.check?).to eq false #should return false if the game stays at starting state
-    end
 
     it 'returns true if the Queen is threatening' do
         Pawn.destroy_all(game: game) #removes all pawns from game
@@ -66,5 +64,7 @@ end
         expect(game.check?).to eq true
     end
 end
+
+
 
 end

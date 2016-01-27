@@ -5,7 +5,7 @@
       <% y_array = (1..8).to_a.reverse! %>
       <% y_array.each do |y_value| %>
         <%= content_tag "tr" do %>
-          <% x_array = ('a'..'h').to_a %>
+          <% x_array = ('A'..'H').to_a %>
           <% x_array.each do |x_value| %>
             <% pos_id = x_value + y_value.to_s %>
             <%= content_tag "td", id: pos_id do %>
