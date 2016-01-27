@@ -1,5 +1,4 @@
 class PiecesController < ApplicationController
-  include PiecesHelper
 
   def update
     current_game = current_piece.game
@@ -11,6 +10,7 @@ class PiecesController < ApplicationController
     end
 
     @result = current_piece.move!(params[:piece][:x], params[:piece][:y].to_i)
+
     render json: @result
   end
 

@@ -93,6 +93,7 @@ class Piece < ActiveRecord::Base
   end
 
   def move!(destination_x, destination_y)
-    move_to!(destination_x, destination_y) if valid_move?(destination_x, destination_y)
+   return move_to!(destination_x, destination_y) if valid_move?(destination_x, destination_y)
+   false
   end
 end
