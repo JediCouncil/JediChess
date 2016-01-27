@@ -13,47 +13,9 @@ class Game < ActiveRecord::Base
 
   scope :available, -> { where('black_player_id IS NULL OR white_player_id IS NULL') }
 
-  private
-
-  def populate_board!
-    pieces.create(x: 'A', y: '1', type: 'Rook', color: 'white')
-    pieces.create(x: 'B', y: '1', type: 'Knight', color: 'white')
-    pieces.create(x: 'C', y: '1', type: 'Bishop', color: 'white')
-    pieces.create(x: 'D', y: '1', type: 'Queen', color: 'white')
-    pieces.create(x: 'E', y: '1', type: 'King', color: 'white')
-    pieces.create(x: 'F', y: '1', type: 'Bishop', color: 'white')
-    pieces.create(x: 'G', y: '1', type: 'Knight', color: 'white')
-    pieces.create(x: 'H', y: '1', type: 'Rook', color: 'white')
-    pieces.create(x: 'A', y: '2', type: 'Pawn', color: 'white')
-    pieces.create(x: 'B', y: '2', type: 'Pawn', color: 'white')
-    pieces.create(x: 'C', y: '2', type: 'Pawn', color: 'white')
-    pieces.create(x: 'D', y: '2', type: 'Pawn', color: 'white')
-    pieces.create(x: 'E', y: '2', type: 'Pawn', color: 'white')
-    pieces.create(x: 'F', y: '2', type: 'Pawn', color: 'white')
-    pieces.create(x: 'G', y: '2', type: 'Pawn', color: 'white')
-    pieces.create(x: 'H', y: '2', type: 'Pawn', color: 'white')
-
-    pieces.create(x: 'A', y: '8', type: 'Rook', color: 'black')
-    pieces.create(x: 'B', y: '8', type: 'Knight', color: 'black')
-    pieces.create(x: 'C', y: '8', type: 'Bishop', color: 'black')
-    pieces.create(x: 'D', y: '8', type: 'Queen', color: 'black')
-    pieces.create(x: 'E', y: '8', type: 'King', color: 'black')
-    pieces.create(x: 'F', y: '8', type: 'Bishop', color: 'black')
-    pieces.create(x: 'G', y: '8', type: 'Knight', color: 'black')
-    pieces.create(x: 'H', y: '8', type: 'Rook', color: 'black')
-    pieces.create(x: 'A', y: '7', type: 'Pawn', color: 'black')
-    pieces.create(x: 'B', y: '7', type: 'Pawn', color: 'black')
-    pieces.create(x: 'C', y: '7', type: 'Pawn', color: 'black')
-    pieces.create(x: 'D', y: '7', type: 'Pawn', color: 'black')
-    pieces.create(x: 'E', y: '7', type: 'Pawn', color: 'black')
-    pieces.create(x: 'F', y: '7', type: 'Pawn', color: 'black')
-    pieces.create(x: 'G', y: '7', type: 'Pawn', color: 'black')
-    pieces.create(x: 'H', y: '7', type: 'Pawn', color: 'black')
-
-  end
 
   def check?
-    !checked_by.empty? ? (return true) : (return false) 
+    !check_by.empty? ? (return true) : (return false) 
   end
 
 
@@ -61,20 +23,20 @@ class Game < ActiveRecord::Base
     #Loop through every piece on the board except for the kings, and for each iteration, determine whether that piece can destroy the opponent's king
     pieces.each do |piece|
       check_by=[] #this array stores the pieces that are checking the king
-      piece.color == 'black' ? (opponent_color == 'white') : (opponent_color == 'black') #set the opponent's color to be the opposite of the current piece color
+      piece.color == 'black' ? (opponent_color='white') : (opponent_color='black') #set the opponent's color to be the opposite of the current piece color
 
       #retrieve the opponent's king x, y
       enemy_king = pieces.find_by(color: opponent_color, type: 'King')
       enemy_king_x = enemy_king.x
       enemy_king_y = enemy_king.y
-      checked_by<<piece if piece.valid_move?(enemy_king_x,enemy_king_y) #determine whether this piece threaten opponent's king
+      check_by<<piece if piece.valid_move?(enemy_king_x,enemy_king_y) #determine whether this piece threaten opponent's king
     end
     return check_by
   end
 
   def king_in_check
     if check?
-      check_by[0].color=='black' ? (king_color=='white') : (king_color=='black')
+      check_by[0].color=='black' ? (king_color='white') : (king_color='black')
       return piece.find_by(type:'King', color:king_color)
     end
   end 
@@ -135,8 +97,8 @@ class Game < ActiveRecord::Base
         when 'Knight'
           #do nothing
         when 'Queen', 'Rook', 'Bishop', 'Pawn'
-          (x_coord_indices[offender_piece.x]-x_coord_indices[king_in_check.x])>0 ? (x_direction==-1) : (x_direction==1)
-          (offender_piece.y-king_in_check.y)>0 ? (y_direction==-1) : (y_direction==1)
+          (x_coord_indices[offender_piece.x]-x_coord_indices[king_in_check.x])>0 ? (x_direction=-1) : (x_direction=1)
+          (offender_piece.y-king_in_check.y)>0 ? (y_direction=-1) : (y_direction=1)
           while pointer.x!=king_in_check.x || pointer.y!=king_in_check.y
             return true if rescue_piece.valid_move?(pointer.x, pointer.y)
             pointer.x+=direction if pointer.x!=king_in_check.x
@@ -149,6 +111,46 @@ class Game < ActiveRecord::Base
     return false
 
   end
+
+  private
+
+  def populate_board!
+    pieces.create(x: 'A', y: '1', type: 'Rook', color: 'white')
+    pieces.create(x: 'B', y: '1', type: 'Knight', color: 'white')
+    pieces.create(x: 'C', y: '1', type: 'Bishop', color: 'white')
+    pieces.create(x: 'D', y: '1', type: 'Queen', color: 'white')
+    pieces.create(x: 'E', y: '1', type: 'King', color: 'white')
+    pieces.create(x: 'F', y: '1', type: 'Bishop', color: 'white')
+    pieces.create(x: 'G', y: '1', type: 'Knight', color: 'white')
+    pieces.create(x: 'H', y: '1', type: 'Rook', color: 'white')
+    pieces.create(x: 'A', y: '2', type: 'Pawn', color: 'white')
+    pieces.create(x: 'B', y: '2', type: 'Pawn', color: 'white')
+    pieces.create(x: 'C', y: '2', type: 'Pawn', color: 'white')
+    pieces.create(x: 'D', y: '2', type: 'Pawn', color: 'white')
+    pieces.create(x: 'E', y: '2', type: 'Pawn', color: 'white')
+    pieces.create(x: 'F', y: '2', type: 'Pawn', color: 'white')
+    pieces.create(x: 'G', y: '2', type: 'Pawn', color: 'white')
+    pieces.create(x: 'H', y: '2', type: 'Pawn', color: 'white')
+
+    pieces.create(x: 'A', y: '8', type: 'Rook', color: 'black')
+    pieces.create(x: 'B', y: '8', type: 'Knight', color: 'black')
+    pieces.create(x: 'C', y: '8', type: 'Bishop', color: 'black')
+    pieces.create(x: 'D', y: '8', type: 'Queen', color: 'black')
+    pieces.create(x: 'E', y: '8', type: 'King', color: 'black')
+    pieces.create(x: 'F', y: '8', type: 'Bishop', color: 'black')
+    pieces.create(x: 'G', y: '8', type: 'Knight', color: 'black')
+    pieces.create(x: 'H', y: '8', type: 'Rook', color: 'black')
+    pieces.create(x: 'A', y: '7', type: 'Pawn', color: 'black')
+    pieces.create(x: 'B', y: '7', type: 'Pawn', color: 'black')
+    pieces.create(x: 'C', y: '7', type: 'Pawn', color: 'black')
+    pieces.create(x: 'D', y: '7', type: 'Pawn', color: 'black')
+    pieces.create(x: 'E', y: '7', type: 'Pawn', color: 'black')
+    pieces.create(x: 'F', y: '7', type: 'Pawn', color: 'black')
+    pieces.create(x: 'G', y: '7', type: 'Pawn', color: 'black')
+    pieces.create(x: 'H', y: '7', type: 'Pawn', color: 'black')
+  end
+
+  
 
 
 end

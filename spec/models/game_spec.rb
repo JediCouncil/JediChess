@@ -53,6 +53,7 @@ RSpec.describe Game, type: :model do
     game.pieces.find_by(type: 'Knight', color: 'white').update(x:'F', y: 5)
 
     it 'black king is checked by 5 pieces' do
+        binding.pry
         result=game.check?
         expect(result).to be true
     end
