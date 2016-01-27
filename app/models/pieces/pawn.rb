@@ -18,7 +18,7 @@ class Pawn < Piece
     return false unless valid_spaces
 
     # check if piece is present on destination
-    destination_piece = Piece.find_by(x: destination_x, y: destination_y)
+    destination_piece = Piece.find_by(x: destination_x, y: destination_y, game_id: game_id)
 
     # check if move is vertical/diagonal
     if vertical_move?(destination_x)
@@ -35,9 +35,9 @@ class Pawn < Piece
     return true if y == destination_y
     # backwards move
     if black?
-      destination_y < y
-    else
       destination_y > y
+    else
+      destination_y < y
     end
   end
 

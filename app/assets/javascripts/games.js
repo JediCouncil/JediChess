@@ -17,15 +17,15 @@ $(document).ready(function(){
         }
       }
 
-      if ( $this.parent().hasClass("selected_piece" )) {
+      if ( $this.closest("td").hasClass("selected_piece" )) {
         // if piece is unselected then disable drag
         if ( $this.hasClass("ui-draggable" )){
           $this.draggable("disable");
         }
-        $this.parent().removeClass("selected_piece");
+        $this.closest("td").removeClass("selected_piece");
       }
       else {
-        $this.parent().addClass("selected_piece")
+        $this.closest("td").addClass("selected_piece")
         lastClicked = this;
 
         if ( $this.hasClass("ui-draggable-disabled" )){
@@ -47,34 +47,51 @@ $(document).ready(function(){
 
     //Handles Drop Event and triggers ajax PUT request
     function updatePieceCoordinates(event, ui){
-      ui.draggable.parent().removeClass("selected_piece");
-      ui.draggable.draggable("disable");
+      draggable_piece = $(ui.draggable);
 
-      var destination_id = $(this).attr("id"), //"e7"
-          destination_x = destination_id[0],
-          destination_y = destination_id[1];
+      draggable_piece.parent().removeClass("selected_piece");
+      draggable_piece.draggable("disable");
+
+      destination_id = $(this).attr("id"); //"e7"
+      destination_x = destination_id[0];
+      destination_y = destination_id[1];
 
       var $this = $(this);
-       ui.draggable.position({
+        draggable_piece.position({
         my: "center",
         at: "center",
         of: $this
        });
 
-      var draggable_piece = $(ui.draggable)
-      var detached_draggable = draggable_piece.detach();
-      draggable_piece.attr("style", "position: relative;");
-
-      //attach piece to new destination
-      var destination_id = '#'+ destination_id;
-      $(destination_id).append(detached_draggable);
 
       $.ajax({
         method: "PUT",
         url: "/pieces/" + draggable_piece.data('item-id'),
         data: { piece: {x: destination_x, y: destination_y} }
       })
-    }
+        .done(function(response){
+          if (response.status == "success"){
+            if (response.pieces_destroyed != undefined) {
+              if (response.pieces_destroyed.length > 0) {
+                var destroyed_piece = response.pieces_destroyed[0];
+                var pos = '#' + destroyed_piece.position.x + destroyed_piece.position.y;
+                $(pos).find('div').detach();
+              }
+            }
+
+            response.pieces_moved.forEach(function(piece){
+              var original_pos = '#' + piece.original_position.x + piece.original_position.y
+              var detached_piece = $(original_pos).find('div').detach();
+              detached_piece.attr("style", "position: relative;");
+              var new_pos = '#' + piece.new_position.x + piece.new_position.y
+              $(new_pos).append(detached_piece);
+            })
+          }
+        }) //end of done
+        .fail(function(){
+          alert("An error has occured");
+        }) //end of fail
+    }//end of drop function
   }//end of if
 });
 
