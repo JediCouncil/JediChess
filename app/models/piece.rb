@@ -65,7 +65,7 @@ class Piece < ActiveRecord::Base
     false
   end
 
-  def can_castle?(piece)
+  def can_castle?(_piece)
     false
   end
 
@@ -93,7 +93,7 @@ class Piece < ActiveRecord::Base
   end
 
   def move!(destination_x, destination_y)
-   return move_to!(destination_x, destination_y) if valid_move?(destination_x, destination_y)
-   false
+    return move_to!(destination_x, destination_y) if valid_move?(destination_x, destination_y)
+    false
   end
 end

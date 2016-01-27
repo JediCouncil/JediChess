@@ -1,5 +1,4 @@
 class PiecesController < ApplicationController
-
   def update
     current_game = current_piece.game
     destination_piece = current_game.pieces.find_by(piece_params)
