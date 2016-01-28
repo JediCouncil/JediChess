@@ -8,10 +8,10 @@ class Bishop < Piece
 
     # bishop moves are only valid when the x and y distances are equivalent
     # they are invalid otherwise
-    if (x_coord_distance == y_coord_distance)
-        return true
+    if x_coord_distance == y_coord_distance
+      return true
     else
-        return false
+      return false
     end
   end
 end

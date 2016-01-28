@@ -26,37 +26,38 @@ ActiveRecord::Schema.define(version: 20160123063553) do
     t.integer  "turn"
   end
 
-  create_table "pieces", force: :cascade do |t|
-    t.string   "x"
-    t.integer  "y"
-    t.integer  "color"
-    t.string   "outcome"
-    t.string   "casualty"
-    t.integer  "game_id"
-    t.integer  "player_id"
-    t.integer  "time_lapsed"
-    t.string   "type"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.boolean  "first_move",  default: true
+  create_table 'pieces', force: :cascade do |t|
+    t.string 'x'
+    t.integer 'y'
+    t.integer 'color'
+    t.string 'outcome'
+    t.string 'casualty'
+    t.integer 'game_id'
+    t.integer 'player_id'
+    t.integer 'time_lapsed'
+    t.string 'type'
+    t.datetime 'created_at',                 null: false
+    t.datetime 'updated_at',                 null: false
+    t.boolean 'first_move', default: true
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+  create_table 'users', force: :cascade do |t|
+    t.string 'name'
+    t.string 'username'
+    t.string 'email',                  default: '', null: false
+    t.string 'encrypted_password',     default: '', null: false
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
+    t.datetime 'remember_created_at'
+    t.integer 'sign_in_count', default: 0, null: false
+    t.datetime 'current_sign_in_at'
+    t.datetime 'last_sign_in_at'
+    t.inet 'current_sign_in_ip'
+    t.inet 'last_sign_in_ip'
+    t.datetime 'created_at',                          null: false
+    t.datetime 'updated_at',                          null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
+  add_index 'users', ['email'], name: 'index_users_on_email', unique: true, using: :btree
+  add_index 'users', ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true, using: :btree
 end
