@@ -1,39 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Piece, type: :model do
-  describe '#check?' do
-    let (:piece1) { create(:king, color: 'black', x: 'D', y: 5, game_id: 12) }
-    let (:piece2) { create(:rook, color: 'white', x: 'A', y: 5, game_id: 12) }
-    let (:piece3) { create(:queen, color: 'white', x: 'B', y: 3, game_id: 12) }
-    let (:piece4) { create(:knight, color: 'white', x: 'B', y: 4, game_id: 12) }
-    let (:piece5) { create(:bishop, color: 'white', x: 'F', y: 3, game_id: 12) }
-    let (:piece6) { create(:knight, color: 'white', x: 'F', y: 5, game_id: 12) }
-    let (:piece7) { create(:rook, color: 'black', x: 'A', y: 8, game_id: 12) }
-    let (:piece8) { create(:knight, color: 'black', x: 'B', y: 8, game_id: 12) }
-    let (:piece9) { create(:bishop, color: 'black', x: 'C', y: 8, game_id: 12) }
 
-    context 'black king is in check' do
-      it 'checked by 5' do
-        result = piece1.game.check?
-        expect(result).to be true
-      end
-      it 'checkmated' do
-        result = piece1.game.checkmate?
-        expect(result).to be true
-      end
-    end
-  end
-
-  # describe '#checkmate?' do
-
-  #   context 'white king is in checkmate' do
-  #       it 'checked by a black queen' do
-  #       end
-  #       it 'white king is checked by a black rook' do
-  #       end
-  #   end
-
-  # end
 
   describe '#is_obstructed?' do
     let(:piece)  { build(:piece) }
@@ -90,21 +58,6 @@ RSpec.describe Piece, type: :model do
       end
     end
 
-    # context 'invalid move' do
-    #   it 'raises an error if input is invalid' do
-    #     piece.update(x: 'D', y: 4)
-
-    #     invalid_move = 'Invalid input. Not diagonal, horizontal, or vertical'
-    #     expect { piece.is_obstructed?('B', 5) }.to raise_error { invalid_move }
-    #   end
-    #   it 'raises an error' do
-    #     piece.update(x: 'D', y: 4)
-
-    #     invalid_move = 'Invalid input. Not diagonal, horizontal, or vertical'
-    #     expect { piece.is_obstructed?('H', 3) }.to raise_error { invalid_move }
-    #   end
-    # end
-
     context 'piece is not obstructed' do
       it 'returns false' do
         piece.update(x: 'A', y: 8)
@@ -135,15 +88,16 @@ RSpec.describe Piece, type: :model do
       it 'piece2 destroyed and piece has updated xy coordinates' do
         piece.update(x: 'H', y: 1, color: 'black')
         piece2.update(x: 'H', y: 4, color: 'white')
+        org_count = Piece.count
 
-        expect { piece.move_to!('H', 4) }.to change { Piece.count }.from(2).to(1)
+        expect { piece.move_to!('H', 4) }.to change { Piece.count }.from(org_count).to(org_count-1)
         expect(piece).to have_attributes(x: 'H', y: 4)
       end
       it 'piece2 destroyed and piece has updated xy coordinates' do
         piece.update(x: 'A', y: 2, color: 'white')
         piece2.update(x: 'A', y: 6, color: 'black')
-
-        expect { piece.move_to!('A', 6) }.to change { Piece.count }.from(2).to(1)
+        org_count = Piece.count
+        expect { piece.move_to!('A', 6) }.to change { Piece.count }.from(org_count).to(org_count-1)
         expect(piece).to have_attributes(x: 'A', y: 6)
       end
     end
