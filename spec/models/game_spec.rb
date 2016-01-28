@@ -48,9 +48,9 @@ RSpec.describe Game, type: :model do
     game.pieces.find_by(type: 'King', color: 0).update(x: 'D', y: 5)
     game.pieces.find_by(type: 'Rook', color: 1).update(x: 'A', y: 5)
     game.pieces.find_by(type: 'Queen', color: 1).update(x: 'B', y: 3)
-    game.pieces.find_by(type: 'Knight', color: 1, x:'B', y: 1).update(x: 'B', y: 4)
+    game.pieces.find_by(type: 'Knight', color: 1, x: 'B', y: 1).update(x: 'B', y: 4)
     game.pieces.find_by(type: 'Bishop', color: 1).update(x: 'F', y: 3)
-    game.pieces.find_by(type: 'Knight', color: 1, x:'G', y: 1).update(x: 'F', y: 5)
+    game.pieces.find_by(type: 'Knight', color: 1, x: 'G', y: 1).update(x: 'F', y: 5)
 
     it 'black king is checked by 4 pieces' do
       result = game.check?
@@ -66,10 +66,10 @@ RSpec.describe Game, type: :model do
   context 'set up a check and can block to escape situation' do
     game = FactoryGirl.create(:game)
 
-    game.pieces.find_by(x:'A', y: 8).delete
-    game.pieces.find_by(x:'C', y: 8).delete
-    game.pieces.find_by(x:'D', y: 8).delete
-    game.pieces.find_by(type: 'Knight', color: 0).move_to!('C',6)
+    game.pieces.find_by(x: 'A', y: 8).delete
+    game.pieces.find_by(x: 'C', y: 8).delete
+    game.pieces.find_by(x: 'D', y: 8).delete
+    game.pieces.find_by(type: 'Knight', color: 0).move_to!('C', 6)
     game.pieces.find_by(type: 'King', color: 0).move_to!('A', 8)
     game.pieces.find_by(type: 'Rook', color: 1).move_to!('C', 8)
 

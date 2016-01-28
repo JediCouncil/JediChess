@@ -14,8 +14,8 @@ class Game < ActiveRecord::Base
     # Loop through every piece on the board except for the kings, and for each iteration, determine whether that piece can destroy the opponent's king
     # binding.pry
     check_by = []
-    #remove the kings from the pieces array
-    pieces_exceptfor_kings=pieces.where.not(type:'King')
+    # remove the kings from the pieces array
+    pieces_exceptfor_kings = pieces.where.not(type: 'King')
 
     pieces_exceptfor_kings.each do |piece|
       # this array stores the pieces that are checking the king
@@ -31,7 +31,7 @@ class Game < ActiveRecord::Base
   end
 
   def king_in_check
-    if check?      
+    if check?
       check_by[0].color == 'black' ? (king_color = 1) : (king_color = 0)
       return pieces.find_by(type: 'King', color: king_color)
     end
@@ -79,16 +79,16 @@ class Game < ActiveRecord::Base
   end
 
   def block_out_of_check?
-    if check_by.length>1
-      return false #can't block more than 1 piece so return false if there are more than 1 piece checking the king
-    else #only 1 piece checking, check whether it can be blocked by one of the king's pieces
-      color=king_in_check.color
-      color=='white' ? color_int=1 : color_int=0
+    if check_by.length > 1
+      return false # can't block more than 1 piece so return false if there are more than 1 piece checking the king
+    else # only 1 piece checking, check whether it can be blocked by one of the king's pieces
+      color = king_in_check.color
+      color == 'white' ? color_int = 1 : color_int = 0
       rescue_team = pieces.where(color: color_int)
 
-      offender_piece=check_by[0]
+      offender_piece = check_by[0]
       pointer = offender_piece # reset pointer to point to the offender piece
-      pointer_x_norm=x_coord_indices(pointer.x)
+      pointer_x_norm = x_coord_indices(pointer.x)
       pointer_y = pointer.y
       rescue_team.each do |rescue_piece|
         # return true if rescue_piece.valid_move?(offender_piece.x, offender_piece.y)
@@ -109,7 +109,6 @@ class Game < ActiveRecord::Base
       false
 
     end
-    
   end
 
   def x_coord_indices(x)
