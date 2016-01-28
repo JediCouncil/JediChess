@@ -1,8 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe Game, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
 
 RSpec.describe Game, type: :model do
   it 'populate board' do
@@ -44,4 +41,30 @@ RSpec.describe Game, type: :model do
     expect(game.pieces.select('type').where(x: 'G', y: 7).first.type).to eq('Pawn')
     expect(game.pieces.select('type').where(x: 'H', y: 7).first.type).to eq('Pawn')
   end
+
+
+ describe "#check?" do
+    game = FactoryGirl.create(:game)
+
+    it 'returns true if the Queen is threatening' do
+        Pawn.destroy_all(game: game) #removes all pawns from game
+        #to make room for threatening queen
+        #makes queen directly vertical to white king]
+
+        create(:queen, x: 'E', y: '7', color: 'black', game: game)
+
+        expect(game.check?).to eq true
+    end
+
+    it 'returns true if a Pawn is threatening' do
+        Pawn.destroy_all(game: game, color: 'white') #removes all white pawns
+
+        create(:pawn, x: 'D', y: '2', color: 'black', game: game)
+
+        expect(game.check?).to eq true
+    end
+end
+
+
+
 end
