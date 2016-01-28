@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Piece, type: :model do
-  describe '#check?' do   
+  describe '#check?' do
     let (:piece1) { create(:king, color: 'black', x: 'D', y: 5, game_id: 12) }
     let (:piece2) { create(:rook, color: 'white', x: 'A', y: 5, game_id: 12) }
     let (:piece3) { create(:queen, color: 'white', x: 'B', y: 3, game_id: 12) }
@@ -13,27 +13,25 @@ RSpec.describe Piece, type: :model do
     let (:piece9) { create(:bishop, color: 'black', x: 'C', y: 8, game_id: 12) }
 
     context 'black king is in check' do
-        it 'checked by 5' do 
-          result = piece1.game.check?
-          expect(result).to be true
-        end
-        it 'checkmated' do
-          result = piece1.game.checkmate?
-          expect(result).to be true
-        end
-    end 
-
-  end 
+      it 'checked by 5' do
+        result = piece1.game.check?
+        expect(result).to be true
+      end
+      it 'checkmated' do
+        result = piece1.game.checkmate?
+        expect(result).to be true
+      end
+    end
+  end
 
   # describe '#checkmate?' do
-    
 
   #   context 'white king is in checkmate' do
-  #       it 'checked by a black queen' do 
+  #       it 'checked by a black queen' do
   #       end
   #       it 'white king is checked by a black rook' do
   #       end
-  #   end 
+  #   end
 
   # end
 
