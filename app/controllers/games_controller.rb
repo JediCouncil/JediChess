@@ -14,9 +14,9 @@ class GamesController < ApplicationController
     redirect_to game_path(@game)
   end
 
-  # def update
-  #   current_game.update_attributes(game_params)
-  # end
+  def update
+    current_game.update_attributes(game_params)
+  end
 
   def show
     @game = Game.find(params[:id])

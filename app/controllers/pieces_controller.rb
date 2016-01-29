@@ -25,8 +25,7 @@ class PiecesController < ApplicationController
 
   private
 
-  helper_method :curent_piece
-
+  helper_method :current_piece
   def current_piece
     @current_piece ||= Piece.find(params[:id])
   end
@@ -36,6 +35,8 @@ class PiecesController < ApplicationController
   end
 
   def require_authorized_for_updating_piece
-
+    unless current_piece.color = color
+      render :text => 'Unauthorized', :status => :unauthorized
+    end
   end
 end
