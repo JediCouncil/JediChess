@@ -101,15 +101,15 @@ RSpec.describe Piece, type: :model do
       it 'piece2 destroyed and piece has updated xy coordinates' do
         piece.update(x: 'H', y: 1, color: 'black')
         piece2.update(x: 'H', y: 4, color: 'white')
-
-        expect { piece.move_to!('H', 4) }.to change { Piece.count }.from(2).to(1)
+        org_count = Piece.count
+        expect { piece.move_to!('H', 4) }.to change { Piece.count }.from(org_count).to(org_count - 1)
         expect(piece).to have_attributes(x: 'H', y: 4)
       end
       it 'piece2 destroyed and piece has updated xy coordinates' do
         piece.update(x: 'A', y: 2, color: 'white')
         piece2.update(x: 'A', y: 6, color: 'black')
-
-        expect { piece.move_to!('A', 6) }.to change { Piece.count }.from(2).to(1)
+        org_count = Piece.count
+        expect { piece.move_to!('A', 6) }.to change { Piece.count }.from(org_count).to(org_count - 1)
         expect(piece).to have_attributes(x: 'A', y: 6)
       end
     end

@@ -15,20 +15,18 @@ class Game < ActiveRecord::Base
 
   def check?
     #game is in check if either black or white king is in check
-    king_is_in_check?('black') || king_is_in_check('white')
+    king_is_in_check?('black') || king_is_in_check?('white')
   end
 
   def king_is_in_check?(color)
     #finds king by color
     king = pieces.find_by(type: "King", color: color)
     #returns array of all opposing pieces
-    opponents = pieces.includes(:game).where(color: !king.color).to_a
+    opponents = pieces.where.not(color: color)
     #loops through each opposing piece to determine if they have a valid move
     #that can capture king
     opponents.each do |opponent|
-      if opponent.valid_move?(king.x, king.y) == true
-        return true
-      end
+      return true if opponent.valid_move?(king.x, king.y)
     end
     false
   end
