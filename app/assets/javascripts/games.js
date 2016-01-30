@@ -1,6 +1,18 @@
+$ ->
+
+  var pusher = new Pusher('07600f80f17ff8fb46ba'), { encrypted: true };
+  var channel = pusher.subscribe('game-id');
+
+  channel.bind('refresh_page', function() {
+    location.reload(); //reloads current document
+  });
+ 
+
 $(document).ready(function(){
   if ( $('#chess').length ) {
+
     for (key in gon.pieces_hash) {
+
       pos_id = '#' + key
       text = "<div class=\"" + gon.pieces_hash[key][0] + " center-block\" data-item-id = " + gon.pieces_hash[key][1] + "></div>"
       $(pos_id).html(text) //this jquery finds each id tag with the value pos_id and insert the above <div class = 'color_type'></div> inside it so it gets inserted inside the td tag
