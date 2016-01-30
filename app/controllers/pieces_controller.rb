@@ -1,6 +1,6 @@
 class PiecesController < ApplicationController
   include GamesHelper
-  before_action :require_authorized_for_updating_piece, :only => [:update]
+  before_action :require_authorized_for_updating_piece, only: [:update]
 
   def show
     @piece = current_piece
@@ -35,8 +35,8 @@ class PiecesController < ApplicationController
   end
 
   def require_authorized_for_updating_piece
-    unless current_piece.color = color
-      render :text => 'Unauthorized', :status => :unauthorized
+    unless current_piece.color == current_user.color
+      render text: 'Unauthorized', status: :unauthorized
     end
   end
 end

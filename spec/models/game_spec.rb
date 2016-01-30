@@ -42,19 +42,20 @@ RSpec.describe Game, type: :model do
   end
 
   describe '#change_turn!' do
-    let(:game) { create(:game, white_player_id: 1, black_player_id: 0, turn: 0) }
+    let(:game) { create(:game, white_player_id: 1, black_player_id: 0) }
+    let(:game1) { create(:game, white_player_id: 1, black_player_id: 0) }
 
     context 'given last piece played was black' do
       it 'changes turn to white_player_id' do
         game.change_turn!
-        expect(Game.turn).to eq(1)
+        expect(game.active_player_id).to eq(1)
       end
     end
 
     context 'given last piece played was white' do
       it 'changes turn to black_player_id' do
-        game.change_turn!
-        expect(Game.turn).to eq(0)
+        game1.change_turn!
+        expect(game1.active_player_id).to eq(0)
       end
     end
   end

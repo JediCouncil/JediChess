@@ -72,6 +72,7 @@ class Piece < ActiveRecord::Base
   def move_to!(destination_x, destination_y)
     destination_piece = Piece.find_by(x: destination_x, y: destination_y, game_id: game_id)
     results = { status: 'success', pieces_moved: [], pieces_destroyed: [] }
+    game = Game.find_by()
 
     if destination_piece.present?
       if destination_piece.color != color
@@ -90,7 +91,7 @@ class Piece < ActiveRecord::Base
     results[:pieces_moved] << piece_moved_hsh
     update(x: destination_x, y: destination_y, first_move: false)
     results
-    Game.change_turn!
+    game.change_turn!
   end
 
   def move!(destination_x, destination_y)
