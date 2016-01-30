@@ -17,6 +17,6 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     gon.pieces_hash = render_pieces(@game) # call the helper function and get the hash. will be passed onto the view
-    Pusher.trigger('game-#{game.id}', 'refresh_page', {:message => "Your Move!"})
+    Pusher.trigger("game-#{game.id}", 'refresh_page', {:message => "Your Move!"})
   end
 end
