@@ -25,7 +25,8 @@ $(document).ready(function(){
         $this.closest("td").removeClass("selected_piece");
       }
       else {
-        $this.closest("td").addClass("selected_piece")
+        $this.closest("td").addClass("selected_piece");
+
         lastClicked = this;
 
         if ( $this.hasClass("ui-draggable-disabled" )){
@@ -62,7 +63,6 @@ $(document).ready(function(){
         at: "center",
         of: $this
        });
-
 
       $.ajax({
         method: "PUT",
