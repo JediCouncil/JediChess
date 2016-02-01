@@ -4,7 +4,7 @@ $ ->
   var channel = pusher.subscribe('game-id');
 
   channel.bind('refresh_page', function() {
-    location.reload(); z//reloads current document
+    location.reload(); //reloads current document
   });
  
 
