@@ -10,6 +10,8 @@ class PiecesController < ApplicationController
 
     @result = current_piece.move!(params[:piece][:x], params[:piece][:y].to_i)
 
+    Pusher.trigger("game-#{current_game.id}", 'refresh_page', {:message => "Your Move!"})
+
     render json: @result
   end
 

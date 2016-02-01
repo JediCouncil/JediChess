@@ -1,12 +1,14 @@
 $(document).ready(function(){
   if ( $('#chess').length ) {
 
+    // Initialize and Subscibe to Pusher Channel
     var pusher = new Pusher('07600f80f17ff8fb46ba');
     var channel = pusher.subscribe('game-' + gon.game_id);
-    debugger;
 
-    channel.bind('refresh_page', function() {
-      location.reload(); //reloads current document
+    channel.bind('refresh_page', function(data) {
+      // alert("workijng!");
+      // location.reload(); //reloads current document
+      alert("data message" + data.message);
     });
 
     // Some useful debug msgs
