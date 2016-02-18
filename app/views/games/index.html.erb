@@ -2,10 +2,12 @@
 	<div class="welcome col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-4 text-center">
 		<p>welcome to</p>
 		<h1 class="star">JediChess</h1>
+		<%= image_tag("lightsaber.png") %>
+		<p>developed by Yan Hu, Eric Orellana, Rebecca Taylor,<br>Gaby Casteneda, and Jenny Mangaly</p>
 	</div>
 </div>
 
-<div class="col-xs-10 col-xs-offset-1 text-center">
+<div class="open-games col-xs-10 col-xs-offset-1 text-center">
 	<h2>Are there any games I can join?</h2>
 		<% if @games.present? %>
 			<h4>Yes, there are! You can join any of these:</h4>
