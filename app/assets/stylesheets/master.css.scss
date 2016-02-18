@@ -135,14 +135,6 @@ nav.navbar.navbar-default {
   color: white !important;
 }
 
-/*.navbar-default .navbar-nav > li > a {
-  color: white !important;
-}
-
-a.navbar-brand {
-  color: white;
-}*/
-
 .front-hero {
   background: url('jc-hero-section.jpeg') no-repeat center center;
     background-size: cover;
@@ -150,6 +142,23 @@ a.navbar-brand {
     -moz-background-size: cover;
     -o-background-size: cover;
   width: 100%;
-  min-height: 730px;
+  min-height: 750px;
   max-height: 800px;
+}
+
+.welcome {
+  color: white;
+  background: rgba(0,0,0, 0.5);
+  margin-top: 275px;
+  padding: 20px 0;
+}
+
+a.navbar-brand.nav-links {
+  font-family: 'distantgalaxyregular' !important;
+  font-size: 35px;
+}
+
+.star {
+  font-family: 'distantgalaxyregular', sans-serif;
+  font-size: 60px;
 }
