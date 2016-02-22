@@ -160,7 +160,7 @@ a.navbar-brand.nav-links {
 }
 
 .star {
-  font-family: 'distantgalaxyregular', sans-serif;
+  font-family: 'distantgalaxyregular', sans-serif !important;
   font-size: 60px;
 }
 
@@ -168,10 +168,31 @@ p {
   font-family: 'aaarghnormal', Helvetica, serif;
 }
 
+h2, h3, h4, h5, h6, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'aaarghnormal' !important;
+}
+
+h1, .h1 {
+  font-family: 'distantgalaxyregular', sans-serif !important;
+  font-size: 70px !important;
+}
+
 h1.star {
   margin: -5px 0;
 }
 
+.blurbs {
+  margin: 100px 0;
+}
+
 .open-games {
   padding: 35px 0;
+}
+
+.subsequent-row {
+  padding-top: 50px;
+}
+
+.bottom {
+  padding-bottom: 50px;
 }
