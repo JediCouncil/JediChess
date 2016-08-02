@@ -10,7 +10,12 @@ class PiecesController < ApplicationController
 
     @result = current_piece.move!(params[:piece][:x], params[:piece][:y].to_i)
 
-    Pusher.trigger("game-#{current_game.id}", 'refresh_page', {:message => "Your Move!"})
+    # No need to send @result data because changes in db already reflected
+    # by user that moved chess piece
+
+    #We could just send the data as a response to the other user's ajax request
+
+    # Pusher.trigger("game-#{current_game.id}", 'refresh_page', {:message => "Your Move!"})
 
     render json: @result
   end
