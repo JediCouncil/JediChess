@@ -1,6 +1,45 @@
-<br />
-<div class="col-xs-10 col-xs-offset-1 text-center">
-	<h2>Are there any games I can join?</h2>
+<div class="front-hero">
+	<div class="welcome col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-4 text-center">
+		<p>welcome to</p>
+		<h1 class="star">JediChess</h1>
+		<%= image_tag("lightsaber.png") %>
+		<p>developed by Yan Hu, Eric Orellana, Rebecca Taylor,<br>Gaby Casteneda, and Jenny Mangaly
+		<br><i>with mentoring by Mike Coutermarsh</i></p>
+	</div>
+</div>
+
+<div class="blurbs">
+	<div class="tools-intro text-center">
+		<h1>THE TOOLSET</h1>
+		<h5>these awesome integrations have helped us along the way:</h5>
+	</div>
+	<br>
+	<div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+		<%= image_tag("github-logo.png") %>
+	</div>
+	<div class="col-xs-10 col-xs-offset-1 col-sm-2 col-sm-offset-0">
+		<%= image_tag("slack-logo.png") %>
+	</div>
+	<div class="col-xs-10 col-xs-offset-1 col-sm-2 col-sm-offset-1">
+		<%= image_tag("travisCI-logo.png") %>
+	</div>
+
+	<div class="subsequent-row col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-3">
+		<%= image_tag("trello-logo.png") %>
+	</div>
+	<div class="subsequent-row col-xs-10 col-xs-offset-1 col-sm-2 col-sm-offset-0">
+		<%= image_tag("codeclimate-logo.png") %>
+	</div>
+
+	<div class="subsequent-row bottom col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-5">
+	<%= image_tag("rubo-logo.png") %>
+	</div>
+</div>
+
+<hr width="60%" noshade>
+
+<div class="open-games col-xs-10 col-xs-offset-1 text-center">
+	<h2><b>Are there any games I can join?</b></h2>
 		<% if @games.present? %>
 			<h4>Yes, there are! You can join any of these:</h4>
 			<% @games.each do |game| %>
@@ -9,4 +48,76 @@
 		<% else %>
 			<h4>No, sorry. :( Check back later, or create your own game!</h4>
 		<% end %>
+</div>
+
+<hr width="60%" noshade>
+
+<div class="blurbs text-center about">
+	<h1>about the team</h1>
+</div>
+
+<div class="bios">
+	<div class="about">
+		<div class="yan descript col-xs-10 col-xs-offset-1 col-sm-5">
+			<h3>yan hu</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fermentum ac nunc a maximus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque ornare mi tristique, sollicitudin mauris eget, tempor arcu. Donec egestas metus diam, sit amet feugiat purus laoreet ac. Ut suscipit, nisi vel finibus consectetur, dui massa imperdiet nisl, id feugiat elit tellus vel orci.</p>
+		</div>
+		<div class="yan pic col-xs-10 col-xs-offset-1 col-sm-4">
+			<%= image_tag("codeclimate-logo.png") %>
+		</div>
+	</div>
+
+		<div class="clearfix"></div>
+
+	<div class="about">
+		<div class="eric pic col-xs-10 col-xs-offset-1 col-sm-4">
+			<%= image_tag("codeclimate-logo.png") %>
+		</div>
+		<div class="eric descript col-xs-10 col-xs-offset-1 col-sm-5">
+			<h3>eric orellana</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fermentum ac nunc a maximus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque ornare mi tristique, sollicitudin mauris eget, tempor arcu. Donec egestas metus diam, sit amet feugiat purus laoreet ac. Ut suscipit, nisi vel finibus consectetur, dui massa imperdiet nisl, id feugiat elit tellus vel orci.</p>
+		</div>
+	</div>
+
+		<div class="clearfix"></div>
+
+	<div class="about">
+		<div class="rebecca descript col-xs-10 col-xs-offset-1 col-sm-5">
+			<h3>rebecca taylor</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fermentum ac nunc a maximus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque ornare mi tristique, sollicitudin mauris eget, tempor arcu. Donec egestas metus diam, sit amet feugiat purus laoreet ac. Ut suscipit, nisi vel finibus consectetur, dui massa imperdiet nisl, id feugiat elit tellus vel orci.</p>
+		</div>
+		<div class="rebecca pic col-xs-10 col-xs-offset-1 col-sm-4">
+			<%= image_tag("codeclimate-logo.png") %>
+		</div>
+	</div>
+
+		<div class="clearfix"></div>
+
+	<div class="about">
+		<div class="jenny pic col-xs-10 col-xs-offset-1 col-sm-4">
+			<%= image_tag("codeclimate-logo.png") %>
+		</div>
+		<div class="jenny descript col-xs-10 col-xs-offset-1 col-sm-5">
+			<h3>jenny mangaly</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fermentum ac nunc a maximus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque ornare mi tristique, sollicitudin mauris eget, tempor arcu. Donec egestas metus diam, sit amet feugiat purus laoreet ac. Ut suscipit, nisi vel finibus consectetur, dui massa imperdiet nisl, id feugiat elit tellus vel orci.</p>
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	<div class="about">
+		<div class="gaby descript col-xs-10 col-xs-offset-1 col-sm-5">
+			<h3>gaby casteneda</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fermentum ac nunc a maximus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque ornare mi tristique, sollicitudin mauris eget, tempor arcu. Donec egestas metus diam, sit amet feugiat purus laoreet ac. Ut suscipit, nisi vel finibus consectetur, dui massa imperdiet nisl, id feugiat elit tellus vel orci.</p>
+		</div>
+		<div class="gaby pic col-xs-10 col-xs-offset-1 col-sm-4">
+			<%= image_tag("codeclimate-logo.png") %>
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	<div class="footer text-center">
+		<p><i><div class="reg-font">&copy;</div> 2016<i></p>
+	</div>
 </div>
