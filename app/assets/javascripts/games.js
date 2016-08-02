@@ -7,7 +7,6 @@
 //     location.reload(); //reloads current document
 //   });
 
-
 $(document).ready(function(){
   if ( $('#chess').length ) {
 
