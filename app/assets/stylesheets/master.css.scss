@@ -125,4 +125,87 @@ td {
   width: 76px;
 }
 
+nav.navbar.navbar-default {
+  background-color: transparent;
+  border-color: transparent;
+  margin-bottom: -75px;
+}
 
+.nav-links {
+  color: white !important;
+  font-family: 'aaarghnormal', Helvetica, serif;
+}
+
+.front-hero {
+  background: url('jc-hero-section.jpeg') no-repeat center center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+  width: 100%;
+  min-height: 750px;
+  max-height: 800px;
+}
+
+.welcome {
+  color: white;
+  background: rgba(0,0,0, 0.5);
+  margin-top: 275px;
+  padding: 20px 0;
+}
+
+a.navbar-brand.nav-links {
+  font-family: 'distantgalaxyregular' !important;
+  font-size: 35px;
+}
+
+.star {
+  font-family: 'distantgalaxyregular', sans-serif !important;
+  font-size: 60px;
+}
+
+p {
+  font-family: 'aaarghnormal', Helvetica, serif;
+}
+
+h2, h3, h4, h5, h6, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'aaarghnormal' !important;
+}
+
+h1, .h1 {
+  font-family: 'distantgalaxyregular', sans-serif !important;
+  font-size: 70px !important;
+}
+
+h1.star {
+  margin: -5px 0;
+}
+
+.blurbs {
+  margin: 100px 0;
+}
+
+.open-games {
+  padding: 35px 0;
+}
+
+.subsequent-row {
+  padding-top: 50px;
+}
+
+.bottom {
+  padding-bottom: 50px;
+}
+
+.about {
+  margin-top: 60px;
+}
+
+.footer {
+  margin-top: 100px;
+}
+
+.reg-font {
+  display: inline;
+  font-family: Helvetica, sans-serif;
+}
