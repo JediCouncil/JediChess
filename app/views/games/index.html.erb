@@ -46,10 +46,10 @@
 				<h5><%= link_to 'Pick me!', game_path(game) %></h5>
 			<% end %>
 			<h2> Want to start a new game?	</h2>
-				<p> To start a new game! Click <%= link_to 'here', games_path(), :method => :post %></p>
+				<p> To start a new game! Click <%= link_to 'here', games_path, :method => :post %></p>
 		<% else %>
 			<h4>No, sorry. :( Check back later, or create your own game!</h4>
-			<p> Start a new Game! Click <%= link_to 'here', games_path(), :method => :post %></p>
+			<h4> To start a new game! Click <%= link_to 'here', games_path, :method => :post %></h4>
 		<% end %>
 </div>
 
