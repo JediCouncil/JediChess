@@ -1,15 +1,30 @@
-$ ->
-
-  var pusher = new Pusher('07600f80f17ff8fb46ba'), { encrypted: true };
-  var channel = pusher.subscribe('game-id');
-
-  channel.bind('refresh_page', function() {
-    location.reload(); //reloads current document
-  });
- 
-
 $(document).ready(function(){
   if ( $('#chess').length ) {
+
+    // // Initialize and Subscibe to Pusher Channel
+    // var pusher = new Pusher('07600f80f17ff8fb46ba');
+    // var channel = pusher.subscribe('game-' + gon.game_id);
+
+    // channel.bind('refresh_page', function(data) {
+    //   debugger;
+    //   // alert("workijng!");
+    //   // location.reload(); //reloads current document
+    //   alert("data message " + data);
+    // });
+
+    // // Some useful debug msgs
+    // pusher.connection.bind('connecting', function() {
+    //   alert('Connecting to Pusher...');
+    // });
+    // pusher.connection.bind('connected', function() {
+    //   alert('Connected to Pusher!');
+    // });
+    // pusher.connection.bind('failed', function() {
+    //     alert('Connection to Pusher failed :(');
+    //   });
+    // channel.bind('subscription_error', function(status) {
+    //   alert('Pusher subscription_error');
+    // });
 
     for (key in gon.pieces_hash) {
 
