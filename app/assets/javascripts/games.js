@@ -1,12 +1,12 @@
-$ ->
+// $ ->
 
-  var pusher = new Pusher('07600f80f17ff8fb46ba'), { encrypted: true };
-  var channel = pusher.subscribe('game-id');
+//   var pusher = new Pusher('07600f80f17ff8fb46ba'), { encrypted: true };
+//   var channel = pusher.subscribe('game-id');
 
-  channel.bind('refresh_page', function() {
-    location.reload(); //reloads current document
-  });
- 
+//   channel.bind('refresh_page', function() {
+//     location.reload(); //reloads current document
+//   });
+
 
 $(document).ready(function(){
   if ( $('#chess').length ) {
