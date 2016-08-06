@@ -56,21 +56,6 @@ RSpec.describe Piece, type: :model do
       end
     end
 
-    # context 'invalid move' do
-    #   it 'raises an error if input is invalid' do
-    #     piece.update(x: 'D', y: 4)
-
-    #     invalid_move = 'Invalid input. Not diagonal, horizontal, or vertical'
-    #     expect { piece.is_obstructed?('B', 5) }.to raise_error { invalid_move }
-    #   end
-    #   it 'raises an error' do
-    #     piece.update(x: 'D', y: 4)
-
-    #     invalid_move = 'Invalid input. Not diagonal, horizontal, or vertical'
-    #     expect { piece.is_obstructed?('H', 3) }.to raise_error { invalid_move }
-    #   end
-    # end
-
     context 'piece is not obstructed' do
       it 'returns false' do
         piece.update(x: 'A', y: 8)
@@ -101,15 +86,16 @@ RSpec.describe Piece, type: :model do
       it 'piece2 destroyed and piece has updated xy coordinates' do
         piece.update(x: 'H', y: 1, color: 'black')
         piece2.update(x: 'H', y: 4, color: 'white')
+        org_count = Piece.count
 
-        expect { piece.move_to!('H', 4) }.to change { Piece.count }.from(2).to(1)
+        expect { piece.move_to!('H', 4) }.to change { Piece.count }.from(org_count).to(org_count - 1)
         expect(piece).to have_attributes(x: 'H', y: 4)
       end
       it 'piece2 destroyed and piece has updated xy coordinates' do
         piece.update(x: 'A', y: 2, color: 'white')
         piece2.update(x: 'A', y: 6, color: 'black')
-
-        expect { piece.move_to!('A', 6) }.to change { Piece.count }.from(2).to(1)
+        org_count = Piece.count
+        expect { piece.move_to!('A', 6) }.to change { Piece.count }.from(org_count).to(org_count - 1)
         expect(piece).to have_attributes(x: 'A', y: 6)
       end
     end

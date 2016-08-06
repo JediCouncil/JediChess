@@ -8,6 +8,7 @@
 //   });
 
 $(document).ready(function(){
+
   if ( $('#chess').length ) {
 
     for (key in gon.pieces_hash) {
