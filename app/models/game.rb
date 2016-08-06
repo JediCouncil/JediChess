@@ -1,17 +1,24 @@
 class Game < ActiveRecord::Base
   has_one :white_player, class_name: :user
   has_one :black_player, class_name: :user
+  belongs_to :active_player, class_name: :user
   has_many :pieces
 
   after_create :populate_board!
 
-  # scope :available, -> {
-  # 	joins("LEFT OUTER JOIN users ON users.game_id = games.id").
-  # 	group("games.id").
-  # 	having("count(games.id) < 2")
-  # }
-
   scope :available, -> { where('black_player_id IS NULL OR white_player_id IS NULL') }
+
+  def change_turn!
+    color = pieces.find_by(color: color)
+    # used at end of move_to! method in piece.rb
+    # if current player who played move_to! just now was white_player_id (white pieces)
+    # then update the turn to the black_player_id (black pieces)
+    if color == 'white'
+      update_attributes(active_player_id: black_player_id)
+    else
+      update_attributes(active_player_id: white_player_id)
+    end
+  end
 
   private
 

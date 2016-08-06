@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'games#index'
-  resources :games, only: [:new, :create, :show]
+  resources :games, only: [:new, :create, :show, :update]
   resources :pieces, only: [:update]
 
 end

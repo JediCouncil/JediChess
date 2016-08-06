@@ -1,4 +1,14 @@
 class PiecesController < ApplicationController
+  include GamesHelper
+  before_action :require_authorized_for_updating_piece, only: [:update]
+
+  def show
+    @piece = current_piece
+    @game = @piece.game
+    @pieces_hash = render_pieces(@game)
+    @piece_pos_id = @piece.x + @piece.y.to_s
+  end
+
   def update
     current_game = current_piece.game
     destination_piece = current_game.pieces.find_by(piece_params)
@@ -15,13 +25,18 @@ class PiecesController < ApplicationController
 
   private
 
-  helper_method :curent_piece
-
+  helper_method :current_piece
   def current_piece
     @current_piece ||= Piece.find(params[:id])
   end
 
   def piece_params
     params.require(:piece).permit(:x, :y)
+  end
+
+  def require_authorized_for_updating_piece
+    unless current_piece.color == current_user.color
+      render text: 'Unauthorized', status: :unauthorized
+    end
   end
 end
