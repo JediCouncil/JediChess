@@ -96,4 +96,15 @@ class Piece < ActiveRecord::Base
     return move_to!(destination_x, destination_y) if valid_move?(destination_x, destination_y)
     false
   end
+
+  def capturable_by_opposing_team?(destination_x, destination_y)
+    # find all opposing pieces
+    opponents = game.pieces.where.not(color: color)
+
+    # check if piece can be captured by opposing piece
+    opponents.each do |opponent|
+      return true if opponent.valid_move?(destination_x, destination_y)
+    end
+    false
+  end
 end
